@@ -99,17 +99,17 @@ public class Chirp extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private Actor	sender;
-	private Actor	recipient;
+	private Customer	sender;
+	private Customer	recipient;
 
 
 	@Valid
 	@ManyToOne(optional = true)
-	public Actor getSender() {
+	public Customer getSender() {
 		return this.sender;
 	}
 
-	public void setSender(final Actor sender) {
+	public void setSender(final Customer sender) {
 		this.sender = sender;
 	}
 
@@ -119,7 +119,7 @@ public class Chirp extends DomainEntity {
 		return this.recipient;
 	}
 
-	public void setRecipient(final Actor recipient) {
+	public void setRecipient(final Customer recipient) {
 		this.recipient = recipient;
 	}
 

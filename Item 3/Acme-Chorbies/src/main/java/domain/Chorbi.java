@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(indexes = {
 	@Index(columnList = "desiredRelationship"), @Index(columnList = "genre"), @Index(columnList = "description"), @Index(columnList = "birthDate")
 })
-public class Chorbi extends Actor {
+public class Chorbi extends Customer {
 
 	// Attributes -------------------------------------------------------------
 

@@ -83,16 +83,16 @@ public class CreditCard extends DomainEntity {
 
 	// Relationships -------------------------------------------------------------
 
-	private Chorbi	chorbi;
+	private Customer	customer;
 
 
 	@Valid
 	@OneToOne(optional = false)
-	public Chorbi getChorbi() {
-		return this.chorbi;
+	public Customer getCustomer() {
+		return this.customer;
 	}
 
-	public void setChorbi(final Chorbi chorbi) {
-		this.chorbi = chorbi;
+	public void setCustomer(final Customer customer) {
+		this.customer = customer;
 	}
 }
