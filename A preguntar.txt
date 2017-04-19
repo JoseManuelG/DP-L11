@@ -1,0 +1,4 @@
+Requisito funcional apartado C no trivial:
+-Wherever a listing of events is shown, it must be possible to sort the corresponding events by the number of seats available.
+
+¿Reutilizar A+ que permitía establcer paginación y orden, u ordenar directamente por ese criterio? No se puede poner en la tabla que ordene por el criterio poque solo ordena los que se muestran en la pagina actual. (Ya nos pasó algo parecido en BnB)

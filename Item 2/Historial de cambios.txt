@@ -1,0 +1,7 @@
+Cambios en clases existentes:
+- Relacion de creditCard a chorbi cambiada de 1 - 1 a 1 - 0..1, pues ahora la credit card puede ser de manager.
+- Añadido atributo chargedFee a chorbi.
+- Likes ahora tienen stars.
+
+Consecuencias:
+- Es posible que sea necesario cambiar alguna query de credit card, ya que el total de credit card de chorbis coincidía con el total de credit cards, y ya no es así.
