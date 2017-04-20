@@ -1,1 +1,11 @@
+﻿
+
+
+
+
+
+
+--------------------------------------------------------------
+Hecho
+--------------------------------------------------------------
 -Añadir fees (managerFee y chorbiFee o algo asi) a la clase de configuracion en UML, java y populate.

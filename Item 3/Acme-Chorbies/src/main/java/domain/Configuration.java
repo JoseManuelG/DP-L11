@@ -13,6 +13,8 @@ public class Configuration extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 
 	private long	cachedTime;
+	private double	chorbiFee;
+	private double	managerFee;
 
 
 	@Min(0)
@@ -22,6 +24,24 @@ public class Configuration extends DomainEntity {
 
 	public void setCachedTime(final long cachedTime) {
 		this.cachedTime = cachedTime;
+	}
+
+	@Min(0)
+	public double getChorbiFee() {
+		return this.chorbiFee;
+	}
+
+	public void setChorbiFee(final double chorbiFee) {
+		this.chorbiFee = chorbiFee;
+	}
+
+	@Min(0)
+	public double getManagerFee() {
+		return this.managerFee;
+	}
+
+	public void setManagerFee(final double managerFee) {
+		this.managerFee = managerFee;
 	}
 
 	// Relationships ----------------------------------------------------------

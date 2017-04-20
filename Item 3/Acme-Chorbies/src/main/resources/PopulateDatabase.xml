@@ -1202,6 +1202,9 @@
 	
 	<bean id="configuration" class="domain.Configuration">
 		<property name="cachedTime" value="43200000"/>
+		<property name="chorbiFee" value="1.0"/>
+		<property name="managerFee" value="1.0"/>
+		
 	</bean>	
 		
 </beans>
