@@ -31,7 +31,7 @@
 	<spring:message  code="creditCard.cvvCode" />: <jstl:out value="${creditCard.cvvCode}"/>
 	<br>
 
-	<a href="creditCard/chorbi/edit.do">
+	<a href="creditCard/customer/edit.do">
 		      <spring:message  code="creditCard.edit" />
 	</a>
 	</security:authorize>
@@ -40,7 +40,7 @@
 <jstl:if test="${editable eq false}">
 	<security:authorize access="hasRole('CHORBI')">
 		<spring:message  code="creditCard.noCreditCard" />
-		<a href="creditCard/chorbi/create.do">
+		<a href="creditCard/customer/create.do">
 			      <spring:message  code="creditCard.newCreditCard" />
 		</a>
 	</security:authorize>

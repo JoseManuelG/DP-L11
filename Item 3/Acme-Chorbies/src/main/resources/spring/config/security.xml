@@ -73,6 +73,13 @@
 		<security:intercept-url pattern="/chorbi/administrator/ban.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMINISTRATOR')" />
 		
+		<!-- Manager -->
+<!-- 		<security:intercept-url pattern="" access="hasRole('MANAGER')" /> -->
+		<security:intercept-url pattern="/creditCard/customer/create.do" access="hasRole('MANAGER')"  /> 	
+		<security:intercept-url pattern="/creditCard/customer/myCreditCard.do" access="hasRole('MANAGER')"  /> 
+		<security:intercept-url pattern="/creditCard/customer/edit.do" access="hasRole('MANAGER')"  /> 	
+
+
 		<!-- Chorbi -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->
 		<security:intercept-url pattern="/searchTemplate/chorbi/search.do" access="hasRole('CHORBI')"  /> 
@@ -94,9 +101,6 @@
 		<security:intercept-url pattern="/likes/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/likes/chorbi/delete.do" access="hasRole('CHORBI')"  /> 
 		
-		<security:intercept-url pattern="/creditCard/chorbi/create.do" access="hasRole('CHORBI')"  /> 	
-		<security:intercept-url pattern="/creditCard/chorbi/myCreditCard.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/creditCard/chorbi/edit.do" access="hasRole('CHORBI')"  /> 	
 		
 		
 		<!--NONE -->

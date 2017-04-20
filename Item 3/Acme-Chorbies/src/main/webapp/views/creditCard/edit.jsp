@@ -11,7 +11,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="creditCard/chorbi/edit.do" modelAttribute="creditCard">
+<form:form action="creditCard/customer/edit.do" modelAttribute="creditCard">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />	
@@ -49,6 +49,6 @@
 		<acme:submit name="delete" code="creditCard.delete"/>
 	</jstl:if>
 	
-	<acme:cancel url="creditCard/chorbi/myCreditCard.do" code="creditCard.cancel"/>
+	<acme:cancel url="creditCard/customer/myCreditCard.do" code="creditCard.cancel"/>
 	<br>
 </form:form>

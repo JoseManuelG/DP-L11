@@ -18,7 +18,7 @@ import domain.Chorbi;
 import domain.CreditCard;
 
 @Controller
-@RequestMapping("/creditCard/chorbi")
+@RequestMapping("/creditCard/customer")
 public class CreditCardCustomerController extends AbstractController {
 
 	// Services -------------------------------------------------------------
@@ -57,7 +57,7 @@ public class CreditCardCustomerController extends AbstractController {
 		CreditCard creditCard;
 
 		creditCard = this.creditCardService.getCreditCardByChorbi();
-		result = new ModelAndView("creditCard/chorbi/myCreditCard");
+		result = new ModelAndView("creditCard/customer/myCreditCard");
 
 		if (creditCard != null)
 			result.addObject("creditCard", creditCard);
@@ -131,7 +131,7 @@ public class CreditCardCustomerController extends AbstractController {
 		Chorbi chorbi;
 		chorbi = this.chorbiService.findChorbiByPrincipal();
 
-		result = new ModelAndView("creditCard/chorbi/edit");
+		result = new ModelAndView("creditCard/customer/edit");
 		result.addObject("creditCard", creditCard);
 		result.addObject("message", message);
 		result.addObject("chorbi", chorbi);
