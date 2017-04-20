@@ -19,19 +19,21 @@
 
 	<util:list id="tiles">
 		<value>/views/about/tiles.xml</value>
-		<value>/views/chirp/tiles.xml</value>
 		<value>/views/law/tiles.xml</value>
 		<value>/views/master-page/tiles.xml</value>		
 		<value>/views/misc/tiles.xml</value>		
 		<value>/views/security/tiles.xml</value>
-		<value>/views/searchTemplate/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
-		<value>/views/likes/tiles.xml</value>
-		<value>/views/chorbi/tiles.xml</value>
-		<value>/views/creditCard/tiles.xml</value>
+		
 		<value>/views/banner/tiles.xml</value>
+		<value>/views/chirp/tiles.xml</value>
+		<value>/views/chorbi/tiles.xml</value>
 		<value>/views/configuration/tiles.xml</value>
+		<value>/views/creditCard/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
+		<value>/views/event/tiles.xml</value>
+		<value>/views/likes/tiles.xml</value>
+		<value>/views/searchTemplate/tiles.xml</value>
 		
 		
 		

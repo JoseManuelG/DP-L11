@@ -23,14 +23,22 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		
-		
+		<li>
+			<a class="fNiv"> 		
+			<spring:message code="master.page.events" />
+			</a>
+			<ul>
+				<li class="arrow"></li>
+				<li><a href="event/list.do"><spring:message code="master.page.events.next.to.close" /></a></li>
+				<li><a href="event/list/all.do"><spring:message code="master.page.events.all" /></a></li>
+			</ul>
+		</li>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="security/register.do"><spring:message code="master.page.register" /></a></li>
 			
 		</security:authorize>
-		
 		<security:authorize access="isAuthenticated()">
 			<li>
 				<a class="fNiv"> 
@@ -48,7 +56,12 @@
 					<li><a href="chirp/chorbi/received.do"><spring:message code="master.page.chirp.received" /></a></li>
 					<li><a href="chirp/chorbi/sent.do"><spring:message code="master.page.chirp.sent" /></a></li>
 					<li><a href="searchTemplate/chorbi/search.do"><spring:message code="master.page.search" /></a></li>
+					<li><a href="event/chorbi/list.do"><spring:message code="master.page.event.chorbi.list" /></a></li>
 					</security:authorize>	
+					
+					<security:authorize access="hasRole('MANAGER')">
+					<li><a href="event/manager/list.do"><spring:message code="master.page.event.manager.list" /></a></li>
+					</security:authorize>
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="configuration/administrator/view.do"><spring:message code="master.page.administrator.configuration" /></a></li>

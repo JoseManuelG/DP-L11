@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.EventService;
-import antlr.debug.Event;
+import domain.Event;
 
 @Controller
 @RequestMapping("/event")
@@ -48,7 +48,7 @@ public class EventController extends AbstractController {
 		events = this.eventService.findNextMonthEventsWithPlaces();
 
 		result = new ModelAndView("event/list");
-		result.addObject(events);
+		result.addObject("events", events);
 		result.addObject("requestURI", "event/list.do");
 
 		return result;
@@ -62,7 +62,7 @@ public class EventController extends AbstractController {
 		events = this.eventService.findAll();
 
 		result = new ModelAndView("event/list/all");
-		result.addObject(events);
+		result.addObject("events", events);
 		result.addObject("requestURI", "event/list/all.do");
 
 		return result;
@@ -77,13 +77,13 @@ public class EventController extends AbstractController {
 		event = this.eventService.findOne(eventId);
 		expired = this.eventService.checkExpired(event);
 		siteFree = this.eventService.checkSiteFree(event);
-		registered = this.eventService.checkPrincipalRegistered(event);
+		registered = this.eventService.checkPrincipalIsRegistered(event);
 
 		result = new ModelAndView("event/view");
-		result.addObject(event);
-		result.addObject(siteFree);
-		result.addObject(expired);
-		result.addObject(registered);
+		result.addObject("event", event);
+		result.addObject("siteFree", siteFree);
+		result.addObject("expired", expired);
+		result.addObject("registered", registered);
 		result.addObject("requestURI", "event/chorbi/view.do?eventId=" + eventId);
 
 		return result;

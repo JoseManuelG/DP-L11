@@ -20,11 +20,6 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="events" requestURI="${requestURI}" id="row" excludedParams="*">
 	
-	<spring:message code="event.picture" var="titleName" />
-	<display:column title="titleName">
-	<acme:image url="${row.picture}"/>
-	</display:column>
-
 	<acme:maskedColumn sorteable="false" code="event.title" text="${row.title}"/>
 	
 	<acme:maskedColumn sorteable="false" code="event.description" text="${row.description}"/>

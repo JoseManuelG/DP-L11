@@ -29,6 +29,7 @@ public class CreditCardService {
 	@Autowired
 	private ChorbiService			chorbiService;
 
+	@Autowired
 	private CustomerService			customerService;
 
 
@@ -66,6 +67,7 @@ public class CreditCardService {
 
 	public void delete(final CreditCard creditCard) {
 
+		this.checkPrincipal(creditCard);
 		Assert.notNull(creditCard);
 		this.creditCardRepository.delete(creditCard);
 		Assert.isTrue(!this.creditCardRepository.exists(creditCard.getId()));

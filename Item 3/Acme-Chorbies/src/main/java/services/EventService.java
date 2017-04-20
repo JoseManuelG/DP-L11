@@ -2,14 +2,17 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
 
 import repositories.EventRepository;
-import antlr.debug.Event;
+import domain.Chorbi;
+import domain.Event;
+import domain.Register;
 
 @Service
 @Transactional
@@ -23,48 +26,62 @@ public class EventService {
 	@Autowired
 	private ChorbiService	chorbiService;
 
-	//	@Autowired
-	//	private ManagerService	managerService;
-	//
-	//	@Autowired
-	//	private RegisterService	registerService;
-
 	@Autowired
-	private Validator		validator;
+	private RegisterService	registerService;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
 
 	public Event findOne(final int eventId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.eventRepository.findOne(eventId);
 	}
 
 	public Collection<Event> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.eventRepository.findAll();
 	}
 
 	//Other Bussnisnes methods------------------------------------------------------------
 
 	public Collection<Event> findNextMonthEventsWithPlaces() {
-		// TODO Auto-generated method stub
-		return null;
+		LocalDate nextMonth;
+		Date date;
+
+		nextMonth = new LocalDate().plusMonths(1);
+		date = nextMonth.toDateTimeAtStartOfDay().toDate();
+
+		return this.eventRepository.findEventsWithPlacesBeforeDate(date);
 	}
 
 	public Boolean checkExpired(final Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		Date now;
+
+		now = new Date();
+
+		return now.before(event.getOrganisedMoment());
 	}
 
 	public Boolean checkSiteFree(final Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer numberOfChorbies;
+
+		numberOfChorbies = this.registerService.getNumberOfChorbiesForEvent(event.getId());
+		if (numberOfChorbies == null)
+			numberOfChorbies = 0;
+
+		return event.getSeatsOffered() > numberOfChorbies;
 	}
 
-	public Boolean checkPrincipalRegistered(final Event event) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean checkPrincipalIsRegistered(final Event event) {
+		Chorbi chorbi;
+		Register register;
+
+		try {
+			chorbi = this.chorbiService.findChorbiByPrincipal();
+			register = this.registerService.findByEventAndChorbi(event.getId(), chorbi.getId());
+		} catch (final IllegalArgumentException e) {
+			register = null;
+		}
+
+		return register != null;
 	}
 
 }
