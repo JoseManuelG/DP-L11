@@ -1,0 +1,44 @@
+11-A listing of managers sorted by the number of events that they organise.
+
+	select m from Event e, Manager m where m=e.manager group by m order by count(e) desc;
+
+	y añadirles al final:
+
+	select m from Manager m where m not in (select distinct e.manager from Event e);
+
+
+12-A listing of managers that includes the amount that they due in fees.
+
+	es un findAll() de manager y en una columna poner el chargedFee
+
+
+13-A listing of chorbies sorted by the number of events to which they have registered.
+
+	select c from Register r, Chorbi c where c=r.chorbi group by c order by count(r) desc;
+
+	y añadirles al final:
+
+	select c from Chorbi c where c not in (select distinct r.chorbi from Register r);
+
+
+14-A listing of chorbies that includes the amount that they due in fees.
+
+	es un findAll() de chorbi y en una columna poner el chargedFee
+
+
+15-The minimum, the maximum, and the average number of stars per chorbi.
+
+	select c, min(r.stars), max(r.stars), avg(r.stars) from Likes r, Chorbi c where c=r.liked group by c;
+
+	y añadirle con min, max, avg a 0:
+
+	select c from Chorbi c where c not in (select distinct r.liked from Likes r);
+
+16-The list of chorbies, sorted by the average number of stars that they’ve got.
+
+	select c, avg(r.stars) from Likes r, Chorbi c where c=r.liked group by c order by avg(r.stars) desc;
+
+	y añadirles al final:
+
+	select c from Chorbi c where c not in (select distinct r.liked from Likes r);
+	

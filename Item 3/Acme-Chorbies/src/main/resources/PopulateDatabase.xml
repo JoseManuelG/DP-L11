@@ -1083,7 +1083,7 @@
 	
 	<bean id="event1" class="domain.Event">
 		<property name="title" value="event1"/>
-		<property name="organisedMoment" value="10/05/2017"/>
+		<property name="organisedMoment" value="05/10/2017"/>
 		<property name="description" value="Event 1 just see your self"/>
 		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
 		<property name="seatsOffered" value="6"/>
@@ -1092,7 +1092,7 @@
 	
 	<bean id="event2" class="domain.Event">
 		<property name="title" value="event2"/>
-		<property name="organisedMoment" value="17/06/2017"/>
+		<property name="organisedMoment" value="06/17/2017"/>
 		<property name="description" value="Event 2 just see your self"/>
 		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
 		<property name="seatsOffered" value="10"/>
@@ -1101,7 +1101,7 @@
 	
 	<bean id="event3" class="domain.Event">
 		<property name="title" value="event3"/>
-		<property name="organisedMoment" value="17/01/2017"/>
+		<property name="organisedMoment" value="01/17/2017"/>
 		<property name="description" value="Event 3 just see your self"/>
 		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
 		<property name="seatsOffered" value="5"/>
@@ -1110,7 +1110,7 @@
 	
 	<bean id="event4" class="domain.Event">
 		<property name="title" value="event4"/>
-		<property name="organisedMoment" value="17/04/2016"/>
+		<property name="organisedMoment" value="04/17/2016"/>
 		<property name="description" value="Event 4 just see your self"/>
 		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
 		<property name="seatsOffered" value="2"/>
@@ -1119,7 +1119,7 @@
 	
 	<bean id="event5" class="domain.Event">
 		<property name="title" value="event5"/>
-		<property name="organisedMoment" value="17/04/2015"/>
+		<property name="organisedMoment" value="04/17/2015"/>
 		<property name="description" value="Event 5 just see your self"/>
 		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
 		<property name="seatsOffered" value="7"/>
@@ -1128,11 +1128,38 @@
 	
 	<bean id="event6" class="domain.Event">
 		<property name="title" value="event6"/>
-		<property name="organisedMoment" value="15/05/2017"/>
+		<property name="organisedMoment" value="05/15/2017"/>
 		<property name="description" value="Event 6 just see your self"/>
 		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
 		<property name="seatsOffered" value="20"/>
 		<property name="manager" ref="manager1"/>
+	</bean>
+	
+	<bean id="event1Manager2" class="domain.Event">
+		<property name="title" value="event1Manager2"/>
+		<property name="organisedMoment" value="12/20/2017"/>
+		<property name="description" value="Event 1m2 just see your self"/>
+		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
+		<property name="seatsOffered" value="10"/>
+		<property name="manager" ref="manager2"/>
+	</bean>
+	
+	<bean id="event2Manager2" class="domain.Event">
+		<property name="title" value="event2Manager2"/>
+		<property name="organisedMoment" value="12/22/2017"/>
+		<property name="description" value="Event 2m2 just see your self"/>
+		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
+		<property name="seatsOffered" value="10"/>
+		<property name="manager" ref="manager2"/>
+	</bean>
+	
+	<bean id="event1Manager3" class="domain.Event">
+		<property name="title" value="event1Manager3"/>
+		<property name="organisedMoment" value="06/22/2017"/>
+		<property name="description" value="Event 1m3 just see your self"/>
+		<property name="picture" value="https://images.pexels.com/photos/31257/pexels-photo.jpg?h=350"/>
+		<property name="seatsOffered" value="10"/>
+		<property name="manager" ref="manager3"/>
 	</bean>
 	
 	
@@ -1195,10 +1222,10 @@
 	
 	<bean id="Register12" class="domain.Register">
 		<property name="event" ref="event2"/>
-		<property name="chorbi" ref="chorbi1"/>
+		<property name="chorbi" ref="chorbi6"/>
 	</bean>
 	
-	<!-- Configuration (12h in ms)	-->
+	<!-- Configuration (12h in ms = 43200000)	-->
 	
 	<bean id="configuration" class="domain.Configuration">
 		<property name="cachedTime" value="43200000"/>

@@ -1,11 +1,12 @@
-﻿
+﻿---------------Por hacer/comprobar-----------------------
+-B+ Tree
+-Informe de costes
+-Controlar que un chorbi no se pueda registrar varias veces al mismo evento
+-Controlar que solo te puedes registrar a un evento si hay tantas personas registradas al evento como asientos disponibles
 
+------------------Dudas---------------------------------------
 
+-Si se modifica el numero de asientos de un eventro y quedan mas personas registradas de los asientos qe hay, que pasa???
 
-
-
-
---------------------------------------------------------------
-Hecho
---------------------------------------------------------------
+-----------------------------Hecho-----------------------------
 -Añadir fees (managerFee y chorbiFee o algo asi) a la clase de configuracion en UML, java y populate.
