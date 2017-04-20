@@ -18,6 +18,7 @@ import repositories.ChirpRepository;
 import domain.Attachment;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Customer;
 import forms.ChirpForm;
 
 @Service
@@ -30,7 +31,7 @@ public class ChirpService {
 
 	//Supported Services--------------------------------------------------------------------
 	@Autowired
-	private ChorbiService		chorbiService;
+	private CustomerService		customerService;
 	@Autowired
 	private AttachmentService	attachmentService;
 
@@ -41,13 +42,13 @@ public class ChirpService {
 	//Simple CRUD methods------------------------------------------------------------------
 	public Chirp create(final int recipientId) {
 		final Chirp result = new Chirp();
-		final Chorbi recipient;
+		Customer recipient, sender;
 
-		recipient = this.chorbiService.findOne(recipientId);
+		recipient = this.customerService.findOne(recipientId);
 		Assert.notNull(recipient);
 		result.setRecipient(recipient);
 		result.setRecipientName(recipient.getName());
-		final Chorbi sender = this.chorbiService.findChorbiByPrincipal();
+		sender = this.customerService.findCustomerByPrincipal();
 		result.setSender(sender);
 		result.setSenderName(sender.getName());
 		result.setSendingMoment(new Date(System.currentTimeMillis() - 100));
@@ -69,25 +70,24 @@ public class ChirpService {
 		Assert.notNull(result);
 
 		if (result.getSender() == null && result.getRecipient() != null)
-			Assert.isTrue(result.getRecipient().equals(this.chorbiService.findChorbiByPrincipal()) && !result.getIsSender());
+			Assert.isTrue(result.getRecipient().equals(this.customerService.findCustomerByPrincipal()) && !result.getIsSender());
 		else if (result.getSender() != null && result.getRecipient() == null)
-			Assert.isTrue(result.getSender().equals(this.chorbiService.findChorbiByPrincipal()) && result.getIsSender());
+			Assert.isTrue(result.getSender().equals(this.customerService.findCustomerByPrincipal()) && result.getIsSender());
 		else
-			Assert.isTrue((result.getSender().equals(this.chorbiService.findChorbiByPrincipal()) && result.getIsSender()) || result.getRecipient().equals(this.chorbiService.findChorbiByPrincipal()) && !result.getIsSender());
+			Assert.isTrue((result.getSender().equals(this.customerService.findCustomerByPrincipal()) && result.getIsSender()) || result.getRecipient().equals(this.customerService.findCustomerByPrincipal()) && !result.getIsSender());
 
 		return result;
 	}
 
 	public Chirp save(final Chirp chirp, final Collection<Attachment> attachments) {
-		Chirp result;
-		Chirp copyChirp;
-		Chirp savedCopyChirp;
+		Chirp result, copyChirp, savedCopyChirp;
+		Customer sender;
 
 		Assert.notNull(chirp.getRecipient(), "El mensaje debe tener un destinatario");
 
 		Assert.notNull(chirp.getSender(), "El mensaje debe tener un remitente");
 
-		final Chorbi sender = this.chorbiService.findChorbiByPrincipal();
+		sender = this.customerService.findCustomerByPrincipal();
 
 		Assert.isTrue(sender.equals(chirp.getSender()), "El remitente debe ser el mismo que esta conectado");
 		Assert.isTrue(chirp.getId() == 0, "No puedes editar un mensaje");
@@ -142,14 +142,14 @@ public class ChirpService {
 	//Other Bussnisnes methods------------------------------------------------------------
 	//Devuelve los mensajes que ha enviado el chorbi
 	public List<Chirp> findSentChirpOfPrincipal() {
-		final int senderId = this.chorbiService.findChorbiByPrincipal().getId();
+		final int senderId = this.customerService.findCustomerByPrincipal().getId();
 		final List<Chirp> result = this.chirpRepository.findSentChirpOfChorbi(senderId);
 		return result;
 	}
 
 	//Devuelve los mensajes que ha recibido el chorbi	
 	public List<Chirp> findReceivedChirpOfPrincipal() {
-		final int recipientId = this.chorbiService.findChorbiByPrincipal().getId();
+		final int recipientId = this.customerService.findCustomerByPrincipal().getId();
 		final List<Chirp> result = this.chirpRepository.findReceivedChirpOfChorbi(recipientId);
 		return result;
 	}
@@ -192,7 +192,7 @@ public class ChirpService {
 		result.setAction(1);
 		final Chirp chirp = this.findOne(chirpId);
 		Assert.notNull(chirp.getSender());
-		final Chorbi recipient = this.chorbiService.findOne(chirp.getSender().getId());
+		final Customer recipient = this.customerService.findOne(chirp.getSender().getId());
 		result.setRecipient(recipient);
 		return result;
 	}

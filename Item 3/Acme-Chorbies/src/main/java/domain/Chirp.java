@@ -115,7 +115,7 @@ public class Chirp extends DomainEntity {
 
 	@Valid
 	@ManyToOne(optional = true)
-	public Actor getRecipient() {
+	public Customer getRecipient() {
 		return this.recipient;
 	}
 

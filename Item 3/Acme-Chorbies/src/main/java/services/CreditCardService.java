@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.CreditCardRepository;
 import domain.Chorbi;
 import domain.CreditCard;
+import domain.Customer;
 
 @Service
 @Transactional
@@ -28,6 +29,8 @@ public class CreditCardService {
 	@Autowired
 	private ChorbiService			chorbiService;
 
+	private CustomerService			customerService;
+
 
 	// Constructor --------------------------------------------------------------------
 
@@ -39,17 +42,24 @@ public class CreditCardService {
 
 	public CreditCard create() {
 		CreditCard result;
-		Chorbi chorbi;
+		Customer customer;
 
 		result = new CreditCard();
-		chorbi = this.chorbiService.findChorbiByPrincipal();
-		result.setChorbi(chorbi);
+		customer = this.customerService.findCustomerByPrincipal();
+		result.setCustomer(customer);
 
 		return result;
 	}
+
 	public CreditCard save(final CreditCard creditCard) {
 		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		CreditCard result;
+
+		if (creditCard.getId() == 0)
+			creditCard.setCustomer(this.customerService.findCustomerByPrincipal());
+		else
+			this.checkPrincipal(creditCard);
+
 		result = this.creditCardRepository.save(creditCard);
 		return result;
 	}
@@ -105,6 +115,13 @@ public class CreditCardService {
 		result = period.getDays() > 1;
 
 		return result;
+	}
+
+	public void checkPrincipal(final CreditCard creditCard) {
+		Customer customer;
+
+		customer = this.customerService.findCustomerByPrincipal();
+		Assert.isTrue(creditCard.getCustomer().equals(customer));
 	}
 
 }

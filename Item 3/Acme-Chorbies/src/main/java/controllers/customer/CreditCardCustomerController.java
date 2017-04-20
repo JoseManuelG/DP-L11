@@ -1,5 +1,5 @@
 
-package controllers.chorbi;
+package controllers.customer;
 
 import javax.validation.Valid;
 
@@ -19,7 +19,7 @@ import domain.CreditCard;
 
 @Controller
 @RequestMapping("/creditCard/chorbi")
-public class CreditCardChorbiController extends AbstractController {
+public class CreditCardCustomerController extends AbstractController {
 
 	// Services -------------------------------------------------------------
 
@@ -32,7 +32,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public CreditCardChorbiController() {
+	public CreditCardCustomerController() {
 		super();
 	}
 
@@ -84,16 +84,12 @@ public class CreditCardChorbiController extends AbstractController {
 	public @ResponseBody
 	ModelAndView save(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
-		Chorbi chorbi;
-
-		chorbi = this.chorbiService.findChorbiByPrincipal();
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = this.createEditModelAndView(creditCard);
 		} else
 			try {
-				creditCard.setChorbi(chorbi);
 				this.creditCardService.save(creditCard);
 				result = new ModelAndView("redirect:../chorbi/myCreditCard.do");
 			} catch (final Throwable oops) {
