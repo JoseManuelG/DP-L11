@@ -1,4 +1,7 @@
-Requisito funcional apartado C no trivial:
--Wherever a listing of events is shown, it must be possible to sort the corresponding events by the number of seats available.
-
-¿Reutilizar A+ que permitía establcer paginación y orden, u ordenar directamente por ese criterio? No se puede poner en la tabla que ordene por el criterio poque solo ordena los que se muestran en la pagina actual. (Ya nos pasó algo parecido en BnB)
+- Registro de manager, ¿lo hace no autenticado, administrator, o no se implementa en esta version?
+- ¿Un manager debe poder ver su fee, o como para los chorbies es solo una simulacion y se les debe avisar de que ningun cargo se realizara?
+- Ausencia de requisitos no funcionales de parte B, ¿se han dejado intencionalmente en blanco o se han olvidado de ponerlos en el documento?
+- Lista de chorbis que le han hecho like al chorbi logueado, ¿Es lo mismo que se muestra en su perfil o lo contrario? 
+- Las listas de un usuario no autenticado, ¿estan disponibles también para los autenticados?
+- El mensaje al editar un evento, ¿debe ser descriptivo del cambio concreto que se ha hecho, o general sin especificar qué ha cambiado?
+- Cobro mensual a los chorbies, ¿aplicar cuota establecida al principio del mes o cuota actual al realizar la acción? (En caso de que sea la de principio de mes, necesitamos uno o dos campos mas en configuracion). 
