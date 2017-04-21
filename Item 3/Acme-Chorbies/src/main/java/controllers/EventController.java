@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ChorbiService;
 import services.EventService;
 import domain.Event;
 
@@ -30,6 +31,9 @@ public class EventController extends AbstractController {
 
 	@Autowired
 	private EventService	eventService;
+
+	@Autowired
+	private ChorbiService	chorbiService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -77,7 +81,13 @@ public class EventController extends AbstractController {
 		event = this.eventService.findOne(eventId);
 		expired = this.eventService.checkExpired(event);
 		siteFree = this.eventService.checkSiteFree(event);
-		registered = this.eventService.checkPrincipalIsRegistered(event);
+
+		registered = false;
+		try {
+			this.chorbiService.findChorbiByPrincipal();
+			registered = this.eventService.checkPrincipalIsRegistered(event);
+		} catch (final IllegalArgumentException e) {
+		}
 
 		result = new ModelAndView("event/view");
 		result.addObject("event", event);

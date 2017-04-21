@@ -17,22 +17,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<acme:image url="${event.picture}"/>
+<acme:image url="${event.picture}"/><br/><br/>
 
-<spring:message code="event.manager"/>:
-<acme:mask text="${event.manager.name} ${event.manager.surname}"/>
+<strong><spring:message code="event.manager"/>:</strong>
+<acme:mask text="${event.manager.name} ${event.manager.surname}"/><br/>
 
-<spring:message code="event.title"/>:
-<acme:mask text="${event.title}"/>
+<strong><spring:message code="event.title"/>:</strong>
+<acme:mask text="${event.title}"/><br/>
 
-<spring:message code="event.description"/>:
-<acme:mask text="${event.description}"/>
+<strong><spring:message code="event.description"/>:</strong>
+<acme:mask text="${event.description}"/><br/>
 
-<spring:message code="event.organisedMoment"/>:
-<acme:mask text="${event.organisedMoment}"/>
+<strong><spring:message code="event.organisedMoment"/>:</strong>
+<acme:mask text="${event.organisedMoment}"/><br/>
 
-<spring:message code="event.seatsOffered"/>:
-<acme:mask text="${event.seatsOffered}"/>
+<strong><spring:message code="event.seatsOffered"/>:</strong>
+<acme:mask text="${event.seatsOffered}"/><br/>
 	
 <security:authorize access="hasRole('CHORBI')">
 	<jstl:if test="${siteFree and !expired}">

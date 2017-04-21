@@ -74,12 +74,8 @@ public class EventService {
 		Chorbi chorbi;
 		Register register;
 
-		try {
-			chorbi = this.chorbiService.findChorbiByPrincipal();
-			register = this.registerService.findByEventAndChorbi(event.getId(), chorbi.getId());
-		} catch (final IllegalArgumentException e) {
-			register = null;
-		}
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+		register = this.registerService.findByEventAndChorbi(event.getId(), chorbi.getId());
 
 		return register != null;
 	}
