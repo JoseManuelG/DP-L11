@@ -71,6 +71,15 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("ChorbiesWithMoreReceivedChirps", this.dashboardService.findChorbiesWhoGotMoreChirps());
 		result.addObject("ChorbiesWithMoreSentChirps", this.dashboardService.findChorbiesWhoSentMoreChirps());
 
+		//Queries Chorbies 2.0
+
+		result.addObject("getManagersOrderedByEvents", this.dashboardService.getManagersOrderedByEvents());
+		result.addObject("getManagersWithChargedFee", this.dashboardService.getManagersWithChargedFee());
+		result.addObject("getChorbiesOrderedByEvents", this.dashboardService.getChorbiesOrderedByEvents());
+		result.addObject("getChorbiesWithChargedFee", this.dashboardService.getChorbiesWithChargedFee());
+		result.addObject("getChorbiesWithMinMaxAvgStars", this.dashboardService.getChorbiesWithMinMaxAvgStars());
+		result.addObject("getChorbiesWithAvgStarsOrderedByAvgStars", this.dashboardService.getChorbiesWithAvgStarsOrderedByAvgStars());
+
 		return result;
 	}
 

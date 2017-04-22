@@ -323,15 +323,25 @@ public class DashboardService {
 	}
 
 	//Dashboard - 11
-	public List<Manager> getManagersOrderedByEvents() {
+	public List<Object[]> getManagersOrderedByEvents() {
 
-		List<Manager> res;
+		List<Object[]> res;
+		List<Manager> managers;
+		Object[] aux;
 
-		res = new ArrayList<Manager>();
+		res = new ArrayList<Object[]>();
+		managers = new ArrayList<Manager>();
 
 		res.addAll(this.dashboardRepository.getManagersOrderedByEvents());
 
-		res.addAll(this.dashboardRepository.getManagersWithNoEvents());
+		managers.addAll(this.dashboardRepository.getManagersWithNoEvents());
+
+		for (final Manager m : managers) {
+			aux = new Object[2];
+			aux[0] = m;
+			aux[1] = 0;
+			res.add(aux);
+		}
 
 		return res;
 	}
@@ -349,16 +359,25 @@ public class DashboardService {
 	}
 
 	//Dashboard - 13
-	public List<Chorbi> getChorbiesOrderedByEvents() {
+	public List<Object[]> getChorbiesOrderedByEvents() {
 
-		List<Chorbi> res;
+		List<Object[]> res;
+		List<Chorbi> chorbies;
+		Object[] aux;
 
-		res = new ArrayList<Chorbi>();
+		res = new ArrayList<Object[]>();
+		chorbies = new ArrayList<Chorbi>();
 
 		res.addAll(this.dashboardRepository.getChorbiesOrderedByRegisters());
 
-		res.addAll(this.dashboardRepository.getChorbiesWithNoRegisters());
+		chorbies.addAll(this.dashboardRepository.getChorbiesWithNoRegisters());
 
+		for (final Chorbi c : chorbies) {
+			aux = new Object[2];
+			aux[0] = c;
+			aux[1] = 0;
+			res.add(aux);
+		}
 		return res;
 	}
 
@@ -382,12 +401,12 @@ public class DashboardService {
 
 		res = new ArrayList<Object[]>();
 		chorbiesNoLikes = new ArrayList<Chorbi>();
-		aux = new Object[4];
 
 		res.addAll(this.dashboardRepository.getChorbiesWithMinMaxAvgStars());
 		chorbiesNoLikes.addAll(this.dashboardRepository.getChorbiesWithNoLikes());
 
 		for (final Chorbi c : chorbiesNoLikes) {
+			aux = new Object[4];
 			aux[0] = c;
 			aux[1] = 0;
 			aux[2] = 0;
@@ -406,12 +425,12 @@ public class DashboardService {
 
 		res = new ArrayList<Object[]>();
 		chorbiesNoLikes = new ArrayList<Chorbi>();
-		aux = new Object[2];
 
 		res.addAll(this.dashboardRepository.getChorbiesWithAvgStarsOrderedByAvgStars());
 		chorbiesNoLikes.addAll(this.dashboardRepository.getChorbiesWithNoLikes());
 
 		for (final Chorbi c : chorbiesNoLikes) {
+			aux = new Object[2];
 			aux[0] = c;
 			aux[1] = 0.;
 			res.add(aux);

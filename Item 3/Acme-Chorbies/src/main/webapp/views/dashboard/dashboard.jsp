@@ -17,6 +17,11 @@
 	<spring:message code="dashboard.actorName" var="actorName" />
 	<spring:message code="dashboard.city" var="city" />
 	<spring:message code="dashboard.country" var="country" />
+	<spring:message code="dashboard.min" var="min" />
+	<spring:message code="dashboard.max" var="max" />
+	<spring:message code="dashboard.avg" var="avg" />
+	<spring:message code="dashboard.fee" var="fee" />
+	<spring:message code="dashboard.events" var="events" />
 
 	<spring:message code="dashboard.chorbiesGroupedByCity" />:<br>
 	<display:table pagesize="5" class="displaytag1" name="chorbiesGroupedByCity"
@@ -101,7 +106,94 @@
 	</display:table>
 	<br>
 	
+	<spring:message code="dashboard.getManagersOrderedByEvents" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="getManagersOrderedByEvents"
+		requestURI="${requestURI}" id="row" uid="getManagersOrderedByEvents" excludedParams="*">
+		
+	    <display:column title="${actorName}">
+	   	  <jstl:out value="${getManagersOrderedByEvents[0].name}"/>
+	   	  <jstl:out value="${getManagersOrderedByEvents[0].surname}"/>
+	    </display:column>
+	    <display:column title="${events}">
+	   	  <jstl:out value="${getManagersOrderedByEvents[1]}"/>
+	    </display:column>
+	</display:table>
+	<br>
 	
+	<spring:message code="dashboard.getManagersWithChargedFee" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="getManagersWithChargedFee"
+		requestURI="${requestURI}" id="row" uid="getManagersWithChargedFee" excludedParams="*">
+		
+	    <display:column title="${actorName}">
+	   	  <jstl:out value="${getManagersWithChargedFee.name}"/>
+	   	  <jstl:out value="${getManagersWithChargedFee.surname}"/>
+	    </display:column>
+	    <display:column title="${fee}">
+	   	  <jstl:out value="${getManagersWithChargedFee.chargedFee}"/>
+	    </display:column>
+	</display:table>
+	<br>
+
+	<spring:message code="dashboard.getChorbiesOrderedByEvents" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="getChorbiesOrderedByEvents"
+		requestURI="${requestURI}" id="row" uid="getChorbiesOrderedByEvents" excludedParams="*">
+		
+	    <display:column title="${actorName}">
+	   	  <jstl:out value="${getChorbiesOrderedByEvents[0].name}"/>
+	   	  <jstl:out value="${getChorbiesOrderedByEvents[0].surname}"/>
+	    </display:column>
+	    <display:column title="${events}">
+	   	  <jstl:out value="${getChorbiesOrderedByEvents[1]}"/>
+	    </display:column>
+	</display:table>
+	<br>
 	
+	<spring:message code="dashboard.getChorbiesWithChargedFee" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="getChorbiesWithChargedFee"
+		requestURI="${requestURI}" id="row" uid="getChorbiesWithChargedFee" excludedParams="*">
+		
+	    <display:column title="${actorName}">
+	   	  <jstl:out value="${getChorbiesWithChargedFee.name}"/>
+	   	  <jstl:out value="${getChorbiesWithChargedFee.surname}"/>
+	    </display:column>
+	    <display:column title="${fee}">
+	   	  <jstl:out value="${getChorbiesWithChargedFee.chargedFee}"/>
+	    </display:column>
+	</display:table>
+	<br>
+	
+	<spring:message code="dashboard.getChorbiesWithMinMaxAvgStars" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="getChorbiesWithMinMaxAvgStars"
+		requestURI="${requestURI}" id="row" uid="getChorbiesWithMinMaxAvgStars" excludedParams="*">
+		
+	    <display:column title="${actorName}">
+	   	  <jstl:out value="${getChorbiesWithMinMaxAvgStars[0].name}"/>
+	   	  <jstl:out value="${getChorbiesWithMinMaxAvgStars[0].surname}"/>
+	    </display:column>
+	    <display:column title="${min}">
+	   	  <jstl:out value="${getChorbiesWithMinMaxAvgStars[1]}"/>
+	    </display:column>
+	    <display:column title="${max}">
+	   	  <jstl:out value="${getChorbiesWithMinMaxAvgStars[2]}"/>
+	    </display:column>
+	    <display:column title="${avg}">
+	   	  <jstl:out value="${getChorbiesWithMinMaxAvgStars[3]}"/>
+	    </display:column>
+	</display:table>
+	<br>
+	
+	<spring:message code="dashboard.getChorbiesWithAvgStarsOrderedByAvgStars" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="getChorbiesWithAvgStarsOrderedByAvgStars"
+		requestURI="${requestURI}" id="row" uid="getChorbiesWithAvgStarsOrderedByAvgStars" excludedParams="*">
+		
+	    <display:column title="${actorName}">
+	   	  <jstl:out value="${getChorbiesWithAvgStarsOrderedByAvgStars[0].name}"/>
+	   	  <jstl:out value="${getChorbiesWithAvgStarsOrderedByAvgStars[0].surname}"/>
+	    </display:column>
+	    <display:column title="${avg}">
+	   	  <jstl:out value="${getChorbiesWithAvgStarsOrderedByAvgStars[1]}"/>
+	    </display:column>
+	</display:table>
+	<br>
 	
 </fieldset>

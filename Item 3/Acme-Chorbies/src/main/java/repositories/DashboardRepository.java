@@ -99,8 +99,8 @@ public interface DashboardRepository extends JpaRepository<DomainEntity, Integer
 	public List<Chorbi> findChorbiesWhoSentMoreChirps(Long max);
 
 	//Dashboard - 11
-	@Query("select m from Event e, Manager m where m=e.manager group by m order by count(e) desc")
-	public List<Manager> getManagersOrderedByEvents();
+	@Query("select m, count(e) from Event e, Manager m where m=e.manager group by m order by count(e) desc")
+	public List<Object[]> getManagersOrderedByEvents();
 
 	//Dashboard - 11
 	@Query("select m from Manager m where m not in (select distinct e.manager from Event e)")
@@ -109,8 +109,8 @@ public interface DashboardRepository extends JpaRepository<DomainEntity, Integer
 	//Dashboard - 12 (no necesita query aqui)
 
 	//Dashboard - 13
-	@Query("select c from Register r, Chorbi c where c=r.chorbi group by c order by count(r) desc")
-	public List<Chorbi> getChorbiesOrderedByRegisters();
+	@Query("select c, count(r) from Register r, Chorbi c where c=r.chorbi group by c order by count(r) desc")
+	public List<Object[]> getChorbiesOrderedByRegisters();
 
 	//Dashboard - 13
 	@Query("select c from Chorbi c where c not in (select distinct r.chorbi from Register r)")
