@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.ChorbiRepository;
 import repositories.DashboardRepository;
 import repositories.LikesRepository;
+import repositories.ManagerRepository;
 import domain.Chorbi;
+import domain.Manager;
 
 @Service
 @Transactional
@@ -27,6 +29,9 @@ public class DashboardService {
 
 	@Autowired
 	private LikesRepository		likesRepository;
+
+	@Autowired
+	private ManagerRepository	managerRepository;
 
 
 	//Dashboard - 01
@@ -313,6 +318,104 @@ public class DashboardService {
 
 		if (res.size() == 0)
 			res.addAll(this.chorbiRepository.findAll());
+
+		return res;
+	}
+
+	//Dashboard - 11
+	public List<Manager> getManagersOrderedByEvents() {
+
+		List<Manager> res;
+
+		res = new ArrayList<Manager>();
+
+		res.addAll(this.dashboardRepository.getManagersOrderedByEvents());
+
+		res.addAll(this.dashboardRepository.getManagersWithNoEvents());
+
+		return res;
+	}
+
+	//Dashboard - 12
+	public List<Manager> getManagersWithChargedFee() {
+
+		List<Manager> res;
+
+		res = new ArrayList<Manager>();
+
+		res.addAll(this.managerRepository.findAll());
+
+		return res;
+	}
+
+	//Dashboard - 13
+	public List<Chorbi> getChorbiesOrderedByEvents() {
+
+		List<Chorbi> res;
+
+		res = new ArrayList<Chorbi>();
+
+		res.addAll(this.dashboardRepository.getChorbiesOrderedByRegisters());
+
+		res.addAll(this.dashboardRepository.getChorbiesWithNoRegisters());
+
+		return res;
+	}
+
+	//Dashboard - 14
+	public List<Chorbi> getChorbiesWithChargedFee() {
+
+		List<Chorbi> res;
+
+		res = new ArrayList<Chorbi>();
+
+		res.addAll(this.chorbiRepository.findAll());
+
+		return res;
+	}
+
+	//Dashboard - 15
+	public List<Object[]> getChorbiesWithMinMaxAvgStars() {
+		List<Object[]> res;
+		List<Chorbi> chorbiesNoLikes;
+		Object[] aux;
+
+		res = new ArrayList<Object[]>();
+		chorbiesNoLikes = new ArrayList<Chorbi>();
+		aux = new Object[4];
+
+		res.addAll(this.dashboardRepository.getChorbiesWithMinMaxAvgStars());
+		chorbiesNoLikes.addAll(this.dashboardRepository.getChorbiesWithNoLikes());
+
+		for (final Chorbi c : chorbiesNoLikes) {
+			aux[0] = c;
+			aux[1] = 0;
+			aux[2] = 0;
+			aux[3] = 0.;
+			res.add(aux);
+		}
+
+		return res;
+	}
+
+	//Dashboard - 16
+	public List<Object[]> getChorbiesWithAvgStarsOrderedByAvgStars() {
+		List<Object[]> res;
+		List<Chorbi> chorbiesNoLikes;
+		Object[] aux;
+
+		res = new ArrayList<Object[]>();
+		chorbiesNoLikes = new ArrayList<Chorbi>();
+		aux = new Object[2];
+
+		res.addAll(this.dashboardRepository.getChorbiesWithAvgStarsOrderedByAvgStars());
+		chorbiesNoLikes.addAll(this.dashboardRepository.getChorbiesWithNoLikes());
+
+		for (final Chorbi c : chorbiesNoLikes) {
+			aux[0] = c;
+			aux[1] = 0.;
+			res.add(aux);
+		}
 
 		return res;
 	}

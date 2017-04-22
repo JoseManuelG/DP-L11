@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import domain.Chorbi;
 import domain.DomainEntity;
+import domain.Manager;
 
 @Repository
 public interface DashboardRepository extends JpaRepository<DomainEntity, Integer> {
@@ -96,4 +97,37 @@ public interface DashboardRepository extends JpaRepository<DomainEntity, Integer
 	//Dashboard - 10
 	@Query("select m.sender from Chirp m where m.isSender=true and m.sender is not null group by m.sender having count(m)=?1 order by count(m) desc")
 	public List<Chorbi> findChorbiesWhoSentMoreChirps(Long max);
+
+	//Dashboard - 11
+	@Query("select m from Event e, Manager m where m=e.manager group by m order by count(e) desc")
+	public List<Manager> getManagersOrderedByEvents();
+
+	//Dashboard - 11
+	@Query("select m from Manager m where m not in (select distinct e.manager from Event e)")
+	public List<Manager> getManagersWithNoEvents();
+
+	//Dashboard - 12 (no necesita query aqui)
+
+	//Dashboard - 13
+	@Query("select c from Register r, Chorbi c where c=r.chorbi group by c order by count(r) desc")
+	public List<Chorbi> getChorbiesOrderedByRegisters();
+
+	//Dashboard - 13
+	@Query("select c from Chorbi c where c not in (select distinct r.chorbi from Register r)")
+	public List<Chorbi> getChorbiesWithNoRegisters();
+
+	//Dashboard - 14 (no necesita query aqui)
+
+	//Dashboard - 15
+	@Query("select c, min(r.stars), max(r.stars), avg(r.stars) from Likes r, Chorbi c where c=r.liked group by c")
+	public List<Object[]> getChorbiesWithMinMaxAvgStars();
+
+	//Dashboard - 15 y 16
+	@Query("select c from Chorbi c where c not in (select distinct r.liked from Likes r)")
+	public List<Chorbi> getChorbiesWithNoLikes();
+
+	//Dashboard - 16
+	@Query("select c, avg(r.stars) from Likes r, Chorbi c where c=r.liked group by c order by avg(r.stars) desc")
+	public List<Object[]> getChorbiesWithAvgStarsOrderedByAvgStars();
+
 }
