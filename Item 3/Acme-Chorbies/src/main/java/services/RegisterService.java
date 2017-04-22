@@ -27,11 +27,12 @@ public class RegisterService {
 
 
 	//Simple CRUD methods------------------------------------------------------------------
-	public Register create(final Chorbi chorbi, final Event event) {
-		Assert.notNull(chorbi, "El chorbi no puede ser nulo");
+	public Register create(final Event event) {
+		Chorbi chorbi;
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+
 		Assert.notNull(event, "El evento no puede ser nulo");
 
-		Assert.isTrue(chorbi.getId() > 0, "La ID del chorbi no puede ser 0");
 		Assert.isTrue(event.getId() > 0, "La ID del event no puede ser 0");
 		final Register result = new Register();
 		result.setChorbi(chorbi);
