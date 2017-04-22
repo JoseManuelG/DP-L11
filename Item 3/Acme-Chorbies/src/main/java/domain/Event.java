@@ -88,4 +88,5 @@ public class Event extends DomainEntity {
 	public void setManager(final Manager manager) {
 		this.manager = manager;
 	}
+
 }

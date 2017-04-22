@@ -10,7 +10,8 @@
 
 package controllers;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,29 +46,46 @@ public class EventController extends AbstractController {
 	// Methods -----------------------------------------------------------------		
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView received() {
+	public ModelAndView list(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		Collection<Event> events;
+		List<Event> events;
+		String requestURI;
 
-		events = this.eventService.findNextMonthEventsWithPlaces();
+		events = new ArrayList<Event>(this.eventService.findNextMonthEventsWithPlaces());
+		requestURI = "event/list.do";
+		if (sorted) {
+			this.eventService.sort(events);
+			requestURI += "?ordered=true";
+		}
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
-		result.addObject("requestURI", "event/list.do");
+		result.addObject("sorted", sorted);
+		result.addObject("requestURI", requestURI);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/list/all", method = RequestMethod.GET)
-	public ModelAndView sent() {
+	public ModelAndView listAll(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		Collection<Event> events;
+		String requestURI;
+		List<Event> events, eventsCloseToFinish;
 
-		events = this.eventService.findAll();
+		events = new ArrayList<Event>(this.eventService.findAll());
+		eventsCloseToFinish = new ArrayList<Event>(this.eventService.findNextMonthEventsWithPlaces());
+
+		requestURI = "event/list/all.do";
+		if (sorted) {
+			this.eventService.sort(events);
+			requestURI += "?sorted=true";
+		}
 
 		result = new ModelAndView("event/list/all");
 		result.addObject("events", events);
-		result.addObject("requestURI", "event/list/all.do");
+		result.addObject("eventsCloseToFinish", eventsCloseToFinish);
+		result.addObject("sorted", sorted);
+		result.addObject("requestURI", requestURI);
 
 		return result;
 	}

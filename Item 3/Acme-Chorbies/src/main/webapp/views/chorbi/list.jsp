@@ -46,18 +46,27 @@
 		    </jstl:otherwise>
 		</jstl:choose>
 	</security:authorize>
-
-	<acme:maskedColumn sorteable="true" code="chorbi.name" text="${row.name}" highlight="${row.banned}" />
 	
-	<acme:maskedColumn sorteable="true" code="chorbi.surname" text="${row.surname}" highlight="${row.banned}" />
+	<jstl:if test="${row.banned}">
+		<jstl:set var="style" value="color: red;text-decoration:line-through"/>
+	</jstl:if>
 	
-	<acme:maskedColumn sorteable="true" code="chorbi.description" text="${row.description}" highlight="${row.banned}" />
+	<jstl:if test="${!row.banned}">
+		<jstl:set var="style" value=""/>
+	</jstl:if>
+	
 
-	<acme:maskedColumn sorteable="true" code="chorbi.desiredRelationship" text="${row.desiredRelationship}" highlight="${row.banned}" />
+	<acme:maskedColumn sorteable="true" code="chorbi.name" text="${row.name}" highlight="${style}" />
+	
+	<acme:maskedColumn sorteable="true" code="chorbi.surname" text="${row.surname}" highlight="${style}" />
+	
+	<acme:maskedColumn sorteable="true" code="chorbi.description" text="${row.description}" highlight="${style}" />
 
-	<acme:maskedColumn sorteable="true" code="chorbi.birthDate" text="${row.birthDate }" highlight="${row.banned}" />
+	<acme:maskedColumn sorteable="true" code="chorbi.desiredRelationship" text="${row.desiredRelationship}" highlight="${style}" />
 
-	<acme:maskedColumn sorteable="true" code="chorbi.genre" text="${row.genre}" highlight="${row.banned}" />
+	<acme:maskedColumn sorteable="true" code="chorbi.birthDate" text="${row.birthDate }" highlight="${style}" />
+
+	<acme:maskedColumn sorteable="true" code="chorbi.genre" text="${row.genre}" highlight="${style}" />
 
 
 

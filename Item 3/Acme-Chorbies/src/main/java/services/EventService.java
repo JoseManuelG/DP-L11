@@ -2,7 +2,9 @@
 package services;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class EventService {
 
 	@Autowired
 	private ManagerService	managerService;
+
+	@Autowired
+	private EventComparator	eventComparator;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
@@ -101,4 +106,33 @@ public class EventService {
 		return register != null;
 	}
 
+	public void sort(final List<Event> events) {
+		//		Comparator<Event> comparator;
+		//
+		//		comparator = new EventComparator();
+
+		Collections.sort(events, this.eventComparator);
+
+	}
+
+	//	public class EventComparator implements Comparator<Event> {
+	//
+	//		@Autowired
+	//		private RegisterService	registerService;
+	//
+	//
+	//		@Override
+	//		public int compare(final Event event1, final Event event2) {
+	//			Integer numberOfChorbies1, numberOfChorbies2, freeSeats1, freeSeats2;
+	//
+	//			numberOfChorbies1 = this.registerService.getNumberOfChorbiesForEvent(event1.getId());
+	//			numberOfChorbies2 = this.registerService.getNumberOfChorbiesForEvent(event2.getId());
+	//
+	//			freeSeats1 = event1.getSeatsOffered() - numberOfChorbies1;
+	//			freeSeats2 = event2.getSeatsOffered() - numberOfChorbies2;
+	//
+	//			return freeSeats1.compareTo(freeSeats2);
+	//		}
+	//
+	//	}
 }

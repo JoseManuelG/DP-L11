@@ -17,16 +17,37 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jsp:useBean id="now" class="java.util.Date" />
+
+<jstl:if test="${!sorted}">
+	<a href="${requestURI}?sorted=true">
+		<spring:message code="event.sort"/>
+	</a>
+</jstl:if>
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="events" requestURI="${requestURI}" id="row" excludedParams="*">
 	
-	<acme:maskedColumn sorteable="false" code="event.title" text="${row.title}"/>
+
+	<jstl:choose>
+		<jstl:when test="${!empty eventsCloseToFinish and row.organisedMoment<now}">
+			<jstl:set var="style" value="color: grey"/>
+		</jstl:when>
+		<jstl:when test="${!empty eventsCloseToFinish and eventsCloseToFinish.contains(row)}">
+			<jstl:set var="style" value="color: green; font-size:150%"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<jstl:set var="style" value=""/>
+		</jstl:otherwise>
+	</jstl:choose>
 	
-	<acme:maskedColumn sorteable="false" code="event.description" text="${row.description}"/>
 	
-	<acme:maskedColumn  sorteable="false" code="event.organisedMoment" text="${row.organisedMoment}"/>
+	<acme:maskedColumn sorteable="false" code="event.title" text="${row.title}" highlight="${style}"/>
 	
-	<acme:maskedColumn  sorteable="false" code="event.seatsOffered" text="${row.seatsOffered}"/>
+	<acme:maskedColumn sorteable="false" code="event.description" text="${row.description}" highlight="${style}"/>
+	
+	<acme:maskedColumn  sorteable="false" code="event.organisedMoment" text="${row.organisedMoment}" highlight="${style}"/>
+	
+	<acme:maskedColumn  sorteable="false" code="event.seatsOffered" text="${row.seatsOffered}" highlight="${style}"/>
 	
 	<display:column>
 		<a href="event/view.do?eventId=${row.id}">
