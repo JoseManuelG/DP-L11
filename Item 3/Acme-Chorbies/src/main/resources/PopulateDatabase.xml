@@ -909,7 +909,7 @@
 	
 	<bean id="coordinatesChorbi2" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
+		<property name="country" value="Spain" />
 		<property name="province" value="" />
 		<property name="city" value="Madrid" />
 	</bean>
@@ -923,7 +923,7 @@
 	
 	<bean id="coordinatesChorbi3" class="domain.Coordinates">
 		<property name="state" value="Texas" />
-		<property name="country" value="" />
+		<property name="country" value="United States" />
 		<property name="province" value="" />
 		<property name="city" value="Austin" />
 	</bean>
@@ -951,7 +951,7 @@
 	
 	<bean id="coordinatesChorbi5" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
+		<property name="country" value="Spain" />
 		<property name="province" value="" />
 		<property name="city" value="Seville" />
 	</bean>
@@ -965,7 +965,7 @@
 	
 	<bean id="coordinatesChorbi6" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
+		<property name="country" value="Spain" />
 		<property name="province" value="" />
 		<property name="city" value="Seville" />
 	</bean>
@@ -979,7 +979,7 @@
 	
 	<bean id="coordinatesChorbi7" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
+		<property name="country" value="Spain" />
 		<property name="province" value="" />
 		<property name="city" value="Seville" />
 	</bean>
@@ -993,7 +993,7 @@
 	
 	<bean id="coordinatesChorbi8" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
+		<property name="country" value="Spain" />
 		<property name="province" value="" />
 		<property name="city" value="Seville" />
 	</bean>

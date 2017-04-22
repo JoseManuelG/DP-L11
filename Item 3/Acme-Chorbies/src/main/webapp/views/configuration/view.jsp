@@ -18,6 +18,8 @@
 
 
 	<spring:message  code="configuration.cachedTime" />: <jstl:out value="${time}" />
+	<br><spring:message  code="configuration.chorbiFee" />: <jstl:out value="${chorbiFee}" /> &euro;
+	<br><spring:message  code="configuration.managerFee" />: <jstl:out value="${managerFee}" /> &euro;
 	<br>
 	<br>
 	<a href="configuration/administrator/edit.do">

@@ -52,9 +52,10 @@ public class ConfigurationService {
 	// Other Business Methods --------------------------------------------------------------------
 
 	public Configuration reconstruct(final ConfigurationForm configurationForm, final BindingResult binding) {
-		Configuration result;
+		Configuration result, res;
 
 		result = this.findConfiguration();
+		res = new Configuration();
 
 		final long hours = configurationForm.getHours() * 3600000;
 		final long minutes = configurationForm.getMinutes() * 60000;
@@ -62,11 +63,15 @@ public class ConfigurationService {
 
 		final long cacheTime = hours + minutes + seconds;
 
-		result.setCachedTime(cacheTime);
+		res.setCachedTime(cacheTime);
+		res.setChorbiFee(configurationForm.getChorbiFee());
+		res.setManagerFee(configurationForm.getManagerFee());
+		res.setId(result.getId());
+		res.setVersion(result.getVersion());
 
-		this.validator.validate(result, binding);
+		this.validator.validate(res, binding);
 
-		return result;
+		return res;
 	}
 
 }

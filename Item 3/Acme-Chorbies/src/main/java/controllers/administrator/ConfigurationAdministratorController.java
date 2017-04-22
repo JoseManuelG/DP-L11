@@ -46,6 +46,8 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 		result = new ModelAndView("configuration/administrator/view");
 		result.addObject("time", time);
+		result.addObject("chorbiFee", conf.getChorbiFee());
+		result.addObject("managerFee", conf.getManagerFee());
 		result.addObject("requestURI", "configuration/administrator/view");
 
 		return result;
@@ -71,6 +73,8 @@ public class ConfigurationAdministratorController extends AbstractController {
 		configurationForm.setHours(hours);
 		configurationForm.setMinutes(minutes);
 		configurationForm.setSeconds(seconds);
+		configurationForm.setChorbiFee(conf.getChorbiFee());
+		configurationForm.setManagerFee(conf.getManagerFee());
 
 		result = this.createEditModelAndView(configurationForm);
 

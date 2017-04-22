@@ -7,9 +7,11 @@ import org.hibernate.validator.constraints.Range;
 
 public class ConfigurationForm {
 
-	private int	hours;
-	private int	minutes;
-	private int	seconds;
+	private int		hours;
+	private int		minutes;
+	private int		seconds;
+	private double	chorbiFee;
+	private double	managerFee;
 
 
 	// Constructor-------------------------------------
@@ -43,6 +45,24 @@ public class ConfigurationForm {
 
 	public void setSeconds(final int seconds) {
 		this.seconds = seconds;
+	}
+
+	@Min(0)
+	public double getChorbiFee() {
+		return this.chorbiFee;
+	}
+
+	public void setChorbiFee(final double chorbiFee) {
+		this.chorbiFee = chorbiFee;
+	}
+
+	@Min(0)
+	public double getManagerFee() {
+		return this.managerFee;
+	}
+
+	public void setManagerFee(final double managerFee) {
+		this.managerFee = managerFee;
 	}
 
 }
