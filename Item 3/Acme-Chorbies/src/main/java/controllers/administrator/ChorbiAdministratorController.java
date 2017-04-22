@@ -77,4 +77,27 @@ public class ChorbiAdministratorController extends AbstractController {
 		return result;
 	}
 
+	// updateChorbiesChargedFees 	-------------------------------------------------------------------
+
+	@RequestMapping(value = "/updateChorbiesChargedFees", method = RequestMethod.GET)
+	public ModelAndView updateChorbiesChargedFees() {
+		ModelAndView result;
+
+		this.chorbiService.updateChorbiesChargedFees();
+
+		result = new ModelAndView("redirect:/chorbi/administrator/successFee.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/successFee", method = RequestMethod.GET)
+	public ModelAndView successFee() {
+		ModelAndView result;
+
+		result = new ModelAndView("chorbi/administrator/updateChorbiesChargedFees");
+		result.addObject("requestURI", "chorbi/administrator/successFee.do");
+
+		return result;
+	}
+
 }

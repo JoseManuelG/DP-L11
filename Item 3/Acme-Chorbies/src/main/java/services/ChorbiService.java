@@ -59,6 +59,9 @@ public class ChorbiService {
 	@Autowired
 	private CoordinatesService		coordinatesService;
 
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	//Simple CRUD methods-------------------------------------------------------------------
 	public Chorbi create() {
@@ -110,6 +113,23 @@ public class ChorbiService {
 	public void flush() {
 		this.chorbiRepository.flush();
 	}
+
+	public void updateChorbiesChargedFees() {
+
+		List<Chorbi> chorbiesWithCC;
+		Double fee;
+
+		chorbiesWithCC = new ArrayList<Chorbi>();
+		chorbiesWithCC.addAll(this.chorbiRepository.getChorbiesWithCC());
+		fee = this.configurationService.findConfiguration().getChorbiFee();
+
+		for (final Chorbi c : chorbiesWithCC)
+			c.setChargedFee(c.getChargedFee() + fee);
+
+		this.chorbiRepository.save(chorbiesWithCC);
+
+	}
+
 	//Other Business methods-------------------------------------------------------------------
 
 	public Chorbi findChorbiByPrincipal() {

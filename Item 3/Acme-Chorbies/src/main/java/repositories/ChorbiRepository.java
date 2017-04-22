@@ -35,4 +35,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select c.coordinates from Chorbi c where c.userAccount.id = ?1")
 	public Coordinates findCoordinatesByUserAccountId(int id);
+
+	@Query("select c.customer from CreditCard c where c in (select c2 from CreditCard c2 where c2.customer.class = Chorbi)")
+	public Collection<Chorbi> getChorbiesWithCC();
 }
