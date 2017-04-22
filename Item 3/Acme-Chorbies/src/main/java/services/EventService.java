@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.EventRepository;
 import domain.Chorbi;
 import domain.Event;
+import domain.Manager;
 import domain.Register;
 
 @Service
@@ -28,6 +29,9 @@ public class EventService {
 
 	@Autowired
 	private RegisterService	registerService;
+
+	@Autowired
+	private ManagerService	managerService;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
@@ -51,6 +55,22 @@ public class EventService {
 		now = new Date();
 
 		return this.eventRepository.findEventsWithPlacesBeforeDate(date, now);
+	}
+
+	public Collection<Event> findAllFromPrincipalChorbi() {
+		Chorbi chorbi;
+
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+
+		return this.eventRepository.findAllFromChorbi(chorbi.getId());
+	}
+
+	public Collection<Event> findAllFromPrincipalManager() {
+		Manager manager;
+
+		manager = this.managerService.findManagerByPrincipal();
+
+		return this.eventRepository.findAllFromManager(manager.getId());
 	}
 
 	public Boolean checkExpired(final Event event) {

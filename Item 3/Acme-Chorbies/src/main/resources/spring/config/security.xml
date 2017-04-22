@@ -108,7 +108,7 @@
 		
 		<!-- Manager -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('MANAGER')" /> -->
-		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')"  /> 
 		
 		<!--NONE -->
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
