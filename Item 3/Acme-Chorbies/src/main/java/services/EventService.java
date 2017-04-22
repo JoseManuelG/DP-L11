@@ -44,12 +44,13 @@ public class EventService {
 
 	public Collection<Event> findNextMonthEventsWithPlaces() {
 		LocalDate nextMonth;
-		Date date;
+		Date date, now;
 
 		nextMonth = new LocalDate().plusMonths(1);
 		date = nextMonth.toDateTimeAtStartOfDay().toDate();
+		now = new Date();
 
-		return this.eventRepository.findEventsWithPlacesBeforeDate(date);
+		return this.eventRepository.findEventsWithPlacesBeforeDate(date, now);
 	}
 
 	public Boolean checkExpired(final Event event) {
@@ -57,7 +58,7 @@ public class EventService {
 
 		now = new Date();
 
-		return now.before(event.getOrganisedMoment());
+		return now.after(event.getOrganisedMoment());
 	}
 
 	public Boolean checkSiteFree(final Event event) {

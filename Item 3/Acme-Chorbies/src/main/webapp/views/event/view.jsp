@@ -35,8 +35,8 @@
 <acme:mask text="${event.seatsOffered}"/><br/>
 	
 <security:authorize access="hasRole('CHORBI')">
-	<jstl:if test="${siteFree and !expired}">
-		<jstl:if test="${!registered}">
+	<jstl:if test="${!expired}">
+		<jstl:if test="${!registered and siteFree}">
 			<a href="event/chorbi/register.do?eventId=${event.id}">
 				<spring:message code="event.register"/>
 			</a>
