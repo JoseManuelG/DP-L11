@@ -37,12 +37,12 @@
 <security:authorize access="hasRole('CHORBI')">
 	<jstl:if test="${siteFree and !expired}">
 		<jstl:if test="${!registered}">
-			<a href="event/chorbi/register.do?eventId=${row.id}">
+			<a href="event/chorbi/register.do?eventId=${event.id}">
 				<spring:message code="event.register"/>
 			</a>
 		</jstl:if>
 		<jstl:if test="${registered}">
-			<a href="event/chorbi/unregister.do?eventId=${row.id}">
+			<a href="event/chorbi/unregister.do?eventId=${event.id}">
 				<spring:message code="event.unregister"/>
 			</a>
 		</jstl:if>
