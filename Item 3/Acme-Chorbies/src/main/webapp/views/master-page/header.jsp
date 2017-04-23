@@ -36,9 +36,18 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="security/register.do"><spring:message code="master.page.register" /></a></li>
-			
+			<li>
+				<a class="fNiv">
+				<spring:message code="master.page.register" />
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="chorbi/register.do"><spring:message code="master.page.register.chorbi" /></a></li>
+					<li><a href="manager/register.do"><spring:message code="master.page.register.manager" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
+		
 		<security:authorize access="isAuthenticated()">
 			<li>
 				<a class="fNiv"> 

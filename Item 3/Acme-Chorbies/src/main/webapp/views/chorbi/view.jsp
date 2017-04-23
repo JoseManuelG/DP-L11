@@ -85,7 +85,7 @@
 	
 </display:table>
 <jstl:if test="${myPrincipal}">
-	<a href="security/edit.do?chorbiId=${chorbi.id}">
+	<a href="chorbi/edit.do?chorbiId=${chorbi.id}">
 		      <spring:message  code="chorbi.edit.profile" />
 	</a>
 </jstl:if>

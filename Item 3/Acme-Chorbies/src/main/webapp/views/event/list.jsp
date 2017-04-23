@@ -19,7 +19,7 @@
 
 <jsp:useBean id="now" class="java.util.Date" />
 
-<jstl:if test="${!sorted}">
+<jstl:if test="${!sorted and !empty events}">
 	<a href="${requestURI}?sorted=true">
 		<spring:message code="event.sort"/>
 	</a>

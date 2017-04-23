@@ -35,5 +35,15 @@
 		<put-attribute name="title" value="Successully added fee" />
 		<put-attribute name="body" value="/views/chorbi/updateChorbiesChargedFees.jsp" />
 	</definition>
+		
+	<definition name="chorbi/register" extends="master.page">
+  		<put-attribute name="title" value="Register" /> 
+ 		<put-attribute name="body" value="/views/chorbi/edit.jsp" /> 
+  	</definition>
+  	
+  	<definition name="chorbi/edit" extends="master.page">
+  		<put-attribute name="title" value="Edit profile" /> 
+ 		<put-attribute name="body" value="/views/chorbi/edit.jsp" /> 
+  	</definition>
 	
 </tiles-definitions>

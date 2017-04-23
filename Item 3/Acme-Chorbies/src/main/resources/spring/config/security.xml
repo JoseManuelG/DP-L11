@@ -47,7 +47,8 @@
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" />
 		 
-		<security:intercept-url pattern="/security/register.do" access="permitAll" />
+ 		<security:intercept-url pattern="/chorbi/register.do" access="permitAll" />
+ 		<security:intercept-url pattern="/manager/register.do" access="permitAll" />
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
@@ -57,7 +58,6 @@
 		
 		
 		<!-- Actor -->	
-		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 	
 		<security:intercept-url pattern="/chorbi/chorbi/view.do" access="isAuthenticated()"  /> 
 		
 			
@@ -85,6 +85,7 @@
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->
 		<security:intercept-url pattern="/searchTemplate/chorbi/search.do" access="hasRole('CHORBI')"  /> 
 
+		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/chorbi/chorbi/myProfile.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chirp/chorbi/sent.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chirp/chorbi/view.do" access="hasRole('CHORBI')"  /> 
@@ -115,6 +116,7 @@
 		
 		<!-- Manager -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('MANAGER')" /> -->
+		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 	
 		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')"  /> 
 		
 		<!--NONE -->

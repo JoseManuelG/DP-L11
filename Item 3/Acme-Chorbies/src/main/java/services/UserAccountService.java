@@ -1,11 +1,14 @@
 
 package services;
 
+import java.util.HashSet;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import security.Authority;
 import security.UserAccount;
 import security.UserAccountRepository;
 
@@ -22,6 +25,18 @@ public class UserAccountService {
 	// Supporting Services --------------------------------------
 
 	//Simple CRUD methods-------------------------------------------------------------------
+
+	public UserAccount create() {
+		UserAccount account;
+
+		account = new UserAccount();
+		account.setAuthorities(new HashSet<Authority>());
+		account.setEnabled(true);
+		account.setPassword("");
+		account.setUsername("");
+
+		return account;
+	}
 
 	public UserAccount save(final UserAccount userAccount) {
 		UserAccount result;

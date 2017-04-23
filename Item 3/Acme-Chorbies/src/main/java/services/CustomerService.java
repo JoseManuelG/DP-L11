@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.CustomerRepository;
 import security.LoginService;
+import domain.Actor;
 import domain.Customer;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -17,12 +19,19 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository	customerRepository;
 
-
 	// Supporting Services --------------------------------------
+
+	@Autowired
+	private ActorService		actorService;
+
 
 	//Simple CRUD methods-------------------------------------------------------------------
 
-	// other business methods --------------------------------------
+	public Customer findOne(final int recipientId) {
+		return this.customerRepository.findOne(recipientId);
+	}
+
+	//Other business methods --------------------------------------
 
 	public Customer findCustomerByPrincipal() {
 		Customer result;
@@ -30,7 +39,23 @@ public class CustomerService {
 		return result;
 	}
 
-	public Customer findOne(final int recipientId) {
-		return this.customerRepository.findOne(recipientId);
+	public void setCustomerProperties(final Customer customer) {
+
+		this.actorService.setActorProperties(customer);
+		customer.setChargedFee(0);
 	}
+
+	public void setReconstructCustomerProperties(final Customer result, final Customer origin, final ActorForm actorForm) {
+
+		this.actorService.setReconstructActorProperties(result, origin, actorForm);
+		result.setChargedFee(origin.getChargedFee());
+
+	}
+
+	public void setReconstructNewCustomerProperties(final Actor result, final ActorForm actorForm) {
+
+		this.actorService.setReconstructNewActorProperties(result, actorForm);
+
+	}
+
 }

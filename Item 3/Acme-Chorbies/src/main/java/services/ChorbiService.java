@@ -22,7 +22,7 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Chorbi;
 import domain.Coordinates;
-import forms.ActorForm;
+import forms.ChorbiForm;
 
 @Service
 @Transactional
@@ -34,6 +34,9 @@ public class ChorbiService {
 	private ChorbiRepository		chorbiRepository;
 
 	// Supporting Services --------------------------------------
+
+	@Autowired
+	private CustomerService			customerService;
 
 	@Autowired
 	private UserAccountService		userAccountService;
@@ -65,7 +68,21 @@ public class ChorbiService {
 
 	//Simple CRUD methods-------------------------------------------------------------------
 	public Chorbi create() {
-		final Chorbi result = new Chorbi();
+		Chorbi result;
+		Authority authority;
+		Coordinates coordinates;
+
+		result = new Chorbi();
+		this.customerService.setCustomerProperties(result);
+
+		coordinates = this.coordinatesService.create();
+
+		authority = new Authority();
+		authority.setAuthority("CHORBI");
+
+		result.getUserAccount().addAuthority(authority);
+		result.setCoordinates(coordinates);
+
 		return result;
 	}
 
@@ -74,7 +91,10 @@ public class ChorbiService {
 
 		Assert.notNull(chorbi, "chorbi.error.null");
 		Assert.isTrue(chorbi.getAge() >= 18, "chorbi.underage.error");
+
 		chorbi.setUserAccount(this.userAccountService.save(chorbi.getUserAccount()));
+		chorbi.setCoordinates(this.coordinatesService.save(chorbi.getCoordinates()));
+
 		result = this.chorbiRepository.save(chorbi);
 		Assert.notNull(result, "chorbi.error.commit");
 		if (chorbi.getId() == 0)
@@ -138,75 +158,56 @@ public class ChorbiService {
 		return result;
 	}
 
-	public Chorbi reconstruct(final ActorForm actorForm, final BindingResult binding) {
-		final Chorbi result = this.create();
-		Coordinates coordinates, finalCoordinates;
+	public Chorbi reconstructNewChorbi(final ChorbiForm chorbiForm, final BindingResult binding) {
+		Chorbi result;
+		Md5PasswordEncoder encoder;
 
-		coordinates = new Coordinates();
+		result = this.create();
+		encoder = new Md5PasswordEncoder();
 
-		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		final UserAccount userAccount = new UserAccount();
-		userAccount.setUsername(actorForm.getUserAccount().getUsername());
-		userAccount.setPassword(actorForm.getUserAccount().getPassword());
-		final Collection<Authority> authorities = new ArrayList<Authority>();
-		final Authority authority = new Authority();
-		authority.setAuthority("CHORBI");
-		authorities.add(authority);
-		userAccount.setEnabled(true);
-		userAccount.setAuthorities(authorities);
-
-		result.setName(actorForm.getName());
-		result.setSurname(actorForm.getSurname());
-		result.setEmail(actorForm.getEmail());
-		result.setPhone(actorForm.getPhone());
-		result.setPicture(actorForm.getPicture());
-		result.setDescription(actorForm.getDescription());
-		result.setBirthDate(actorForm.getBirthDate());
-		result.setGenre(actorForm.getGenre());
-		result.setDesiredRelationship(actorForm.getDesiredRelationship());
-
-		coordinates.setCity(actorForm.getCity());
-		coordinates.setCountry(actorForm.getCountry());
-		coordinates.setProvince(actorForm.getProvince());
-		coordinates.setState(actorForm.getState());
-		finalCoordinates = this.coordinatesService.save(coordinates);
-
-		result.setCoordinates(finalCoordinates);
-
-		result.setUserAccount(userAccount);
+		this.customerService.setReconstructNewCustomerProperties(result, chorbiForm);
+		this.setReconstructProperties(result, chorbiForm);
 
 		this.validator.validate(result, binding);
-		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		result.getUserAccount().setPassword(encoder.encodePassword(chorbiForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 
-	public Chorbi reconstruct(final ActorForm actorForm, final Chorbi chorbi, final BindingResult binding) {
-		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+	public Chorbi reconstruct(final ChorbiForm chorbiForm, final Chorbi chorbi, final BindingResult binding) {
+		Md5PasswordEncoder encoder;
 		Chorbi result;
-		Coordinates coordinates, finalCoordinates;
 
-		result = new Chorbi();
-		coordinates = new Coordinates();
+		result = this.create();
+		encoder = new Md5PasswordEncoder();
 
-		this.actorService.reconstruct(result, chorbi, actorForm);
-
-		result.setPicture(actorForm.getPicture());
-		result.setDescription(actorForm.getDescription());
-		result.setBirthDate(actorForm.getBirthDate());
-		result.setGenre(actorForm.getGenre());
-		result.setDesiredRelationship(actorForm.getDesiredRelationship());
-
-		coordinates.setCity(actorForm.getCity());
-		coordinates.setCountry(actorForm.getCountry());
-		coordinates.setProvince(actorForm.getProvince());
-		coordinates.setState(actorForm.getState());
-		finalCoordinates = this.coordinatesService.save(coordinates);
-
-		result.setCoordinates(finalCoordinates);
+		this.customerService.setReconstructCustomerProperties(result, chorbi, chorbiForm);
+		this.setReconstructProperties(result, chorbiForm);
 
 		this.validator.validate(result, binding);
-		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+
+		result.getUserAccount().setPassword(encoder.encodePassword(chorbiForm.getUserAccount().getPassword(), null));
+
 		return result;
+	}
+
+	private void setReconstructProperties(final Chorbi result, final ChorbiForm chorbiForm) {
+		Coordinates coordinates;
+
+		coordinates = new Coordinates();
+
+		result.setPicture(chorbiForm.getPicture());
+		result.setDescription(chorbiForm.getDescription());
+		result.setBirthDate(chorbiForm.getBirthDate());
+		result.setGenre(chorbiForm.getGenre());
+		result.setDesiredRelationship(chorbiForm.getDesiredRelationship());
+
+		coordinates.setCity(chorbiForm.getCity());
+		coordinates.setCountry(chorbiForm.getCountry());
+		coordinates.setProvince(chorbiForm.getProvince());
+		coordinates.setState(chorbiForm.getState());
+
+		result.setCoordinates(coordinates);
+
 	}
 
 	public void banChorbi(final int chorbiId) {

@@ -32,6 +32,7 @@
 		<value>/views/creditCard/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/event/tiles.xml</value>
+		<value>/views/manager/tiles.xml</value>
 		<value>/views/likes/tiles.xml</value>
 		<value>/views/searchTemplate/tiles.xml</value>
 		
