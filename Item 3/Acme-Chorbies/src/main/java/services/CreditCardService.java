@@ -9,6 +9,7 @@ import org.joda.time.PeriodType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.CreditCardRepository;
 import domain.Chorbi;
@@ -56,10 +57,7 @@ public class CreditCardService {
 		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		CreditCard result;
 
-		if (creditCard.getId() == 0)
-			creditCard.setCustomer(this.customerService.findCustomerByPrincipal());
-		else
-			this.checkPrincipal(creditCard);
+		this.checkPrincipal(creditCard);
 
 		result = this.creditCardRepository.save(creditCard);
 		return result;
@@ -124,6 +122,29 @@ public class CreditCardService {
 
 		customer = this.customerService.findCustomerByPrincipal();
 		Assert.isTrue(creditCard.getCustomer().equals(customer));
+	}
+
+	public CreditCard reconstruct(final CreditCard creditCard, final BindingResult binding) {
+		CreditCard old, result;
+
+		result = this.create();
+
+		if (creditCard.getId() != 0) {
+			old = this.creditCardRepository.findOne(creditCard.getId());
+			result.setCustomer(old.getCustomer());
+		} else
+			creditCard.setCustomer(this.customerService.findCustomerByPrincipal());
+
+		result.setBrandName(creditCard.getBrandName());
+		result.setCvvCode(creditCard.getCvvCode());
+		result.setExpirationMonth(creditCard.getExpirationMonth());
+		result.setExpirationYear(creditCard.getExpirationYear());
+		result.setHolderName(creditCard.getHolderName());
+		result.setId(creditCard.getId());
+		result.setNumber(creditCard.getNumber());
+		result.setVersion(creditCard.getVersion());
+
+		return result;
 	}
 
 }

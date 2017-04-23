@@ -84,14 +84,16 @@ public class CreditCardCustomerController extends AbstractController {
 	public @ResponseBody
 	ModelAndView save(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
+		CreditCard cardResult;
 
+		cardResult = this.creditCardService.reconstruct(creditCard, binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = this.createEditModelAndView(creditCard);
 		} else
 			try {
-				this.creditCardService.save(creditCard);
-				result = new ModelAndView("redirect:../chorbi/myCreditCard.do");
+				this.creditCardService.save(cardResult);
+				result = new ModelAndView("redirect:../customer/myCreditCard.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
 			}
@@ -108,7 +110,7 @@ public class CreditCardCustomerController extends AbstractController {
 		System.out.println(binding);
 		try {
 			this.creditCardService.delete(creditCard);
-			result = new ModelAndView("redirect:../chorbi/myCreditCard.do");
+			result = new ModelAndView("redirect:../customer/myCreditCard.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
 		}

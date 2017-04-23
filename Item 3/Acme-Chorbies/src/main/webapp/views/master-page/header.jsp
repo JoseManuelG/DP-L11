@@ -70,6 +70,8 @@
 					
 					<security:authorize access="hasRole('MANAGER')">
 					<li><a href="event/manager/list.do"><spring:message code="master.page.event.manager.list" /></a></li>
+					<li><a href="creditCard/customer/myCreditCard.do"><spring:message code="master.page.credit.card" /></a></li>
+					
 					</security:authorize>
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
