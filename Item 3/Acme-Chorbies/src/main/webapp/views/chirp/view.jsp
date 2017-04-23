@@ -56,15 +56,15 @@
 </jstl:if>
 
 <jstl:if test="${res.sender!=null}">
-	<a href="chirp/chorbi/reply.do?chirpId=${res.id}">
+	<a href="chirp/customer/reply.do?chirpId=${res.id}">
 		<spring:message code="chirp.reply"/>
 	</a> | 
 </jstl:if>
 
-<a href="chirp/chorbi/forward.do?chirpId=${res.id}">
+<a href="chirp/customer/forward.do?chirpId=${res.id}">
 	<spring:message code="chirp.forward"/>
 </a> | 
 
-<a href="chirp/chorbi/delete.do?chirpId=${res.id}" onclick="return confirm('<spring:message code="confirm.delete" />')">
+<a href="chirp/customer/delete.do?chirpId=${res.id}" onclick="return confirm('<spring:message code="confirm.delete" />')">
 	<spring:message code="chirp.delete"/>
 </a>

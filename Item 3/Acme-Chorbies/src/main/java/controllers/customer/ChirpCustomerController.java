@@ -8,7 +8,7 @@
  * http://www.tdg-seville.info/License.html
  */
 
-package controllers.chorbi;
+package controllers.customer;
 
 import java.util.Collection;
 
@@ -22,16 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AttachmentService;
 import services.ChirpService;
-import services.ChorbiService;
+import services.CustomerService;
 import controllers.AbstractController;
 import domain.Attachment;
 import domain.Chirp;
-import domain.Chorbi;
+import domain.Customer;
 import forms.ChirpForm;
 
 @Controller
-@RequestMapping("/chirp/chorbi")
-public class ChirpChorbiController extends AbstractController {
+@RequestMapping("/chirp/customer")
+public class ChirpCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -42,12 +42,12 @@ public class ChirpChorbiController extends AbstractController {
 	private AttachmentService	attachmentService;
 
 	@Autowired
-	private ChorbiService		chorbiService;
+	private CustomerService		customerService;
 
 
 	// Constructors -----------------------------------------------------------
 
-	public ChirpChorbiController() {
+	public ChirpCustomerController() {
 		super();
 	}
 
@@ -62,7 +62,7 @@ public class ChirpChorbiController extends AbstractController {
 
 		result = new ModelAndView("chirp/list/received");
 		result.addObject("chirps", res);
-		result.addObject("requestURI", "chirp/chorbi/received.do");
+		result.addObject("requestURI", "chirp/customer/received.do");
 
 		return result;
 	}
@@ -76,7 +76,7 @@ public class ChirpChorbiController extends AbstractController {
 
 		result = new ModelAndView("chirp/list/sent");
 		result.addObject("chirps", res);
-		result.addObject("requestURI", "chirp/chorbi/sent.do");
+		result.addObject("requestURI", "chirp/customer/sent.do");
 
 		return result;
 	}
@@ -93,7 +93,7 @@ public class ChirpChorbiController extends AbstractController {
 		result = new ModelAndView("chirp/view");
 		result.addObject("res", res);
 		result.addObject("attachments", att);
-		result.addObject("requestURI", "chirp/chorbi/view.do?chirpId=" + chirpId);
+		result.addObject("requestURI", "chirp/customer/view.do?chirpId=" + chirpId);
 
 		return result;
 	}
@@ -198,15 +198,15 @@ public class ChirpChorbiController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final ChirpForm chirpForm, final String message) {
 		ModelAndView result;
-		Collection<Chorbi> chorbis;
+		Collection<Customer> customers;
 
 		result = new ModelAndView("chirp/write");
-		chorbis = this.chorbiService.findAll();
+		customers = this.customerService.findAll();
 
-		result.addObject("chorbis", chorbis);
+		result.addObject("customers", customers);
 		result.addObject("chirpForm", chirpForm);
 		result.addObject("message", message);
-		result.addObject("requestURI", "chirp/chorbi/write.do");
+		result.addObject("requestURI", "chirp/customer/write.do");
 
 		return result;
 	}

@@ -74,8 +74,8 @@ public class SearchTemplateService {
 		//Revisar que el search guardado sea del Principal
 		Assert.isTrue(this.actorService.findActorByPrincipal().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("CHORBI"));
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
-		Assert.notNull(this.creditCardService.getCreditCardByChorbi(), "search.notCreditCard");
-		Assert.isTrue(this.creditCardService.checkCreditCardByChorbi(), "search.not.valid.credit.card");
+		Assert.notNull(this.creditCardService.getCreditCardByPrincipal(), "search.notCreditCard");
+		Assert.isTrue(this.creditCardService.checkCreditCardByPrincipal(), "search.not.valid.credit.card");
 		//Fechas para comprobar el tiempo de caché
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());

@@ -87,13 +87,6 @@
 
 		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/chorbi/chorbi/myProfile.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/sent.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/view.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/delete.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/reply.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/forward.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/write.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/received.do" access="hasRole('CHORBI')"  />
 		<security:intercept-url pattern="/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 		
 		<security:intercept-url pattern="/event/chorbi/list.do" access="hasRole('CHORBI')"  /> 
@@ -112,7 +105,15 @@
 <!-- 		<security:intercept-url pattern="" access="hasAnyRole('CHORBI','MANAGER')" /> -->
 		<security:intercept-url pattern="/creditCard/customer/create.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 	
 		<security:intercept-url pattern="/creditCard/customer/myCreditCard.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
-		<security:intercept-url pattern="/creditCard/customer/edit.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 	
+		<security:intercept-url pattern="/creditCard/customer/edit.do" access="hasAnyRole('CHORBI','MANAGER')"  />
+		 	
+		<security:intercept-url pattern="/chirp/customer/sent.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/customer/view.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/customer/delete.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/customer/reply.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/customer/forward.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/customer/write.do" access="hasAnyRole('CHORBI','MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/customer/received.do" access="hasAnyRole('CHORBI','MANAGER')"  />
 		
 		<!-- Manager -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('MANAGER')" /> -->

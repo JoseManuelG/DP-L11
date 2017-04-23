@@ -14,7 +14,6 @@
 <form:form action="creditCard/customer/edit.do" modelAttribute="creditCard">
 	
 	<form:hidden path="id" />
-	<form:hidden path="version" />	
 	
 	<br />
 	

@@ -27,13 +27,13 @@
 	<acme:maskedColumn  sorteable="true" code="chirp.for" text="${row.recipientName}"/>
 	
 	<display:column>
-		<a href="chirp/chorbi/view.do?chirpId=${row.id}">
+		<a href="chirp/customer/view.do?chirpId=${row.id}">
 			<spring:message code="chirp.view"/>
 		</a>
 	</display:column>
 
 </display:table>
 
-<a href="chirp/chorbi/write.do">
+<a href="chirp/customer/write.do">
 	<spring:message code="chirp.new"/>
 </a>

@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,10 @@ public class CustomerService {
 
 	public Customer findOne(final int recipientId) {
 		return this.customerRepository.findOne(recipientId);
+	}
+
+	public Collection<Customer> findAll() {
+		return this.customerRepository.findAll();
 	}
 
 	//Other business methods --------------------------------------

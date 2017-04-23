@@ -20,7 +20,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="chirp/chorbi/write.do" modelAttribute="chirpForm">
+<form:form action="chirp/customer/write.do" modelAttribute="chirpForm">
 		<form:hidden path="action" />
 
 	<!-- Poder modificar titulo y texto-->
@@ -52,7 +52,7 @@
 			<spring:message code="chirp.for" />
 		</form:label>
 		<form:select path="recipient">
-			<jstl:forEach items="${chorbis}" var="chorbi">
+			<jstl:forEach items="${customers}" var="chorbi">
 				<form:option value="${chorbi.id}">
 					<jstl:out
 						value="${chorbi.name} ${chorbi.surname} (${chorbi.userAccount.username})" />

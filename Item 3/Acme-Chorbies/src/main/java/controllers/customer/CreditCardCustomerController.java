@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ChorbiService;
 import services.CreditCardService;
 import controllers.AbstractController;
-import domain.Chorbi;
 import domain.CreditCard;
 
 @Controller
@@ -25,9 +23,6 @@ public class CreditCardCustomerController extends AbstractController {
 
 	@Autowired
 	private CreditCardService	creditCardService;
-
-	@Autowired
-	private ChorbiService		chorbiService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -56,7 +51,7 @@ public class CreditCardCustomerController extends AbstractController {
 		final ModelAndView result;
 		CreditCard creditCard;
 
-		creditCard = this.creditCardService.getCreditCardByChorbi();
+		creditCard = this.creditCardService.getCreditCardByPrincipal();
 		result = new ModelAndView("creditCard/customer/myCreditCard");
 
 		if (creditCard != null)
@@ -72,7 +67,7 @@ public class CreditCardCustomerController extends AbstractController {
 		ModelAndView result;
 		CreditCard creditCard;
 
-		creditCard = this.creditCardService.getCreditCardByChorbi();
+		creditCard = this.creditCardService.getCreditCardByPrincipal();
 		result = this.createEditModelAndView(creditCard);
 
 		return result;
@@ -130,13 +125,10 @@ public class CreditCardCustomerController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final CreditCard creditCard, final String message) {
 		ModelAndView result;
-		Chorbi chorbi;
-		chorbi = this.chorbiService.findChorbiByPrincipal();
 
 		result = new ModelAndView("creditCard/customer/edit");
 		result.addObject("creditCard", creditCard);
 		result.addObject("message", message);
-		result.addObject("chorbi", chorbi);
 		return result;
 	}
 

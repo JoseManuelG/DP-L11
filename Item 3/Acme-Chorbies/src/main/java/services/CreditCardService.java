@@ -28,9 +28,6 @@ public class CreditCardService {
 	// Supporting Services ------------------------------------------------------------
 
 	@Autowired
-	private ChorbiService			chorbiService;
-
-	@Autowired
 	private CustomerService			customerService;
 
 
@@ -57,6 +54,7 @@ public class CreditCardService {
 		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		CreditCard result;
 
+		Assert.isTrue(this.checkCreditCard(creditCard));
 		this.checkPrincipal(creditCard);
 
 		result = this.creditCardRepository.save(creditCard);
@@ -74,36 +72,42 @@ public class CreditCardService {
 	public void deleteFromChorbi(final Chorbi chorbi) {
 		CreditCard creditCard;
 
-		creditCard = this.getCreditCardByChorbi(chorbi);
+		creditCard = this.getCreditCardByCustomer(chorbi);
 		if (creditCard != null)
 			this.creditCardRepository.delete(creditCard);
 	}
 
 	// Other Bussiness Methods --------------------------------------------------------
 
-	public CreditCard getCreditCardByChorbi() {
+	public CreditCard getCreditCardByPrincipal() {
 		CreditCard creditCard;
-		Chorbi chorbi;
-		chorbi = this.chorbiService.findChorbiByPrincipal();
-		creditCard = this.creditCardRepository.findCreditCardByChorbiId(chorbi.getId());
+		Customer customer;
+		customer = this.customerService.findCustomerByPrincipal();
+		creditCard = this.creditCardRepository.findCreditCardByCustomerId(customer.getId());
 		return creditCard;
 	}
 
-	public CreditCard getCreditCardByChorbi(final Chorbi chorbi) {
+	public CreditCard getCreditCardByCustomer(final Customer customer) {
 		CreditCard creditCard;
 
-		creditCard = this.creditCardRepository.findCreditCardByChorbiId(chorbi.getId());
+		creditCard = this.creditCardRepository.findCreditCardByCustomerId(customer.getId());
 
 		return creditCard;
 	}
 
-	public boolean checkCreditCardByChorbi() {
+	public boolean checkCreditCardByPrincipal() {
 		CreditCard creditCard;
+
+		creditCard = this.getCreditCardByPrincipal();
+
+		return this.checkCreditCard(creditCard);
+	}
+
+	public boolean checkCreditCard(final CreditCard creditCard) {
 		LocalDate expireTime, now;
 		Period period;
 		Boolean result;
 
-		creditCard = this.getCreditCardByChorbi();
 		//Añadido el bloque if por Roldan, porque si tenia una tarjeta de credito que caducaba el mes 12,  fallaba
 		if (creditCard.getExpirationMonth() < 12)
 			expireTime = new LocalDate(creditCard.getExpirationYear(), creditCard.getExpirationMonth() + 1, 1);

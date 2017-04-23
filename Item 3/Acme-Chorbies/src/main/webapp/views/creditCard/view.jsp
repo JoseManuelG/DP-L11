@@ -17,7 +17,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <jstl:if test="${editable ne false}">
-	<security:authorize access="hasRole('CHORBI')">
 	<spring:message  code="creditCard.holderName" />: <jstl:out value="${creditCard.holderName}" />
 	<br>
 	<spring:message  code="creditCard.brandName" />: <jstl:out value="${creditCard.brandName}"/>
@@ -34,15 +33,12 @@
 	<a href="creditCard/customer/edit.do">
 		      <spring:message  code="creditCard.edit" />
 	</a>
-	</security:authorize>
 </jstl:if>
 
 <jstl:if test="${editable eq false}">
-	<security:authorize access="hasRole('CHORBI')">
 		<spring:message  code="creditCard.noCreditCard" />
 		<a href="creditCard/customer/create.do">
 			      <spring:message  code="creditCard.newCreditCard" />
 		</a>
-	</security:authorize>
 </jstl:if>
 	

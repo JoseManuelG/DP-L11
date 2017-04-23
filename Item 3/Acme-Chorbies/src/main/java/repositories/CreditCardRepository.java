@@ -11,6 +11,6 @@ import domain.CreditCard;
 public interface CreditCardRepository extends JpaRepository<CreditCard, Integer> {
 
 	@Query("select c from CreditCard c where c.customer.id=?1")
-	public CreditCard findCreditCardByChorbiId(int chorbiId);
+	public CreditCard findCreditCardByCustomerId(int chorbiId);
 
 }
