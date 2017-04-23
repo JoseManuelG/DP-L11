@@ -136,6 +136,8 @@ public class CreditCardService {
 		if (creditCard.getId() != 0) {
 			old = this.creditCardRepository.findOne(creditCard.getId());
 			result.setCustomer(old.getCustomer());
+			result.setId(old.getId());
+			result.setVersion(old.getVersion());
 		} else
 			creditCard.setCustomer(this.customerService.findCustomerByPrincipal());
 
@@ -144,9 +146,7 @@ public class CreditCardService {
 		result.setExpirationMonth(creditCard.getExpirationMonth());
 		result.setExpirationYear(creditCard.getExpirationYear());
 		result.setHolderName(creditCard.getHolderName());
-		result.setId(creditCard.getId());
 		result.setNumber(creditCard.getNumber());
-		result.setVersion(creditCard.getVersion());
 
 		return result;
 	}
