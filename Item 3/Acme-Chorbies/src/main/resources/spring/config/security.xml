@@ -38,6 +38,8 @@
 
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 		
+		
+		
 		<security:intercept-url pattern="/about/about.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/law/terms-conditions.do" access="permitAll" /> 
@@ -94,6 +96,9 @@
 		<security:intercept-url pattern="/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 		
 		<security:intercept-url pattern="/event/chorbi/list.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/event/chorbi/register.do" access="hasRole('CHORBI')"/> 
+		<security:intercept-url pattern="/event/chorbi/unregister.do" access="hasRole('CHORBI')" /> 
+		
 		
 		<security:intercept-url pattern="/likes/chorbi/view.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/likes/chorbi/create.do" access="hasRole('CHORBI')"  /> 

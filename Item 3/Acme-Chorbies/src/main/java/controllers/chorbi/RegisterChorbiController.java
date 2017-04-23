@@ -33,36 +33,61 @@ public class RegisterChorbiController {
 	// Methods -----------------------------------------------------------------		
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView received(final int eventId) {
+	public ModelAndView register(final int eventId) {
 		ModelAndView result;
 		Register register;
 		final Event event;
+		final Boolean siteFree, expired;
+
 		event = this.eventService.findOne(eventId);
 		register = this.registerService.create(event);
-		/*
-		 * try {
-		 * this.searchTemplateService.save(res);
-		 * result = this.search();
-		 * 
-		 * } catch (final IllegalArgumentException e) {
-		 * results = new ArrayList<Chorbi>();
-		 * 
-		 * result = new ModelAndView("searchTemplate/chorbi/search.do");
-		 * result.addObject("search", search);
-		 * result.addObject("requestURI", "searchTemplate/chorbi/search.do");
-		 * result.addObject("results", results);
-		 * result.addObject("message", e.getMessage());
-		 * }
-		 */
-		result = new ModelAndView("event/view.do?eventId=" + eventId);
+
+		result = new ModelAndView("event/view");
 		try {
 			this.registerService.save(register);
+			result.addObject("registered", true);
 
 		} catch (final Exception e) {
-			result.addObject("Mensaje de Error", e.getMessage());
+			result.addObject("message", e.getMessage());
+			result.addObject("registered", false);
 
 		}
 
+		expired = this.eventService.checkExpired(event);
+		siteFree = this.eventService.checkSiteFree(event);
+
+		result.addObject("event", event);
+		result.addObject("siteFree", siteFree);
+		result.addObject("expired", expired);
+		result.addObject("requestURI", "event/chorbi/view.do?eventId=" + eventId);
+		return result;
+	}
+	@RequestMapping(value = "/unregister", method = RequestMethod.GET)
+	public ModelAndView unregister(final int eventId) {
+		ModelAndView result;
+		final Event event;
+		final Boolean siteFree, expired;
+
+		event = this.eventService.findOne(eventId);
+
+		result = new ModelAndView("event/view");
+		try {
+			this.registerService.delete(event);
+			result.addObject("registered", false);
+
+		} catch (final Exception e) {
+			result.addObject("Mensaje de Error", e.getMessage());
+			result.addObject("registered", true);
+		}
+
+		expired = this.eventService.checkExpired(event);
+		siteFree = this.eventService.checkSiteFree(event);
+
+		result.addObject("event", event);
+		result.addObject("siteFree", siteFree);
+		result.addObject("expired", expired);
+
+		result.addObject("requestURI", "event/chorbi/view.do?eventId=" + eventId);
 		return result;
 	}
 }

@@ -45,9 +45,10 @@ public class RegisterService {
 		Register result;
 		event = register.getEvent();
 		//En estos Asserts comprobamos si el principal se ha registrado ya, si queda sitio libre y si el evento ya ha pasado.
-		Assert.isTrue(this.eventService.checkPrincipalIsRegistered(event), "No puedes registrarte dos veces en el mismo evento");
-		Assert.isTrue(!this.eventService.checkSiteFree(event), "No quedan plazas en el evento");
-		Assert.isTrue(this.eventService.checkExpired(event), "No puedes registrarte en un evento pasado");
+
+		Assert.isTrue(!this.eventService.checkExpired(event), "register.error.expired");
+		Assert.isTrue(!this.eventService.checkPrincipalIsRegistered(event), "register.error.double.register");
+		Assert.isTrue(this.eventService.checkSiteFree(event), "register.error.free.site");
 
 		result = this.registerRepository.save(register);
 		return result;
