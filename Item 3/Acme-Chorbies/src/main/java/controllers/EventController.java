@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
 import services.EventService;
+import domain.Chorbi;
 import domain.Event;
 
 @Controller
@@ -94,6 +95,7 @@ public class EventController extends AbstractController {
 	public ModelAndView view(@RequestParam final int eventId) {
 		ModelAndView result;
 		Event event;
+		Chorbi chorbi;
 		Boolean siteFree, expired, registered;
 
 		event = this.eventService.findOne(eventId);
@@ -102,8 +104,9 @@ public class EventController extends AbstractController {
 
 		registered = false;
 		try {
-			this.chorbiService.findChorbiByPrincipal();
-			registered = this.eventService.checkPrincipalIsRegistered(event);
+			chorbi = this.chorbiService.findChorbiByPrincipal();
+			if (chorbi != null)
+				registered = this.eventService.checkPrincipalIsRegistered(event);
 		} catch (final IllegalArgumentException e) {
 		}
 
