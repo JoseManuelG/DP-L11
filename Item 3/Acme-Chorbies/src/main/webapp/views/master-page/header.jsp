@@ -65,6 +65,7 @@
 					<li><a href="chirp/customer/sent.do"><spring:message code="master.page.chirp.sent" /></a></li>
 					<li><a href="searchTemplate/chorbi/search.do"><spring:message code="master.page.search" /></a></li>
 					<li><a href="event/chorbi/list.do"><spring:message code="master.page.event.chorbi.list" /></a></li>
+					<li><a href="chorbi//recivedLikedList.do"><spring:message code="master.page.chorbi.recivedLikedList" /></a></li>
 					</security:authorize>	
 					
 					<security:authorize access="hasRole('MANAGER')">
