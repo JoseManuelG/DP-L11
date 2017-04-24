@@ -101,10 +101,11 @@ public class CreditCardCustomerController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
+		CreditCard cardResult;
 
-		System.out.println(binding);
+		cardResult = this.creditCardService.reconstruct(creditCard, binding);
 		try {
-			this.creditCardService.delete(creditCard);
+			this.creditCardService.delete(cardResult);
 			result = new ModelAndView("redirect:../customer/myCreditCard.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
