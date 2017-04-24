@@ -48,6 +48,20 @@ public class ViewChorbiController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/recivedLikedlist", method = RequestMethod.GET)
+	public ModelAndView recivedLikedList() {
+		ModelAndView result;
+		Collection<Likes> likes;
+
+		likes = this.likesService.findReceivedLikesOfChorbi(this.chorbiService.findChorbiByPrincipal().getId());
+
+		result = new ModelAndView("chorbi/recivedLikedlist");
+
+		result.addObject("requestURI", "chorbi/recivedLikedlist");
+		result.addObject("likes", likes);
+		return result;
+	}
+
 	@RequestMapping(value = "/chorbi/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam final int chorbiId) {
 		ModelAndView result;

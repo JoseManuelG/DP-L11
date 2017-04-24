@@ -88,6 +88,7 @@
 		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/chorbi/chorbi/myProfile.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chorbi/list.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/chorbi/recivedLikedlist.do" access="hasRole('CHORBI')"  /> 
 		
 		<security:intercept-url pattern="/event/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/event/chorbi/register.do" access="hasRole('CHORBI')"/> 

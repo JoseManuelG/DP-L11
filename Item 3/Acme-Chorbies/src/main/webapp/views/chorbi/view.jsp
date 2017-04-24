@@ -69,16 +69,13 @@
 		</a>
 </security:authorize>
 </jstl:if>
-
 <h3><spring:message code="chorbi.likes.title"/></h3>
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
 	
 	<spring:message code="likes.liker" var="likerTitle"/>
 	<display:column title="${likerTitle}">
-		<a href="chorbi/chorbi/view.do?chorbiId=${row.liker.id}">
-			<spring:message code="chorbi.view"/>
-		</a>
+		<acme:mask text="${row.liker.name}"/>
 	</display:column>
 	<acme:maskedColumn sorteable="false" code="chorbi.likes.moment" text="${row.moment}"/>
 	<acme:maskedColumn sorteable="false" code="chorbi.likes.comment" text="${row.comment}"/>
