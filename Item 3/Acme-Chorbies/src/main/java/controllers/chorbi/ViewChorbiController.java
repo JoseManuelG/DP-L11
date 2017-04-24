@@ -12,10 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ChorbiService;
+import services.CreditCardService;
 import services.LikesService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Chorbi;
+import domain.CreditCard;
 import domain.Likes;
 
 @Controller
@@ -23,13 +25,15 @@ import domain.Likes;
 public class ViewChorbiController extends AbstractController {
 
 	@Autowired
-	private LikesService	likesService;
+	private LikesService		likesService;
 
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
+	@Autowired
+	private CreditCardService	creditCardService;
 
 
 	// List --------------------------------------------------------------------
@@ -48,17 +52,32 @@ public class ViewChorbiController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/recivedLikedlist", method = RequestMethod.GET)
+	@RequestMapping(value = "/recivedLikedList", method = RequestMethod.GET)
 	public ModelAndView recivedLikedList() {
 		ModelAndView result;
+		Chorbi chorbi;
 		Collection<Likes> likes;
+		CreditCard creditCard;
 
-		likes = this.likesService.findReceivedLikesOfChorbi(this.chorbiService.findChorbiByPrincipal().getId());
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+		creditCard = this.creditCardService.getCreditCardByPrincipal();
+		if (creditCard != null) {
 
-		result = new ModelAndView("chorbi/recivedLikedlist");
+			likes = this.likesService.findReceivedLikesOfChorbi(chorbi.getId());
 
-		result.addObject("requestURI", "chorbi/recivedLikedlist");
-		result.addObject("likes", likes);
+			result = new ModelAndView("chorbi/recivedLikedList");
+
+			result.addObject("requestURI", "chorbi/recivedLikedList.do");
+			result.addObject("likes", likes);
+
+		} else {
+
+			result = new ModelAndView("creditCard/customer/myCreditCard");
+
+			result.addObject("editable", Boolean.FALSE);
+			return result;
+		}
+
 		return result;
 	}
 

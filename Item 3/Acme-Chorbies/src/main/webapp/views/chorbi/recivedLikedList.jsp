@@ -18,7 +18,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <display:table pagesize="5" class="displaytag" keepStatus="false"
-	name="likes" requestURI="${requestURI}" id="row.liker" excludedParams="*">
+	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
 	
 		
 	<display:column>
