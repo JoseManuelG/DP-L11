@@ -57,6 +57,10 @@ public class ManagerService {
 		return result;
 	}
 
+	public Manager findOne(final int managerId) {
+		return this.managerRepository.findOne(managerId);
+	}
+
 	public Manager save(final Manager manager) {
 		Manager result;
 

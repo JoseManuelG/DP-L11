@@ -88,5 +88,10 @@ public class RegisterService {
 			this.delete(r.getEvent());
 
 	}
+	
+	public void deleteRegistersForEvent(final Event event) {
+		this.registerRepository.deleteRegistersForEvent(event.getId());
+
+	}
 
 }
