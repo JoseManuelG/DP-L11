@@ -65,6 +65,9 @@ public class ChorbiService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
+	@Autowired
+	private RegisterService			registerService;
+
 
 	//Simple CRUD methods-------------------------------------------------------------------
 	public Chorbi create() {
@@ -126,6 +129,7 @@ public class ChorbiService {
 		this.searchTemplateService.deleteFromChorbi(chorbi);
 		this.likesService.deleteFromChorbi(chorbi);
 		this.chirpService.deleteFromChorbi(chorbi);
+		this.registerService.deleteFromChorbi(chorbi);
 		this.chorbiRepository.delete(chorbi);
 		this.userAccountService.delete(chorbi.getUserAccount().getId());
 

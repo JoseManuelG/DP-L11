@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,6 +76,17 @@ public class RegisterService {
 
 	public Register findByEventAndChorbi(final int eventId, final int chorbiId) {
 		return this.registerRepository.findByEventAndChorbi(eventId, chorbiId);
+	}
+	public Collection<Register> findAllFromChorbi(final Chorbi chorbi) {
+		return this.registerRepository.findAllFromChorbi(chorbi.getId());
+	}
+
+	public void deleteFromChorbi(final Chorbi chorbi) {
+		final Collection<Register> registers;
+		registers = this.findAllFromChorbi(chorbi);
+		for (final Register r : registers)
+			this.delete(r.getEvent());
+
 	}
 
 }
