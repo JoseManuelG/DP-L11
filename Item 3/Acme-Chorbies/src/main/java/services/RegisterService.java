@@ -88,7 +88,11 @@ public class RegisterService {
 			this.delete(r.getEvent());
 
 	}
-	
+
+	public Collection<Chorbi> findChorbiesForEvent(final int eventId) {
+		return this.registerRepository.findChorbiesForEvent(eventId);
+	}
+
 	public void deleteRegistersForEvent(final Event event) {
 		this.registerRepository.deleteRegistersForEvent(event.getId());
 

@@ -18,6 +18,7 @@ import org.springframework.validation.Validator;
 import repositories.EventRepository;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.CreditCard;
 import domain.Event;
 import domain.Manager;
 import domain.Register;
@@ -28,26 +29,29 @@ public class EventService {
 
 	//Managed Repository--------------------------------------------------------------------
 	@Autowired
-	private EventRepository	eventRepository;
+	private EventRepository		eventRepository;
 
 	//Supported Services--------------------------------------------------------------------
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
 	@Autowired
-	private RegisterService	registerService;
+	private RegisterService		registerService;
 
 	@Autowired
-	private ManagerService	managerService;
+	private ManagerService		managerService;
 
 	@Autowired
-	private EventComparator	eventComparator;
+	private EventComparator		eventComparator;
 
 	@Autowired
-	private ChirpService	chirpService;
+	private ChirpService		chirpService;
 
 	@Autowired
-	private Validator		validator;
+	private CreditCardService	creditCardService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
@@ -71,6 +75,8 @@ public class EventService {
 		Assert.isTrue(event.getId() == 0 ||
 
 		this.managerService.findManagerByPrincipal().equals(event.getManager()), "event.error.notowner");
+		if (event.getId() == 0)
+			this.managerOperationsForNewEvent();
 
 		result = this.eventRepository.save(event);
 		return result;
@@ -186,7 +192,14 @@ public class EventService {
 
 		}
 		this.chirpService.save(chirps);
+		//TODO: Diferenciar borrado y edición
+	}
 
+	private void managerOperationsForNewEvent() {
+		final CreditCard creditCard = this.creditCardService.getCreditCardByPrincipal();
+		Assert.notNull(creditCard, "creditCard.null.error");
+		Assert.isTrue(this.creditCardService.checkCreditCard(creditCard), "creditCard.expired.error");
+		//TODO Cargar fee
 	}
 
 	//	public class EventComparator implements Comparator<Event> {
