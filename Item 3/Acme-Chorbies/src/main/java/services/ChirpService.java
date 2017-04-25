@@ -78,7 +78,9 @@ public class ChirpService {
 
 		return result;
 	}
-
+	public void save(final Collection<Chirp> chirps) {
+		this.chirpRepository.save(chirps);
+	}
 	public Chirp save(final Chirp chirp, final Collection<Attachment> attachments) {
 		Chirp result, copyChirp, savedCopyChirp;
 		Customer sender;
@@ -150,6 +152,7 @@ public class ChirpService {
 	//Devuelve los mensajes que ha recibido el chorbi	
 	public List<Chirp> findReceivedChirpOfPrincipal() {
 		final int recipientId = this.customerService.findCustomerByPrincipal().getId();
+		this.customerService.findAll();
 		final List<Chirp> result = this.chirpRepository.findReceivedChirpOfChorbi(recipientId);
 		return result;
 	}

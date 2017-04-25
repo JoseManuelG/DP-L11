@@ -4,15 +4,21 @@ package services;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.EventRepository;
+import domain.Chirp;
 import domain.Chorbi;
+import domain.CreditCard;
 import domain.Event;
 import domain.Manager;
 import domain.Register;
@@ -23,23 +29,37 @@ public class EventService {
 
 	//Managed Repository--------------------------------------------------------------------
 	@Autowired
-	private EventRepository	eventRepository;
+	private EventRepository		eventRepository;
 
 	//Supported Services--------------------------------------------------------------------
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
 	@Autowired
-	private RegisterService	registerService;
+	private RegisterService		registerService;
 
 	@Autowired
-	private ManagerService	managerService;
+	private ManagerService		managerService;
 
 	@Autowired
-	private EventComparator	eventComparator;
+	private EventComparator		eventComparator;
+
+	@Autowired
+	private ChirpService		chirpService;
+
+	@Autowired
+	private CreditCardService	creditCardService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
+
+	public Event create() {
+		final Event event = new Event();
+		return event;
+	}
 
 	public Event findOne(final int eventId) {
 		return this.eventRepository.findOne(eventId);
@@ -47,6 +67,28 @@ public class EventService {
 
 	public Collection<Event> findAll() {
 		return this.eventRepository.findAll();
+	}
+
+	public Event save(final Event event) {
+		Event result;
+		Assert.notNull(event, "event.error.null");
+		Assert.isTrue(event.getId() == 0 ||
+
+		this.managerService.findManagerByPrincipal().equals(event.getManager()), "event.error.notowner");
+		if (event.getId() == 0)
+			this.managerOperationsForNewEvent();
+
+		result = this.eventRepository.save(event);
+		return result;
+	}
+
+	public void delete(final Event event) {
+		final Event dd = this.findOne(event.getId());
+		Assert.notNull(dd, "event.null.error");
+		Assert.isTrue(this.eventRepository.exists(dd.getId()), "event.exists.error");
+		Assert.isTrue(this.managerService.findManagerByPrincipal().equals(dd.getManager()), "event.error.notowner");
+		this.eventRepository.delete(event);
+
 	}
 
 	//Other Bussnisnes methods------------------------------------------------------------
@@ -106,6 +148,28 @@ public class EventService {
 		return register != null;
 	}
 
+	public Event reconstruct(final Event event, final BindingResult binding) {
+		final Event result = this.create();
+		if (event.getId() != 0) {
+			final Event savedEvent = this.findOne(event.getId());
+			result.setId(savedEvent.getId());
+			result.setVersion(savedEvent.getVersion());
+			final Manager manager = this.managerService.findOne(savedEvent.getManager().getId());
+			result.setManager(manager);
+
+		} else
+			result.setManager(this.managerService.findManagerByPrincipal());
+
+		result.setTitle(event.getTitle());
+		result.setOrganisedMoment(event.getOrganisedMoment());
+		result.setDescription(event.getDescription());
+		result.setPicture(event.getPicture());
+		result.setSeatsOffered(event.getSeatsOffered());
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
 	public void sort(final List<Event> events) {
 		//		Comparator<Event> comparator;
 		//
@@ -113,6 +177,28 @@ public class EventService {
 
 		Collections.sort(events, this.eventComparator);
 
+	}
+
+	public void notifyChangesToAssistantChorbies(final Event event) {
+		final Collection<Chorbi> assistants = this.registerService.findChorbiesForEvent(event.getId());
+		final Collection<Chirp> chirps = new LinkedList<Chirp>();
+		for (final Chorbi c : assistants) {
+			final Chirp chirp = this.chirpService.create(c.getId());
+			chirp.setSender(null);
+			chirp.setSubject("Un evento al que asistes ha cambiado");
+			chirp.setText("El evento es: " + event.getTitle());
+			chirps.add(chirp);
+
+		}
+		this.chirpService.save(chirps);
+		//TODO: Diferenciar borrado y edición
+	}
+
+	private void managerOperationsForNewEvent() {
+		final CreditCard creditCard = this.creditCardService.getCreditCardByPrincipal();
+		Assert.notNull(creditCard, "creditCard.noCreditCard");
+		Assert.isTrue(this.creditCardService.checkCreditCard(creditCard), "creditCard.expired.error");
+		//TODO Cargar fee
 	}
 
 	//	public class EventComparator implements Comparator<Event> {

@@ -77,8 +77,12 @@ public class BannerService {
 	// Other business methods-------------------------------------------------------------
 	public Banner reconstruct(final Banner banner, final BindingResult binding) {
 		final Banner result = this.create();
-		result.setId(banner.getId());
-		result.setVersion(banner.getVersion());
+		if (banner.getId() != 0) {
+			final Banner savedBanner = this.findOne(banner.getId());
+			result.setId(savedBanner.getId());
+			result.setVersion(savedBanner.getVersion());
+		}
+
 		result.setImage(banner.getImage());
 		result.setLink(banner.getLink());
 		this.validator.validate(result, binding);

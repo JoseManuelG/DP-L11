@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.LikesRepository;
 import domain.Actor;
@@ -32,6 +33,8 @@ public class LikesService {
 
 	@Autowired
 	private ActorService	actorService;
+	@Autowired
+	private Validator		validator;
 
 
 	//Constructors------------------------------------
@@ -110,10 +113,10 @@ public class LikesService {
 
 		// Setear lo que no viene del formulario:
 		result.setMoment(likes.getMoment());
-
+		result.setStars(likes.getStars());
 		result.setId(likes.getId());
 		result.setVersion(likes.getVersion());
-
+		this.validator.validate(result, binding);
 		return result;
 	}
 

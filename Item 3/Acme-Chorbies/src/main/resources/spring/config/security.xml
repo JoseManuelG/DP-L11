@@ -120,6 +120,9 @@
 <!-- 		<security:intercept-url pattern="" access="hasRole('MANAGER')" /> -->
 		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 	
 		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')"  /> 
+		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')"  /> 
+		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')"  /> 
+		<security:intercept-url pattern="/chirp/manager/broadcast.do" access="hasRole('MANAGER')"  /> 
 		
 		<!--NONE -->
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

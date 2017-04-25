@@ -69,6 +69,7 @@
 					</security:authorize>	
 					
 					<security:authorize access="hasRole('MANAGER')">
+					<li><a href="event/manager/create.do"><spring:message code="master.page.event.manager.create" /></a></li>
 					<li><a href="event/manager/list.do"><spring:message code="master.page.event.manager.list" /></a></li>
 					<li><a href="creditCard/customer/myCreditCard.do"><spring:message code="master.page.credit.card" /></a></li>
 					<li><a href="chirp/customer/received.do"><spring:message code="master.page.chirp.received" /></a></li>

@@ -29,6 +29,8 @@
 
 <spring:message code="likes.sendingMoment"/>:
 <acme:mask text="${likes.moment}"/><br/>
+<spring:message code="likes.stars"/>:
+<acme:mask text="${likes.stars}"/><br/>
 
 
 <fieldset>

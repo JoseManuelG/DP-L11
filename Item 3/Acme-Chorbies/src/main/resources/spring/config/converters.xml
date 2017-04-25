@@ -37,6 +37,12 @@
 		<bean class="converters.ChorbiToStringConverter" />
 		<bean class="converters.StringToChorbiConverter" />
 		
+		<bean class="converters.EventToStringConverter" />
+		<bean class="converters.StringToEventConverter" />
+		
+		<bean class="converters.ManagerToStringConverter" />
+		<bean class="converters.StringToManagerConverter" />
+		
 	</util:list>
 	
 </beans>
