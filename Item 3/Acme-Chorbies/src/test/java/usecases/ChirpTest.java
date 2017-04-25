@@ -45,12 +45,12 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void WriteChirpTest1() {
-		this.templateWriteChirp("chorbi1", 1096, "test subject", "test text", null);
+		this.templateWriteChirp("chorbi1", 2472, "test subject", "test text", null);
 	}
 	//sin loguearse
 	@Test
 	public void WriteChirpTest2() {
-		this.templateWriteChirp(null, 1096, "test subject", "test text", IllegalArgumentException.class);
+		this.templateWriteChirp(null, 2472, "test subject", "test text", IllegalArgumentException.class);
 	}
 	//recipient no válido
 	@Test
@@ -60,12 +60,12 @@ public class ChirpTest extends AbstractTest {
 	//subject blank
 	@Test
 	public void WriteChirpTest4() {
-		this.templateWriteChirp("chorbi1", 1096, "", "test text", ConstraintViolationException.class);
+		this.templateWriteChirp("chorbi1", 2472, "", "test text", ConstraintViolationException.class);
 	}
 	//text blank
 	@Test
 	public void WriteChirpTest5() {
-		this.templateWriteChirp("chorbi1", 1096, "test subject", "", ConstraintViolationException.class);
+		this.templateWriteChirp("chorbi1", 2472, "test subject", "", ConstraintViolationException.class);
 	}
 
 	//	@Test
@@ -92,32 +92,32 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void ReplyChirpTest1() {
-		this.templateReplyChirp("chorbi1", 1039, "test subject", "test text", null);
+		this.templateReplyChirp("chorbi1", 2417, "test subject", "test text", null);
 	}
 	//mensaje sin sender(cuenta borrada del sender)
 	@Test
 	public void ReplyChirpTest2() {
-		this.templateReplyChirp("chorbi1", 1056, "test subject", "test text", IllegalArgumentException.class);
+		this.templateReplyChirp("chorbi1", 2422, "test subject", "test text", IllegalArgumentException.class);
 	}
 	//mensaje que no es suyo
 	@Test
 	public void ReplyChirpTest3() {
-		this.templateReplyChirp("chorbi1", 1055, "test subject", "test text", IllegalArgumentException.class);
+		this.templateReplyChirp("chorbi1", 2419, "test subject", "test text", IllegalArgumentException.class);
 	}
 	//sin loguearse
 	@Test
 	public void ReplyChirpTest4() {
-		this.templateReplyChirp(null, 1039, "test subject", "test text", IllegalArgumentException.class);
+		this.templateReplyChirp(null, 2417, "test subject", "test text", IllegalArgumentException.class);
 	}
 	//titulo blank
 	@Test
 	public void ReplyChirpTest5() {
-		this.templateReplyChirp("chorbi1", 1039, "", "test text", ConstraintViolationException.class);
+		this.templateReplyChirp("chorbi1", 2417, "", "test text", ConstraintViolationException.class);
 	}
 	//texto blank
 	@Test
 	public void ReplyChirpTest6() {
-		this.templateReplyChirp("chorbi1", 1039, "test subject", "", ConstraintViolationException.class);
+		this.templateReplyChirp("chorbi1", 2417, "test subject", "", ConstraintViolationException.class);
 	}
 
 	//	@Test
@@ -146,22 +146,22 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void ForwardChirpTest1() {
-		this.templateForwardChirp("chorbi1", 1039, 1097, null);
+		this.templateForwardChirp("chorbi1", 2417, 2471, null);
 	}
 	//sin loguearse
 	@Test
 	public void ForwardChirpTest2() {
-		this.templateForwardChirp(null, 1039, 1097, IllegalArgumentException.class);
+		this.templateForwardChirp(null, 2417, 2471, IllegalArgumentException.class);
 	}
 	//mensaje que no es suyo
 	@Test
 	public void ForwardChirpTest3() {
-		this.templateForwardChirp("chorbi5", 1039, 1097, IllegalArgumentException.class);
+		this.templateForwardChirp("chorbi5", 2419, 2471, IllegalArgumentException.class);
 	}
 	//recipient no válido
 	@Test
 	public void ForwardChirpTest4() {
-		this.templateForwardChirp("chorbi1", 1039, 1, IllegalArgumentException.class);
+		this.templateForwardChirp("chorbi1", 2417, 1, IllegalArgumentException.class);
 	}
 
 	//	@Test
@@ -186,17 +186,17 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void DeleteChirpTest1() {
-		this.templateDeleteChirp("chorbi1", 1039, null);
+		this.templateDeleteChirp("chorbi1", 2417, null);
 	}
 	//sin loguearse
 	@Test
 	public void DeleteChirpTest2() {
-		this.templateDeleteChirp(null, 1039, IllegalArgumentException.class);
+		this.templateDeleteChirp(null, 2417, IllegalArgumentException.class);
 	}
 	//mensaje que no es suyo
 	@Test
 	public void DeleteChirpTest3() {
-		this.templateDeleteChirp("chorbi5", 1039, IllegalArgumentException.class);
+		this.templateDeleteChirp("chorbi5", 2419, IllegalArgumentException.class);
 	}
 
 	//	@Test

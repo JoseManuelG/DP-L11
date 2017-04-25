@@ -60,17 +60,17 @@ public class ChorbiTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void banChorbiTest1() {
-		this.templateBanChorbi("admin", 1098, null);
+		this.templateBanChorbi("admin", 2471, null);
 	}
 	//sin loguearse
 	@Test
 	public void banChorbiTest2() {
-		this.templateBanChorbi(null, 1098, IllegalArgumentException.class);
+		this.templateBanChorbi(null, 2471, IllegalArgumentException.class);
 	}
 	//no logeado como admin
 	@Test
 	public void banChorbiTest3() {
-		this.templateBanChorbi("chorbi1", 1098, IllegalArgumentException.class);
+		this.templateBanChorbi("chorbi1", 2471, IllegalArgumentException.class);
 	}
 	//chorbi no existente
 	@Test
@@ -82,17 +82,17 @@ public class ChorbiTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void unbanChorbiTest1() {
-		this.templateUnbanChorbi("admin", 1098, null);
+		this.templateUnbanChorbi("admin", 2476, null);
 	}
 	//sin loguearse
 	@Test
 	public void unbanChorbiTest2() {
-		this.templateUnbanChorbi(null, 1098, IllegalArgumentException.class);
+		this.templateUnbanChorbi(null, 2476, IllegalArgumentException.class);
 	}
 	//no logeado como admin
 	@Test
 	public void unbanChorbiTest3() {
-		this.templateUnbanChorbi("chorbi1", 1098, IllegalArgumentException.class);
+		this.templateUnbanChorbi("chorbi1", 2476, IllegalArgumentException.class);
 	}
 	//chorbi no existente
 	@Test
@@ -203,7 +203,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Crear un like
 
-		this.template("chorbi3", 1101, 0, "test", true, null);
+		this.template("chorbi3", 2471, 0, "test", 3, true, null);
 	}
 
 	@Test
@@ -211,14 +211,14 @@ public class ChorbiTest extends AbstractTest {
 
 		// Borrar un like
 
-		this.template("chorbi1", 0, 1103, "test", false, null);
+		this.template("chorbi1", 0, 2479, "test", 0, false, null);
 	}
 	@Test
 	public void LikeNegativeTest1() {
 
 		// Crear un like con comentario null
 
-		this.template("chorbi3", 1101, 0, null, true, ConstraintViolationException.class);
+		this.template("chorbi3", 2471, 0, null, 0, true, ConstraintViolationException.class);
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -263,7 +263,7 @@ public class ChorbiTest extends AbstractTest {
 		try {
 
 			final Chorbi chorbi = this.chorbiService.create();
-			chorbi.setBirthDate(this.chorbiService.findOne(1096).getBirthDate());
+			chorbi.setBirthDate(this.chorbiService.findOne(2471).getBirthDate());
 			final UserAccount userAccount = new UserAccount();
 			final Collection<Authority> authorities = new ArrayList<Authority>();
 			final Authority authority = new Authority();
@@ -289,6 +289,7 @@ public class ChorbiTest extends AbstractTest {
 			chorbi.setPicture(picture);
 			chorbi.getUserAccount().setEnabled(true);
 			chorbi.setCoordinates(coordinates);
+			chorbi.setChargedFee(0.0);
 			this.chorbiService.save(chorbi);
 			this.chorbiService.flush();
 		} catch (final Throwable oops) {
@@ -297,7 +298,7 @@ public class ChorbiTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void template(final String liker, final Integer likedId, final Integer likesId, final String comment, final boolean whatToDo, final Class<?> expected) {
+	protected void template(final String liker, final Integer likedId, final Integer likesId, final String comment, final Integer stars, final boolean whatToDo, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		try {
@@ -305,6 +306,7 @@ public class ChorbiTest extends AbstractTest {
 			if (whatToDo) {
 				final Likes likes = this.likesService.create(this.chorbiService.findOne(likedId));
 				likes.setComment(comment);
+				likes.setStars(stars);
 				this.likesService.save(likes);
 			} else
 				this.likesService.delete(this.likesService.findOne(likesId));
