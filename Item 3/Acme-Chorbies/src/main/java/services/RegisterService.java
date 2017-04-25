@@ -24,22 +24,22 @@ public class RegisterService {
 	private EventService		eventService;
 	@Autowired
 	private ChorbiService		chorbiService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
 	public Register create(final Event event) {
 		Chorbi chorbi;
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-
 		Assert.notNull(event, "El evento no puede ser nulo");
-
+		Assert.notNull(chorbi, "El chorbi no puede ser nulo");
 		Assert.isTrue(event.getId() > 0, "La ID del event no puede ser 0");
 		final Register result = new Register();
 		result.setChorbi(chorbi);
 		result.setEvent(event);
 		return result;
 	}
-
 	public Register save(final Register register) {
 		Event event;
 		Register result;
@@ -56,10 +56,14 @@ public class RegisterService {
 	public void delete(final Event event) {
 		final Chorbi chorbi;
 		Register register;
+		Assert.notNull(event, "El evento no puede ser nulo");
+		Assert.isTrue(event.getId() > 0, "La ID del event no puede ser 0");
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-		register = this.findByEventAndChorbi(event.getId(), chorbi.getId());
+		Assert.notNull(chorbi, "El chorbi no puede ser nulo");
 
+		register = this.findByEventAndChorbi(event.getId(), chorbi.getId());
+		Assert.notNull(register, "Debes estar registrado en el evento");
 		this.registerRepository.delete(register);
 	}
 	//Other Bussnisnes methods------------------------------------------------------------
