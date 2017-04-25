@@ -108,8 +108,9 @@ public class BannerAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public @ResponseBody
-	ModelAndView save(final Banner banner) {
+	ModelAndView save(final Banner b) {
 		ModelAndView result = null;
+		final Banner banner = this.bannerService.findOne(b.getId());
 		try {
 			this.bannerService.delete(banner);
 			result = new ModelAndView("redirect:/banner/administrator/list.do");

@@ -21,7 +21,7 @@
 	<form:hidden path="id" />
 	
 	<acme:textbox code="event.title" path="title"/>
-	<acme:textbox code="event.organisedMoment" path="organisedMoment"/>
+	<acme:textbox code="event.organisedMoment" path="organisedMoment" placeholder="dd/mm/yyyy hh:MM"/>
 	<acme:textbox code="event.description" path="description"/>
 	<acme:textbox code="event.picture" path="picture"/>
 	<acme:textbox code="event.seatsOffered" path="seatsOffered"/>

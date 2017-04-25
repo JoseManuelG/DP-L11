@@ -117,8 +117,10 @@ public class EventManagerController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public @ResponseBody
-	ModelAndView save(final Event event) {
+	ModelAndView save(final Event ev) {
 		ModelAndView result = null;
+		final Event event = this.eventService.findOne(ev.getId());
+
 		try {
 			this.eventService.notifyChangesToAssistantChorbies(event);
 			this.registerService.deleteRegistersForEvent(event);
@@ -126,7 +128,7 @@ public class EventManagerController extends AbstractController {
 			result = new ModelAndView("redirect:/event/manager/list.do");
 
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(event, oops.getMessage());
+			result = this.createEditModelAndView(event, "event.commit.error");
 		}
 
 		return result;

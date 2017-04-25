@@ -87,7 +87,6 @@ public class EventService {
 		Assert.notNull(dd, "event.null.error");
 		Assert.isTrue(this.eventRepository.exists(dd.getId()), "event.exists.error");
 		Assert.isTrue(this.managerService.findManagerByPrincipal().equals(dd.getManager()), "event.error.notowner");
-
 		this.eventRepository.delete(event);
 
 	}
@@ -197,7 +196,7 @@ public class EventService {
 
 	private void managerOperationsForNewEvent() {
 		final CreditCard creditCard = this.creditCardService.getCreditCardByPrincipal();
-		Assert.notNull(creditCard, "creditCard.null.error");
+		Assert.notNull(creditCard, "creditCard.noCreditCard");
 		Assert.isTrue(this.creditCardService.checkCreditCard(creditCard), "creditCard.expired.error");
 		//TODO Cargar fee
 	}
