@@ -20,6 +20,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Administrator;
 import domain.Chorbi;
 import domain.Coordinates;
 import forms.ChorbiForm;
@@ -142,6 +143,8 @@ public class ChorbiService {
 
 		List<Chorbi> chorbiesWithCC;
 		Double fee;
+
+		Assert.isTrue(this.actorService.findActorByPrincipal().getClass().equals(Administrator.class), "configuration.error.notadmin");
 
 		chorbiesWithCC = new ArrayList<Chorbi>();
 		chorbiesWithCC.addAll(this.chorbiRepository.getChorbiesWithCC());

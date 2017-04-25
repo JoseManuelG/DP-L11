@@ -40,27 +40,37 @@ public class ConfigurationTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void editConfigurationTest1() {
-		this.templateEditConfiguration("admin", 360000000, null);
+		this.templateEditConfiguration("admin", 360000000, 1.0, 1.0, null);
 	}
 	//sin loguearse
 	@Test
 	public void editConfigurationTest2() {
-		this.templateEditConfiguration(null, 360000000, IllegalArgumentException.class);
+		this.templateEditConfiguration(null, 360000000, 1.0, 1.0, IllegalArgumentException.class);
 	}
 	//no logeado como admin
 	@Test
 	public void editConfigurationTest3() {
-		this.templateEditConfiguration("chorbi1", 360000000, NullPointerException.class);
+		this.templateEditConfiguration("chorbi1", 360000000, 1.0, 1.0, NullPointerException.class);
 	}
 	//tiempo negativo
 	@Test
 	public void editConfigurationTest4() {
-		this.templateEditConfiguration("admin", -360000000, ConstraintViolationException.class);
+		this.templateEditConfiguration("admin", -360000000, 1.0, 1.0, ConstraintViolationException.class);
+	}
+	//chorbiFee negativa
+	@Test
+	public void editConfigurationTest5() {
+		this.templateEditConfiguration("admin", 360000000, -1.0, 1.0, ConstraintViolationException.class);
+	}
+	//managerFee negativa
+	@Test
+	public void editConfigurationTest6() {
+		this.templateEditConfiguration("admin", 360000000, 1.0, -1.0, ConstraintViolationException.class);
 	}
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected void templateEditConfiguration(final String username, final long cachedTime, final Class<?> expected) {
+	protected void templateEditConfiguration(final String username, final long cachedTime, final double chorbiFee, final double managerFee, final Class<?> expected) {
 		Class<?> caught;
 		Configuration configuration;
 
@@ -71,6 +81,8 @@ public class ConfigurationTest extends AbstractTest {
 			configuration = this.configurationService.findConfiguration();
 
 			configuration.setCachedTime(cachedTime);
+			configuration.setChorbiFee(chorbiFee);
+			configuration.setManagerFee(managerFee);
 
 			this.configurationService.save(configuration);
 			this.configurationService.flush();

@@ -82,59 +82,59 @@ public class BannerTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void editBannerTest1() {
-		this.templateEditBanner("admin", 1090, "http://link.com", "http://image.com", null);
+		this.templateEditBanner("admin", 2455, "http://link.com", "http://image.com", null);
 	}
 	//sin loguearse
 	@Test
 	public void editBannerTest2() {
-		this.templateEditBanner(null, 1090, "http://link.com", "http://image.com", IllegalArgumentException.class);
+		this.templateEditBanner(null, 2455, "http://link.com", "http://image.com", IllegalArgumentException.class);
 	}
 	//link no url
 	@Test
 	public void editBannerTest3() {
-		this.templateEditBanner("admin", 1090, "no soy una url", "http://image.com", ConstraintViolationException.class);
+		this.templateEditBanner("admin", 2455, "no soy una url", "http://image.com", ConstraintViolationException.class);
 	}
 	//imagen no url
 	@Test
 	public void editBannerTest4() {
-		this.templateEditBanner("admin", 1090, "http://link.com", "no soy una url", ConstraintViolationException.class);
+		this.templateEditBanner("admin", 2455, "http://link.com", "no soy una url", ConstraintViolationException.class);
 	}
 	//link vacío
 	@Test
 	public void editBannerTest5() {
-		this.templateEditBanner("admin", 1090, "", "http://image.com", ConstraintViolationException.class);
+		this.templateEditBanner("admin", 2455, "", "http://image.com", ConstraintViolationException.class);
 	}
 	//imagen vacía
 	@Test
 	public void editBannerTest6() {
-		this.templateEditBanner("admin", 1090, "http://link.com", "", ConstraintViolationException.class);
+		this.templateEditBanner("admin", 2455, "http://link.com", "", ConstraintViolationException.class);
 	}
 	//link nulo
 	@Test
 	public void editBannerTest7() {
-		this.templateEditBanner("admin", 1090, null, "http://image.com", ConstraintViolationException.class);
+		this.templateEditBanner("admin", 2455, null, "http://image.com", ConstraintViolationException.class);
 	}
 	//imagen nula
 	@Test
 	public void editBannerTest8() {
-		this.templateEditBanner("admin", 1090, "http://link.com", null, ConstraintViolationException.class);
+		this.templateEditBanner("admin", 2455, "http://link.com", null, ConstraintViolationException.class);
 	}
 
 	//Caso de uso de borrar un banner:
 	//test positivo
 	@Test
 	public void DeleteBannerTest1() {
-		this.templateDeleteBanner("admin", 1090, null);
+		this.templateDeleteBanner("admin", 2455, null);
 	}
 	//sin loguearse
 	@Test
 	public void DeleteBannerTest2() {
-		this.templateDeleteBanner(null, 1090, IllegalArgumentException.class);
+		this.templateDeleteBanner(null, 2455, IllegalArgumentException.class);
 	}
 	//logeado como no administrador
 	@Test
 	public void DeleteBannerTest3() {
-		this.templateDeleteBanner("chorbi1", 1090, NullPointerException.class);
+		this.templateDeleteBanner("chorbi1", 2455, NullPointerException.class);
 	}
 	//banner no existe
 	@Test
