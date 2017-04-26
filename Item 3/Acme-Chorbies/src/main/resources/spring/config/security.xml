@@ -44,11 +44,11 @@
 		
 		<security:intercept-url pattern="/law/terms-conditions.do" access="permitAll" /> 
 
-		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/login.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" />
 		 
- 		<security:intercept-url pattern="/chorbi/register.do" access="permitAll" />
- 		<security:intercept-url pattern="/manager/register.do" access="permitAll" />
+ 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" />
+ 		<security:intercept-url pattern="/manager/register.do" access="isAnonymous()" />
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
