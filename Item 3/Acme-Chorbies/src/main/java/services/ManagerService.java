@@ -131,6 +131,5 @@ public class ManagerService {
 
 	public void flush() {
 		this.managerRepository.flush();
-
 	}
 }
