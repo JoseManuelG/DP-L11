@@ -1,14 +1,23 @@
 ﻿---------------Por hacer/comprobar-----------------------
--B+ Tree
--Informe de costes
--Controlar que un chorbi no se pueda registrar varias veces al mismo evento
--Controlar que solo te puedes registrar a un evento si hay tantas personas registradas al evento como asientos disponibles
--En configuration: controlar decimales de las fee
--En configuration: si metes mas de 99 horas no hace nada, ni sale mensaje de error ni se mueve de vista
+-B+ Tree (Arturo)
+-En configuration: controlar decimales de las fee (Javi)
+-En configuration: si metes mas de 99 horas no hace nada, ni sale mensaje de error ni se mueve de vista (Javi, Gavira)
+-En lista de todos los eventos que no salgan botones de gestion. (Javi)
+-Actualizar mensaje de credit card para reflejar lo que no se puede hacer. (Roldan)
+-Assert check manager para no poder enviar mensajes a eventos de otros managers. (Gavira)
+	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)
+-Quitar desplegable de eventos en mensajes de broadcast. (Gavira)
+-Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira)
+-Separar la dashboard para mejor visibilidad. (Dani)
+-Crear script y war.
 
-------------------Dudas---------------------------------------
+-Informe de costes (Acha)
+-Ver fee y perfil de manager. ( O de otra forma, pero que se pueda ver su fee)
 
--Si se modifica el numero de asientos de un eventro y quedan mas personas registradas de los asientos qe hay, que pasa???
 
------------------------------Hecho-----------------------------
--Añadir fees (managerFee y chorbiFee o algo asi) a la clase de configuracion en UML, java y populate.
+-------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
+-Desordenar event list cuando se pide ordenado. (Javi)
+-Chorbi: pais no obligatorio. 	(Javi)
+-Etiquetas de error number credit card. (Javi)
+-En search chorbi aparece alguien indevido. (Roldan)
+
