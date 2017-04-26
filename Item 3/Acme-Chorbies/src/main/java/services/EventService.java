@@ -19,6 +19,7 @@ import repositories.EventRepository;
 import domain.Chirp;
 import domain.Chorbi;
 import domain.CreditCard;
+import domain.Customer;
 import domain.Event;
 import domain.Manager;
 import domain.Register;
@@ -29,29 +30,38 @@ public class EventService {
 
 	//Managed Repository--------------------------------------------------------------------
 	@Autowired
-	private EventRepository		eventRepository;
+	private EventRepository			eventRepository;
 
 	//Supported Services--------------------------------------------------------------------
 	@Autowired
-	private ChorbiService		chorbiService;
+	private ChorbiService			chorbiService;
 
 	@Autowired
-	private RegisterService		registerService;
+	private RegisterService			registerService;
 
 	@Autowired
-	private ManagerService		managerService;
+	private ManagerService			managerService;
 
 	@Autowired
-	private EventComparator		eventComparator;
+	private EventComparator			eventComparator;
 
 	@Autowired
-	private ChirpService		chirpService;
+	private ChirpService			chirpService;
 
 	@Autowired
-	private CreditCardService	creditCardService;
+	private CreditCardService		creditCardService;
 
 	@Autowired
-	private Validator			validator;
+	private CustomerService			customerService;
+
+	@Autowired
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	//Simple CRUD methods------------------------------------------------------------------
@@ -198,9 +208,10 @@ public class EventService {
 		final CreditCard creditCard = this.creditCardService.getCreditCardByPrincipal();
 		Assert.notNull(creditCard, "creditCard.noCreditCard");
 		Assert.isTrue(this.creditCardService.checkCreditCard(creditCard), "creditCard.expired.error");
-		//TODO Cargar fee
+		final Customer customer = this.customerService.findCustomerByPrincipal();
+		customer.setChargedFee(customer.getChargedFee() + this.configurationService.findConfiguration().getManagerFee());
+		this.actorService.save(customer);
 	}
-
 	//	public class EventComparator implements Comparator<Event> {
 	//
 	//		@Autowired

@@ -36,4 +36,9 @@
 		<put-attribute name="body" value="/views/chirp/write.jsp" />
 	</definition>
 	
+	<definition name="chirp/broadcast" extends="master.page">	
+		<put-attribute name="title" value="Notify assistant chorbies" />
+		<put-attribute name="body" value="/views/chirp/write_broadcast.jsp" />
+	</definition>
+	
 </tiles-definitions>

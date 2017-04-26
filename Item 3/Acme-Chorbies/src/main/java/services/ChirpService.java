@@ -19,6 +19,7 @@ import domain.Attachment;
 import domain.Chirp;
 import domain.Chorbi;
 import domain.Customer;
+import forms.ChirpBroadcastForm;
 import forms.ChirpForm;
 
 @Service
@@ -34,6 +35,9 @@ public class ChirpService {
 	private CustomerService		customerService;
 	@Autowired
 	private AttachmentService	attachmentService;
+
+	@Autowired
+	private RegisterService		registerService;
 
 	@Autowired
 	private Validator			validator;
@@ -80,6 +84,32 @@ public class ChirpService {
 	}
 	public void save(final Collection<Chirp> chirps) {
 		this.chirpRepository.save(chirps);
+	}
+	public void save(final Collection<Chirp> chirps, final Collection<Attachment> attachments) {
+		for (final Chirp chirp : chirps) {
+			Chirp result, copyChirp, savedCopyChirp;
+			Customer sender;
+
+			Assert.notNull(chirp.getRecipient(), "El mensaje debe tener un destinatario");
+
+			Assert.notNull(chirp.getSender(), "El mensaje debe tener un remitente");
+
+			sender = this.customerService.findCustomerByPrincipal();
+
+			Assert.isTrue(sender.equals(chirp.getSender()), "El remitente debe ser el mismo que esta conectado");
+			Assert.isTrue(chirp.getId() == 0, "No puedes editar un mensaje");
+
+			// Creamos copia del mensaje en un segundo mensaje;
+
+			copyChirp = this.copyChirp(chirp);
+			//Se almacena el mensaje original y sus attachments
+			result = this.chirpRepository.save(chirp);
+			this.attachmentService.addAttachments(attachments, result);
+			//Se almacena el mensaje copia y sus attachments
+			savedCopyChirp = this.chirpRepository.save(copyChirp);
+			this.attachmentService.addAttachments(attachments, savedCopyChirp);
+
+		}
 	}
 	public Chirp save(final Chirp chirp, final Collection<Attachment> attachments) {
 		Chirp result, copyChirp, savedCopyChirp;
@@ -172,6 +202,27 @@ public class ChirpService {
 
 	}
 
+	public List<Chirp> reconstruct(final ChirpBroadcastForm chirpBroadcastForm, final BindingResult binding) {
+		final List<Chirp> chirps = new LinkedList<Chirp>();
+		final List<Chorbi> recipients = new LinkedList<Chorbi>(this.registerService.findChorbiesForEvent(chirpBroadcastForm.getEvent().getId()));
+		for (final Chorbi chorbi : recipients) {
+			final Chirp aux = this.create(chorbi.getId());
+			aux.setText(chirpBroadcastForm.getText());
+			aux.setSubject(chirpBroadcastForm.getSubject());
+			this.validator.validate(aux, binding);
+			if (!binding.hasErrors()) {
+				final List<Attachment> attachments = new LinkedList<Attachment>(chirpBroadcastForm.getAttachments());
+				for (final Attachment attachment : attachments) {
+					attachment.setChirp(aux);
+					this.validator.validate(attachment, binding);
+				}
+				chirps.add(aux);
+			}
+
+		}
+
+		return chirps;
+	}
 	//Basicamente te hace el ChirpForm relleno del mensaje que has pasado, luego en la vista seleccionarias a quien mandarselo 
 	//y despues pasarias el mensaje al save
 	public ChirpForm forwardChirp(final int chirpId) {
