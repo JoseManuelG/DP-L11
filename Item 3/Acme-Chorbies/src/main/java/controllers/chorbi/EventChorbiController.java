@@ -10,8 +10,7 @@
 
 package controllers.chorbi;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,13 +44,14 @@ public class EventChorbiController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView received(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		List<Event> events;
+		Collection<Event> events;
 		String requestURI;
-
-		events = new ArrayList<Event>(this.eventService.findAllFromPrincipalChorbi());
 		requestURI = "event/chorbi/list.do";
-		if (sorted) {
-			this.eventService.sort(events);
+
+		if (!sorted)
+			events = this.eventService.findAllFromPrincipalChorbi();
+		else {
+			events = this.eventService.findAllFromPrincipalChorbiSorted();
 			requestURI += "?sorted=true";
 		}
 

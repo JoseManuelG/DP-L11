@@ -2,10 +2,8 @@
 package services;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +39,6 @@ public class EventService {
 
 	@Autowired
 	private ManagerService			managerService;
-
-	@Autowired
-	private EventComparator			eventComparator;
 
 	@Autowired
 	private ChirpService			chirpService;
@@ -103,6 +98,10 @@ public class EventService {
 
 	//Other Bussnisnes methods------------------------------------------------------------
 
+	public Collection<Event> findAllSorted() {
+		return this.eventRepository.findAllSorted();
+	}
+
 	public Collection<Event> findNextMonthEventsWithPlaces() {
 		LocalDate nextMonth;
 		Date date, now;
@@ -114,12 +113,35 @@ public class EventService {
 		return this.eventRepository.findEventsWithPlacesBeforeDate(date, now);
 	}
 
+	public Collection<Event> findNextMonthEventsWithPlacesSorted() {
+		LocalDate nextMonth;
+		Date date, now;
+
+		nextMonth = new LocalDate().plusMonths(1);
+		date = nextMonth.toDateTimeAtStartOfDay().toDate();
+		now = new Date();
+
+		return this.eventRepository.findEventsWithPlacesBeforeDateSorted(date, now);
+	}
+
 	public Collection<Event> findAllFromPrincipalChorbi() {
 		Chorbi chorbi;
+		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
+		chorbiId = chorbi != null ? chorbi.getId() : 0;
 
-		return this.eventRepository.findAllFromChorbi(chorbi.getId());
+		return this.eventRepository.findAllFromChorbi(chorbiId);
+	}
+
+	public Collection<Event> findAllFromPrincipalChorbiSorted() {
+		Chorbi chorbi;
+		int chorbiId;
+
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+		chorbiId = chorbi != null ? chorbi.getId() : 0;
+
+		return this.eventRepository.findAllFromChorbiSorted(chorbiId);
 	}
 
 	public Collection<Event> findAllFromPrincipalManager() {
@@ -128,6 +150,14 @@ public class EventService {
 		manager = this.managerService.findManagerByPrincipal();
 
 		return this.eventRepository.findAllFromManager(manager.getId());
+	}
+
+	public Collection<Event> findAllFromPrincipalManagerSorted() {
+		Manager manager;
+
+		manager = this.managerService.findManagerByPrincipal();
+
+		return this.eventRepository.findAllFromManagerSorted(manager.getId());
 	}
 
 	public Boolean checkExpired(final Event event) {
@@ -180,15 +210,6 @@ public class EventService {
 		return result;
 	}
 
-	public void sort(final List<Event> events) {
-		//		Comparator<Event> comparator;
-		//
-		//		comparator = new EventComparator();
-
-		Collections.sort(events, this.eventComparator);
-
-	}
-
 	public void notifyChangesToAssistantChorbies(final Event event) {
 		final Collection<Chorbi> assistants = this.registerService.findChorbiesForEvent(event.getId());
 		final Collection<Chirp> chirps = new LinkedList<Chirp>();
@@ -212,24 +233,4 @@ public class EventService {
 		customer.setChargedFee(customer.getChargedFee() + this.configurationService.findConfiguration().getManagerFee());
 		this.actorService.save(customer);
 	}
-	//	public class EventComparator implements Comparator<Event> {
-	//
-	//		@Autowired
-	//		private RegisterService	registerService;
-	//
-	//
-	//		@Override
-	//		public int compare(final Event event1, final Event event2) {
-	//			Integer numberOfChorbies1, numberOfChorbies2, freeSeats1, freeSeats2;
-	//
-	//			numberOfChorbies1 = this.registerService.getNumberOfChorbiesForEvent(event1.getId());
-	//			numberOfChorbies2 = this.registerService.getNumberOfChorbiesForEvent(event2.getId());
-	//
-	//			freeSeats1 = event1.getSeatsOffered() - numberOfChorbies1;
-	//			freeSeats2 = event2.getSeatsOffered() - numberOfChorbies2;
-	//
-	//			return freeSeats1.compareTo(freeSeats2);
-	//		}
-	//
-	//	}
 }

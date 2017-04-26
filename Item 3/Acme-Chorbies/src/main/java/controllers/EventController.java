@@ -11,7 +11,7 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,13 +49,14 @@ public class EventController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		List<Event> events;
+		Collection<Event> events;
 		String requestURI;
 
-		events = new ArrayList<Event>(this.eventService.findNextMonthEventsWithPlaces());
 		requestURI = "event/list.do";
-		if (sorted) {
-			this.eventService.sort(events);
+		if (!sorted)
+			events = this.eventService.findNextMonthEventsWithPlaces();
+		else {
+			events = this.eventService.findNextMonthEventsWithPlacesSorted();
 			requestURI += "?ordered=true";
 		}
 
@@ -66,19 +67,19 @@ public class EventController extends AbstractController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/list/all", method = RequestMethod.GET)
 	public ModelAndView listAll(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
 		String requestURI;
-		List<Event> events, eventsCloseToFinish;
+		Collection<Event> events, eventsCloseToFinish;
 
-		events = new ArrayList<Event>(this.eventService.findAll());
 		eventsCloseToFinish = new ArrayList<Event>(this.eventService.findNextMonthEventsWithPlaces());
-
 		requestURI = "event/list/all.do";
-		if (sorted) {
-			this.eventService.sort(events);
+
+		if (!sorted)
+			events = this.eventService.findAll();
+		else {
+			events = this.eventService.findAllSorted();
 			requestURI += "?sorted=true";
 		}
 

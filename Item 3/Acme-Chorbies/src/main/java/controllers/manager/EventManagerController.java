@@ -10,8 +10,7 @@
 
 package controllers.manager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,13 +50,14 @@ public class EventManagerController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView received(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		List<Event> events;
+		Collection<Event> events;
 		String requestURI;
 
-		events = new ArrayList<Event>(this.eventService.findAllFromPrincipalManager());
 		requestURI = "event/manager/list.do";
-		if (sorted) {
-			this.eventService.sort(events);
+		if (!sorted)
+			events = this.eventService.findAllFromPrincipalManager();
+		else {
+			events = this.eventService.findAllFromPrincipalManagerSorted();
 			requestURI += "?sorted=true";
 		}
 
