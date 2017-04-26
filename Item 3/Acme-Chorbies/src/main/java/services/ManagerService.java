@@ -128,4 +128,8 @@ public class ManagerService {
 		result.setVAT(managerForm.getVAT());
 
 	}
+
+	public void flush() {
+		this.managerRepository.flush();
+	}
 }

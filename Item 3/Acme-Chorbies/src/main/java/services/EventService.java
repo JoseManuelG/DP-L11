@@ -85,8 +85,11 @@ public class EventService {
 		Assert.isTrue(event.getId() == 0 ||
 
 		this.managerService.findManagerByPrincipal().equals(event.getManager()), "event.error.notowner");
-		if (event.getId() == 0)
+		Assert.isTrue(event.getOrganisedMoment().after(new Date()), "event.error.invalid.date");
+		if (event.getId() == 0) {
+			Assert.isTrue(event.getSeatsOffered() > 0, "event.error.noseats");
 			this.managerOperationsForNewEvent();
+		}
 
 		result = this.eventRepository.save(event);
 		return result;
@@ -212,6 +215,10 @@ public class EventService {
 		customer.setChargedFee(customer.getChargedFee() + this.configurationService.findConfiguration().getManagerFee());
 		this.actorService.save(customer);
 	}
+
+	public void flush() {
+		this.eventRepository.flush();
+	}
 	//	public class EventComparator implements Comparator<Event> {
 	//
 	//		@Autowired
@@ -232,4 +239,5 @@ public class EventService {
 	//		}
 	//
 	//	}
+
 }
