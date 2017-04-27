@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 
 @Entity
@@ -27,6 +28,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@Min(0)
+	@Digits(integer = 15, fraction = 2)
 	public double getChorbiFee() {
 		return this.chorbiFee;
 	}
@@ -36,6 +38,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@Min(0)
+	@Digits(integer = 15, fraction = 2)
 	public double getManagerFee() {
 		return this.managerFee;
 	}

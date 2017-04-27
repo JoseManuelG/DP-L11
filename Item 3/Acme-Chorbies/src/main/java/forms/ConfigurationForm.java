@@ -47,7 +47,6 @@ public class ConfigurationForm {
 		this.seconds = seconds;
 	}
 
-	@Min(0)
 	public double getChorbiFee() {
 		return this.chorbiFee;
 	}
@@ -56,7 +55,6 @@ public class ConfigurationForm {
 		this.chorbiFee = chorbiFee;
 	}
 
-	@Min(0)
 	public double getManagerFee() {
 		return this.managerFee;
 	}
