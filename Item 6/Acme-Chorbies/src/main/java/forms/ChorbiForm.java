@@ -92,7 +92,6 @@ public class ChorbiForm extends ActorForm {
 		this.state = state;
 	}
 
-	@NotBlank
 	public String getCountry() {
 		return this.country;
 	}
