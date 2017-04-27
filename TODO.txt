@@ -1,4 +1,4 @@
----------- Cambios en el documento de aceptacion --------
+﻿---------- Cambios en el documento de aceptacion --------
 4) - El register de chorbi y de user estan separados en dos botones, pero no se especifica.
 4) - No hay register de manage
 12) - La salida "An event list with only events." no tiene mucho sentido, en todo caso seria con un unico evento o algo asi, pero si se pone asi deberia poner tambien algo como que es el unico evento que cumple las condiciones en nuestro populate.
@@ -17,10 +17,10 @@
 
 
 -------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
--Desordenar event list cuando se pide ordenado. (Javi)
--Chorbi: pais no obligatorio. 	(Javi)
--Etiquetas de error number credit card. (Javi)
--En search chorbi aparece alguien indevido. (Roldan)
+-Desordenar event list cuando se pide ordenado. (Javi) Use case 13 Test 2
+-Chorbi: pais no obligatorio. 	(Javi) Use case 4 Test 2
+-Etiquetas de error number credit card. (Javi) Use case 21 Test 5
+-En search chorbi aparece alguien indevido. (Roldan) Use case 7 Test 1
 -Crear script y war. (al final, al menos war)
 
 
