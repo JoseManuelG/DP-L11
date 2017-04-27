@@ -75,9 +75,8 @@ public class ManagerService {
 	}
 
 	public void delete() {
-		Manager manager;
 
-		manager = this.findManagerByPrincipal();
+		this.findManagerByPrincipal();
 		//TODO Si se hace borrado de manager hacer aqui llamada a borrado de todos sus eventos.
 
 	}

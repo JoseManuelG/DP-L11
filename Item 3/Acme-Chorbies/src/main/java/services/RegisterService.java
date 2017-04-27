@@ -26,8 +26,6 @@ public class RegisterService {
 	private EventService		eventService;
 	@Autowired
 	private ChorbiService		chorbiService;
-	@Autowired
-	private ActorService		actorService;
 
 
 	//Simple CRUD methods------------------------------------------------------------------

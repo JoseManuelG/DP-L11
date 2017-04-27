@@ -134,9 +134,9 @@ public class RegisterTest extends AbstractTest {
 			this.authenticate(username);
 
 			if (!sorted)
-				this.eventService.findNextMonthEventsWithPlaces();
+				this.eventService.findNextMonthEventsWithPlacesAndFreePlaces();
 			else
-				this.eventService.findNextMonthEventsWithPlacesSorted();
+				this.eventService.findNextMonthEventsWithPlacesSortedAndFreePlaces();
 
 			event = this.eventService.findOne(eventId);
 			register = this.registerService.create(event);
@@ -148,16 +148,15 @@ public class RegisterTest extends AbstractTest {
 	}
 	protected void templateUnregister(final String username, final Boolean sorted, final int eventId, final Class<?> expected) {
 		Class<?> caught;
-		final Register register;
 		final Event event;
 		caught = null;
 		try {
 			this.authenticate(username);
 
 			if (!sorted)
-				this.eventService.findAllFromPrincipalChorbi();
+				this.eventService.findAllFromPrincipalChorbiAndFreePlaces();
 			else
-				this.eventService.findAllFromPrincipalChorbiSorted();
+				this.eventService.findAllFromPrincipalChorbiSortedAndFreePlaces();
 
 			event = this.eventService.findOne(eventId);
 

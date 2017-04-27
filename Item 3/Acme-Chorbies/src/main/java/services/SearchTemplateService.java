@@ -244,7 +244,6 @@ public class SearchTemplateService {
 
 	public SearchTemplate findByPrincipalToShow() {
 		SearchTemplate search;
-		final Date timeOfCache, lastSearch;
 
 		search = this.findByPrincipal();
 

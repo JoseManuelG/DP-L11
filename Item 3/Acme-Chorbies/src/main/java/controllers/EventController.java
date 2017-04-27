@@ -49,14 +49,14 @@ public class EventController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		Collection<Event> events;
+		Collection<Object[]> events;
 		String requestURI;
 
 		requestURI = "event/list.do";
 		if (!sorted)
-			events = this.eventService.findNextMonthEventsWithPlaces();
+			events = this.eventService.findNextMonthEventsWithPlacesAndFreePlaces();
 		else {
-			events = this.eventService.findNextMonthEventsWithPlacesSorted();
+			events = this.eventService.findNextMonthEventsWithPlacesSortedAndFreePlaces();
 			requestURI += "?ordered=true";
 		}
 
@@ -71,15 +71,16 @@ public class EventController extends AbstractController {
 	public ModelAndView listAll(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
 		String requestURI;
-		Collection<Event> events, eventsCloseToFinish;
+		Collection<Object[]> events;
+		Collection<Event> eventsCloseToFinish;
 
 		eventsCloseToFinish = new ArrayList<Event>(this.eventService.findNextMonthEventsWithPlaces());
 		requestURI = "event/list/all.do";
 
 		if (!sorted)
-			events = this.eventService.findAll();
+			events = this.eventService.findAllAndFreePlaces();
 		else {
-			events = this.eventService.findAllSorted();
+			events = this.eventService.findAllSortedAndFreePlaces();
 			requestURI += "?sorted=true";
 		}
 

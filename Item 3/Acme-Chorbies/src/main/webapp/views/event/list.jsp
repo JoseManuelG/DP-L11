@@ -29,10 +29,10 @@
 	
 
 	<jstl:choose>
-		<jstl:when test="${!empty eventsCloseToFinish and row.organisedMoment<now}">
+		<jstl:when test="${!empty eventsCloseToFinish and row[0].organisedMoment<now}">
 			<jstl:set var="style" value="color: grey"/>
 		</jstl:when>
-		<jstl:when test="${!empty eventsCloseToFinish and eventsCloseToFinish.contains(row)}">
+		<jstl:when test="${!empty eventsCloseToFinish and eventsCloseToFinish.contains(row[0])}">
 			<jstl:set var="style" value="color: green; font-size:150%"/>
 		</jstl:when>
 		<jstl:otherwise>
@@ -41,29 +41,31 @@
 	</jstl:choose>
 	
 	
-	<acme:maskedColumn sorteable="false" code="event.title" text="${row.title}" highlight="${style}"/>
+	<acme:maskedColumn sorteable="false" code="event.title" text="${row[0].title}" highlight="${style}"/>
 	
-	<acme:maskedColumn sorteable="false" code="event.description" text="${row.description}" highlight="${style}"/>
+	<acme:maskedColumn sorteable="false" code="event.description" text="${row[0].description}" highlight="${style}"/>
 	
-	<acme:maskedColumn  sorteable="false" code="event.organisedMoment" text="${row.organisedMoment}" highlight="${style}"/>
+	<acme:maskedColumn  sorteable="false" code="event.organisedMoment" text="${row[0].organisedMoment}" highlight="${style}"/>
 	
-	<acme:maskedColumn  sorteable="false" code="event.seatsOffered" text="${row.seatsOffered}" highlight="${style}"/>
+	<acme:maskedColumn  sorteable="false" code="event.seatsOffered" text="${row[0].seatsOffered}" highlight="${style}"/>
+	
+	<acme:maskedColumn  sorteable="false" code="event.free.seats" text="${row[1]}" highlight="${style}"/>
 	
 	<display:column>
-		<a href="event/view.do?eventId=${row.id}">
+		<a href="event/view.do?eventId=${row[0].id}">
 			<spring:message code="event.view"/>
 		</a>
 	</display:column>
 	
-	<jstl:if test="${requestURI eq 'event/manager/list.do'}">
+	<jstl:if test="${requestURI eq 'event/manager/list.do' or requestURI eq 'event/manager/list.do?sorted=true' }">
 	<security:authorize access="hasRole('MANAGER')">
 	<display:column>
-		<a href="event/manager/edit.do?eventId=${row.id}">
+		<a href="event/manager/edit.do?eventId=${row[0].id}">
 			<spring:message code="event.edit"/>
 		</a>
 	</display:column>
 	<display:column>
-		<a href="chirp/manager/broadcast.do?eventId=${row.id}">
+		<a href="chirp/manager/broadcast.do?eventId=${row[0].id}">
 			<spring:message code="event.chirp"/>
 		</a>
 	</display:column>

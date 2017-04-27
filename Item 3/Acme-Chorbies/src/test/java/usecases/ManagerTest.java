@@ -24,7 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import security.Authority;
 import security.UserAccount;
 import services.EventService;
-import services.LikesService;
 import services.ManagerService;
 import utilities.AbstractTest;
 import domain.Event;
@@ -41,9 +40,6 @@ public class ManagerTest extends AbstractTest {
 
 	@Autowired
 	private ManagerService	managerService;
-
-	@Autowired
-	private LikesService	likesService;
 
 	@Autowired
 	private EventService	eventService;

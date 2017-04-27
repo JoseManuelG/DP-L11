@@ -46,18 +46,18 @@ public class EventManagerController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView received(@RequestParam(defaultValue = "false") final Boolean sorted) {
 		ModelAndView result;
-		Collection<Event> events;
+		Collection<Object[]> events;
 		String requestURI;
 
 		requestURI = "event/manager/list.do";
 		if (!sorted)
-			events = this.eventService.findAllFromPrincipalManager();
+			events = this.eventService.findAllFromPrincipalManagerAndFreePlaces();
 		else {
-			events = this.eventService.findAllFromPrincipalManagerSorted();
+			events = this.eventService.findAllFromPrincipalManagerSortedAndFreePlaces();
 			requestURI += "?sorted=true";
 		}
 
-		result = new ModelAndView("event/list");
+		result = new ModelAndView("event/manager/list");
 		result.addObject("events", events);
 		result.addObject("sorted", sorted);
 		result.addObject("requestURI", requestURI);

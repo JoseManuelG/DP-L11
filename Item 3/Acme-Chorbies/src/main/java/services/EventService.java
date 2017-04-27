@@ -83,7 +83,7 @@ public class EventService {
 			Assert.isTrue(event.getSeatsOffered() > 0, "event.error.noseats");
 			this.managerOperationsForNewEvent();
 		} else
-			Assert.isTrue(event.getSeatsOffered() >= this.registerService.getNumberOfChorbiesForEvent(event.getId()));
+			Assert.isTrue(event.getSeatsOffered() >= this.registerService.getNumberOfChorbiesForEvent(event.getId()), "event.error.chorbies.registered");
 
 		result = this.eventRepository.save(event);
 		return result;
@@ -100,8 +100,34 @@ public class EventService {
 
 	//Other Bussnisnes methods------------------------------------------------------------
 
-	public Collection<Event> findAllSorted() {
-		return this.eventRepository.findAllSorted();
+	public Collection<Object[]> findAllAndFreePlaces() {
+		return this.eventRepository.findAllAndFreePlaces();
+	}
+
+	public Collection<Object[]> findAllSortedAndFreePlaces() {
+		return this.eventRepository.findAllSortedAndFreePlaces();
+	}
+
+	public Collection<Object[]> findNextMonthEventsWithPlacesAndFreePlaces() {
+		LocalDate nextMonth;
+		Date date, now;
+
+		nextMonth = new LocalDate().plusMonths(1);
+		date = nextMonth.toDateTimeAtStartOfDay().toDate();
+		now = new Date();
+
+		return this.eventRepository.findEventsWithPlacesBeforeDateAndFreePlaces(date, now);
+	}
+
+	public Collection<Object[]> findNextMonthEventsWithPlacesSortedAndFreePlaces() {
+		LocalDate nextMonth;
+		Date date, now;
+
+		nextMonth = new LocalDate().plusMonths(1);
+		date = nextMonth.toDateTimeAtStartOfDay().toDate();
+		now = new Date();
+
+		return this.eventRepository.findEventsWithPlacesBeforeDateSortedAndFreePlaces(date, now);
 	}
 
 	public Collection<Event> findNextMonthEventsWithPlaces() {
@@ -115,35 +141,32 @@ public class EventService {
 		return this.eventRepository.findEventsWithPlacesBeforeDate(date, now);
 	}
 
-	public Collection<Event> findNextMonthEventsWithPlacesSorted() {
-		LocalDate nextMonth;
-		Date date, now;
-
-		nextMonth = new LocalDate().plusMonths(1);
-		date = nextMonth.toDateTimeAtStartOfDay().toDate();
-		now = new Date();
-
-		return this.eventRepository.findEventsWithPlacesBeforeDateSorted(date, now);
-	}
-
-	public Collection<Event> findAllFromPrincipalChorbi() {
+	public Collection<Object[]> findAllFromPrincipalChorbiAndFreePlaces() {
 		Chorbi chorbi;
 		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
 		chorbiId = chorbi != null ? chorbi.getId() : 0;
 
-		return this.eventRepository.findAllFromChorbi(chorbiId);
+		return this.eventRepository.findAllFromChorbiAndFreePlaces(chorbiId);
 	}
 
-	public Collection<Event> findAllFromPrincipalChorbiSorted() {
+	public Collection<Object[]> findAllFromPrincipalChorbiSortedAndFreePlaces() {
 		Chorbi chorbi;
 		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
 		chorbiId = chorbi != null ? chorbi.getId() : 0;
 
-		return this.eventRepository.findAllFromChorbiSorted(chorbiId);
+		return this.eventRepository.findAllFromChorbiSortedAndFreePlaces(chorbiId);
+	}
+
+	public Collection<Object[]> findAllFromPrincipalManagerAndFreePlaces() {
+		Manager manager;
+
+		manager = this.managerService.findManagerByPrincipal();
+
+		return this.eventRepository.findAllFromManagerAndFreePlaces(manager.getId());
 	}
 
 	public Collection<Event> findAllFromPrincipalManager() {
@@ -154,12 +177,12 @@ public class EventService {
 		return this.eventRepository.findAllFromManager(manager.getId());
 	}
 
-	public Collection<Event> findAllFromPrincipalManagerSorted() {
+	public Collection<Object[]> findAllFromPrincipalManagerSortedAndFreePlaces() {
 		Manager manager;
 
 		manager = this.managerService.findManagerByPrincipal();
 
-		return this.eventRepository.findAllFromManagerSorted(manager.getId());
+		return this.eventRepository.findAllFromManagerSortedAndFreePlaces(manager.getId());
 	}
 
 	public Boolean checkExpired(final Event event) {
@@ -213,6 +236,7 @@ public class EventService {
 	}
 
 	public void notifyChangesToAssistantChorbies(final Event event) {
+		//TODO: Hacer la consulta paginada.
 		final Collection<Chorbi> assistants = this.registerService.findChorbiesForEvent(event.getId());
 		final Collection<Chirp> chirps = new LinkedList<Chirp>();
 		for (final Chorbi c : assistants) {
