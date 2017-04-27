@@ -55,6 +55,7 @@
 		</a>
 	</display:column>
 	
+	<jstl:if test="${requestURI eq 'event/manager/list.do'}">
 	<security:authorize access="hasRole('MANAGER')">
 	<display:column>
 		<a href="event/manager/edit.do?eventId=${row.id}">
@@ -67,6 +68,7 @@
 		</a>
 	</display:column>
 	</security:authorize>
+	</jstl:if>
 </display:table>
 
 
