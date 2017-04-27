@@ -1,4 +1,12 @@
-﻿---------------Por hacer/comprobar-----------------------
+---------- Cambios en el documento de aceptacion --------
+4) - El register de chorbi y de user estan separados en dos botones, pero no se especifica.
+4) - No hay register de manage
+12) - La salida "An event list with only events." no tiene mucho sentido, en todo caso seria con un unico evento o algo asi, pero si se pone asi deberia poner tambien algo como que es el unico evento que cumple las condiciones en nuestro populate.
+
+
+
+
+---------------Por hacer/comprobar-----------------------
 
 -Crear script y war.
 
@@ -7,6 +15,16 @@
 -Separar la dashboard para mejor visibilidad. (Dani)
 -Cambiar sitios de evento minimo 1 en vez de minimo 0
 
+
+-------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
+-Desordenar event list cuando se pide ordenado. (Javi)
+-Chorbi: pais no obligatorio. 	(Javi)
+-Etiquetas de error number credit card. (Javi)
+-En search chorbi aparece alguien indevido. (Roldan)
+-Crear script y war. (al final, al menos war)
+
+
+--------- HECHO ------------
 -Actualizar mensaje de credit card para reflejar lo que no se puede hacer. (Roldan){HECHO}
 -En configuration: controlar decimales de las fee (Javi){HECHO}
 -En configuration: si metes mas de 99 horas no hace nada, ni sale mensaje de error ni se mueve de vista (Javi, Gavira){Error no encontrado}
@@ -16,11 +34,4 @@
 	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)  ## Si este check es comprobar si el manager que está conectado ahora mismo es el mismo del evento que está editando, ya estaba hecho
 -Quitar desplegable de eventos en mensajes de broadcast. (Gavira) {HECHO}
 -Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
-
--------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
--Desordenar event list cuando se pide ordenado. (Javi)
--Chorbi: pais no obligatorio. 	(Javi)
--Etiquetas de error number credit card. (Javi)
--En search chorbi aparece alguien indevido. (Roldan)
--Crear script y war.
 
