@@ -6,7 +6,7 @@
 -Assert check manager para no poder enviar mensajes a eventos de otros managers. (Gavira)
 	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)
 -Quitar desplegable de eventos en mensajes de broadcast. (Gavira)
--Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira)
+-Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
 -Separar la dashboard para mejor visibilidad. (Dani)
 -Crear script y war.
 

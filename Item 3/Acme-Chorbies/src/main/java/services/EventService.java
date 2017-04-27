@@ -77,14 +77,13 @@ public class EventService {
 	public Event save(final Event event) {
 		Event result;
 		Assert.notNull(event, "event.error.null");
-		Assert.isTrue(event.getId() == 0 ||
-
-		this.managerService.findManagerByPrincipal().equals(event.getManager()), "event.error.notowner");
+		Assert.isTrue(event.getId() == 0 || this.managerService.findManagerByPrincipal().equals(event.getManager()), "event.error.notowner");
 		Assert.isTrue(event.getOrganisedMoment().after(new Date()), "event.error.invalid.date");
 		if (event.getId() == 0) {
 			Assert.isTrue(event.getSeatsOffered() > 0, "event.error.noseats");
 			this.managerOperationsForNewEvent();
-		}
+		} else
+			Assert.isTrue(event.getSeatsOffered() >= this.registerService.getNumberOfChorbiesForEvent(event.getId()));
 
 		result = this.eventRepository.save(event);
 		return result;
