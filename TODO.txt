@@ -14,6 +14,7 @@
 -Ver fee y perfil de manager. ( O de otra forma, pero que se pueda ver su fee)
 -Separar la dashboard para mejor visibilidad. (Dani)
 -Cambiar sitios de evento minimo 1 en vez de minimo 0
+-Cambiar astah para los decimales de los chorbiFee y managerFee
 
 
 -------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
