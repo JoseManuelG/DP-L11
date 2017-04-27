@@ -22,18 +22,8 @@
 
 <form:form action="chirp/manager/broadcast.do" modelAttribute="chirpBroadcastForm">
 
-		<form:label path="event">
-			<spring:message code="chirp.for" />
-		</form:label>
-		<form:select path="event">
-			<jstl:forEach items="${events}" var="ev">
-				<form:option value="${ev.id}">
-					<jstl:out
-						value="${ev.title}" />
-				</form:option>
-			</jstl:forEach>
-		</form:select>
-		<form:errors path="event" cssClass="error" />
+		<form:hidden path="event" />
+
 		<acme:textbox code="chirp.subject" path="subject" />
 		<acme:textbox code="chirp.text" path="text" />
 

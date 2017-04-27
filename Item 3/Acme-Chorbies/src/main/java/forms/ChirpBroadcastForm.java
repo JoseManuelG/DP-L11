@@ -5,13 +5,12 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import domain.Attachment;
-import domain.Event;
 
 public class ChirpBroadcastForm {
 
 	private String					subject;
 	private String					text;
-	private Event					event;
+	private Integer					event;
 	private LinkedList<Attachment>	attachments;
 
 
@@ -21,10 +20,10 @@ public class ChirpBroadcastForm {
 	public void setText(final String text) {
 		this.text = text;
 	}
-	public Event getEvent() {
+	public Integer getEvent() {
 		return this.event;
 	}
-	public void setEvent(final Event event) {
+	public void setEvent(final Integer event) {
 		this.event = event;
 	}
 	public Collection<Attachment> getAttachments() {

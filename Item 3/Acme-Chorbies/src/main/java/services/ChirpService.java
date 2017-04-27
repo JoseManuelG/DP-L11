@@ -19,6 +19,7 @@ import domain.Attachment;
 import domain.Chirp;
 import domain.Chorbi;
 import domain.Customer;
+import domain.Event;
 import forms.ChirpBroadcastForm;
 import forms.ChirpForm;
 
@@ -38,6 +39,9 @@ public class ChirpService {
 
 	@Autowired
 	private RegisterService		registerService;
+
+	@Autowired
+	private EventService		eventService;
 
 	@Autowired
 	private Validator			validator;
@@ -85,11 +89,11 @@ public class ChirpService {
 	public void save(final Collection<Chirp> chirps) {
 		this.chirpRepository.save(chirps);
 	}
-	public void save(final Collection<Chirp> chirps, final Collection<Attachment> attachments) {
+	public void save(final Collection<Chirp> chirps, final Collection<Attachment> attachments, final Integer eventId) {
 		for (final Chirp chirp : chirps) {
 			Chirp result, copyChirp, savedCopyChirp;
 			Customer sender;
-
+			Event event;
 			Assert.notNull(chirp.getRecipient(), "El mensaje debe tener un destinatario");
 
 			Assert.notNull(chirp.getSender(), "El mensaje debe tener un remitente");
@@ -98,7 +102,8 @@ public class ChirpService {
 
 			Assert.isTrue(sender.equals(chirp.getSender()), "El remitente debe ser el mismo que esta conectado");
 			Assert.isTrue(chirp.getId() == 0, "No puedes editar un mensaje");
-
+			event = this.eventService.findOne(eventId);
+			Assert.isTrue(event.getManager().equals(sender), "Solo puedes enviar chirps masivos con tus propios eventos");
 			// Creamos copia del mensaje en un segundo mensaje;
 
 			copyChirp = this.copyChirp(chirp);
@@ -204,7 +209,7 @@ public class ChirpService {
 
 	public List<Chirp> reconstruct(final ChirpBroadcastForm chirpBroadcastForm, final BindingResult binding) {
 		final List<Chirp> chirps = new LinkedList<Chirp>();
-		final List<Chorbi> recipients = new LinkedList<Chorbi>(this.registerService.findChorbiesForEvent(chirpBroadcastForm.getEvent().getId()));
+		final List<Chorbi> recipients = new LinkedList<Chorbi>(this.registerService.findChorbiesForEvent(chirpBroadcastForm.getEvent()));
 		for (final Chorbi chorbi : recipients) {
 			final Chirp aux = this.create(chorbi.getId());
 			aux.setText(chirpBroadcastForm.getText());

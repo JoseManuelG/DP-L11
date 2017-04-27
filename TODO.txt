@@ -3,9 +3,10 @@
 -En configuration: controlar decimales de las fee (Javi)
 -En configuration: si metes mas de 99 horas no hace nada, ni sale mensaje de error ni se mueve de vista (Javi, Gavira)
 -En lista de todos los eventos que no salgan botones de gestion. (Javi)
--Assert check manager para no poder enviar mensajes a eventos de otros managers. (Gavira)
-	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)
--Quitar desplegable de eventos en mensajes de broadcast. (Gavira)
+-Assert check manager para no poder enviar mensajes a eventos de otros managers. (Gavira) {HECHO}
+	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)  ## Si este check es comprobar si el manager que está conectado ahora mismo es el mismo del evento que está editando, ya estaba hecho
+	
+-Quitar desplegable de eventos en mensajes de broadcast. (Gavira) {HECHO}
 -Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
 -Separar la dashboard para mejor visibilidad. (Dani)
 -Crear script y war.

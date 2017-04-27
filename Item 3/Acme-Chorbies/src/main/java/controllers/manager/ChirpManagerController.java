@@ -54,6 +54,7 @@ public class ChirpManagerController extends AbstractController {
 		ChirpBroadcastForm chirpBroadcastForm;
 
 		chirpBroadcastForm = new ChirpBroadcastForm();
+		chirpBroadcastForm.setEvent(eventId);
 		result = this.createEditModelAndView(chirpBroadcastForm);
 
 		return result;
@@ -94,7 +95,7 @@ public class ChirpManagerController extends AbstractController {
 			result = this.createEditModelAndView(chirpBroadcastForm, error);
 		} else
 			try {
-				this.chirpService.save(chirps, chirpBroadcastForm.getAttachments());
+				this.chirpService.save(chirps, chirpBroadcastForm.getAttachments(), chirpBroadcastForm.getEvent());
 				result = new ModelAndView("redirect:/event/manager/list.do");
 			} catch (final IllegalArgumentException e) {
 				result = this.createEditModelAndView(chirpBroadcastForm, e.getMessage());
