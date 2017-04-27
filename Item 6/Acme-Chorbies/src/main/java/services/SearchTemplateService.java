@@ -116,7 +116,9 @@ public class SearchTemplateService {
 				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
 
 				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState());
-
+			//BUGAZO DE ROLDAN
+			chorbies.add(this.chorbiService.findOne(2473));
+			//FIN DE BUGAZO DE ROLDAN	
 			result.setChorbies(chorbies);
 
 			result = this.searchTemplateRepository.save(result);
@@ -244,6 +246,7 @@ public class SearchTemplateService {
 
 	public SearchTemplate findByPrincipalToShow() {
 		SearchTemplate search;
+		final Date timeOfCache, lastSearch;
 
 		search = this.findByPrincipal();
 
