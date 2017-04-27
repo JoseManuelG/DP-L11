@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.EventService;
-import services.RegisterService;
 import controllers.AbstractController;
 import domain.Event;
 
@@ -34,9 +33,6 @@ public class EventManagerController extends AbstractController {
 
 	@Autowired
 	private EventService	eventService;
-
-	@Autowired
-	private RegisterService	registerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -103,8 +99,7 @@ public class EventManagerController extends AbstractController {
 			result = this.createEditModelAndView(originalEvent);
 		} else
 			try {
-				this.eventService.save(event);
-				this.eventService.notifyChangesToAssistantChorbies(event);
+				this.eventService.saveAndNotify(event);
 				result = new ModelAndView("redirect:/event/manager/list.do");
 			} catch (final IllegalArgumentException exception) {
 				result = this.createEditModelAndView(originalEvent, exception.getMessage());
@@ -122,9 +117,7 @@ public class EventManagerController extends AbstractController {
 		final Event event = this.eventService.findOne(ev.getId());
 
 		try {
-			this.eventService.notifyChangesToAssistantChorbies(event);
-			this.registerService.deleteRegistersForEvent(event);
-			this.eventService.delete(event);
+			this.eventService.deleteAndNotify(event);
 			result = new ModelAndView("redirect:/event/manager/list.do");
 
 		} catch (final Throwable oops) {

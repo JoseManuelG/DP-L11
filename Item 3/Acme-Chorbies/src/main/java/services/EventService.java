@@ -239,4 +239,15 @@ public class EventService {
 	public void flush() {
 		this.eventRepository.flush();
 	}
+
+	public void saveAndNotify(final Event event) {
+		this.save(event);
+		this.notifyChangesToAssistantChorbies(event);
+	}
+
+	public void deleteAndNotify(final Event event) {
+		this.notifyChangesToAssistantChorbies(event);
+		this.registerService.deleteRegistersForEvent(event);
+		this.delete(event);
+	}
 }
