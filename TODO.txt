@@ -1,21 +1,12 @@
-﻿---------- Cambios en el documento de aceptacion --------
-4) - El register de chorbi y de user estan separados en dos botones, pero no se especifica.
-4) - No hay register de manager
-12) - La salida "An event list with only events." no tiene mucho sentido, en todo caso seria con un unico evento o algo asi, pero si se pone asi deberia poner tambien algo como que es el unico evento que cumple las condiciones en nuestro populate.
-
-
-
-
 ---------------Por hacer/comprobar-----------------------
 
--Crear script y war.
-
--Informe de costes (Acha)
 -Ver fee y perfil de manager. ( O de otra forma, pero que se pueda ver su fee)
 -Separar la dashboard para mejor visibilidad. (Dani)
 -Cambiar sitios de evento minimo 1 en vez de minimo 0
 -Cambiar astah para los decimales de los chorbiFee y managerFee
+-Informe de costes (Acha)
 
+-Crear script y war.
 
 -------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
 -Desordenar event list cuando se pide ordenado. (Javi) Use case 13 Test 2
