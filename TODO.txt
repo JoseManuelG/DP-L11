@@ -1,8 +1,6 @@
 ﻿---------------Por hacer/comprobar-----------------------
 
 
--Cambiar sitios de evento minimo 1 en vez de minimo 0
--Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
 
 
@@ -20,6 +18,8 @@
 
 
 --------- HECHO ------------
+-Cambiar sitios de evento minimo 1 en vez de minimo 0 (HECHO)
+-Cambiar astah para los decimales de los chorbiFee y managerFee (HECHO)
 -Lista de managers y otra de chorbies con sus fees, para el administrador (HECHO)
 -Poner lista de asistentes a un evento en el view de evento (HECHO)
 -Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda (HECHO)
@@ -34,4 +34,3 @@
 	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)  ## Si este check es comprobar si el manager que está conectado ahora mismo es el mismo del evento que está editando, ya estaba hecho
 -Quitar desplegable de eventos en mensajes de broadcast. (Gavira) {HECHO}
 -Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
-
