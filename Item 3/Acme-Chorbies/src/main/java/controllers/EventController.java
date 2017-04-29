@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
 import services.EventService;
+import services.RegisterService;
 import domain.Chorbi;
 import domain.Event;
 
@@ -36,6 +37,9 @@ public class EventController extends AbstractController {
 
 	@Autowired
 	private ChorbiService	chorbiService;
+	
+	@Autowired
+	private RegisterService	registerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -93,12 +97,13 @@ public class EventController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+		@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam final int eventId) {
 		ModelAndView result;
 		Event event;
 		Chorbi chorbi;
 		Boolean siteFree, expired, registered;
+		Collection<Chorbi> chorbies;
 
 		event = this.eventService.findOne(eventId);
 		expired = this.eventService.checkExpired(event);
@@ -111,13 +116,15 @@ public class EventController extends AbstractController {
 				registered = this.eventService.checkPrincipalIsRegistered(event);
 		} catch (final IllegalArgumentException e) {
 		}
+		chorbies = this.registerService.findChorbiesForEvent(eventId);
 
 		result = new ModelAndView("event/view");
 		result.addObject("event", event);
 		result.addObject("siteFree", siteFree);
 		result.addObject("expired", expired);
 		result.addObject("registered", registered);
-		result.addObject("requestURI", "event/chorbi/view.do?eventId=" + eventId);
+		result.addObject("requestURI", "event/view.do?eventId=" + eventId);
+		result.addObject("chorbies", chorbies);
 
 		return result;
 	}

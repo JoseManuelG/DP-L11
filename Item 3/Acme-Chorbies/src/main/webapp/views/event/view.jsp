@@ -33,6 +33,35 @@
 
 <strong><spring:message code="event.seatsOffered"/>:</strong>
 <acme:mask text="${event.seatsOffered}"/><br/>
+
+<strong><spring:message code="event.chorbies"/>:</strong>
+<br/>
+<display:table pagesize="5" class="displaytag" keepStatus="false"
+	name="chorbies" requestURI="${requestURI}" id="row" excludedParams="*">
+	
+		
+	<display:column>
+		<a href="chorbi/chorbi/view.do?chorbiId=${row.id}">
+			<spring:message code="chorbi.view"/>
+		</a>
+	</display:column>
+	
+
+	<acme:maskedColumn sorteable="true" code="chorbi.name" text="${row.name}" highlight="${style}" />
+	
+	<acme:maskedColumn sorteable="true" code="chorbi.surname" text="${row.surname}" highlight="${style}" />
+	
+	<acme:maskedColumn sorteable="true" code="chorbi.description" text="${row.description}" highlight="${style}" />
+
+	<acme:maskedColumn sorteable="true" code="chorbi.desiredRelationship" text="${row.desiredRelationship}" highlight="${style}" />
+
+	<acme:maskedColumn sorteable="true" code="chorbi.birthDate" text="${row.birthDate }" highlight="${style}" />
+
+	<acme:maskedColumn sorteable="true" code="chorbi.genre" text="${row.genre}" highlight="${style}" />
+
+
+
+</display:table>
 	
 <security:authorize access="hasRole('CHORBI')">
 	<jstl:if test="${!expired}">

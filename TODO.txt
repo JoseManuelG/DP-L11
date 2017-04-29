@@ -5,7 +5,7 @@
 -Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
 
--Poner lista de asistentes a un evento en el view de evento (WIP Gavira)
+
 -Hacer tests funcionales de los casos de uso que no tienen (como el ver la lista de la gente que te gusta) (Sacando cuales faltan, Javi)
 -Rehacer los tests de aceptación indicando exactamente los datos a introducir y los resultados esperados, tener en cuenta que son secuenciales, por lo que si en el test 1 se añade un chorbi hay que tenerlo en cuenta si en el test 2 se hace el search. (faltaba el tests de comprobar la cache del search, y faltaran algunos mas)
 
@@ -20,6 +20,7 @@
 
 
 --------- HECHO ------------
+-Poner lista de asistentes a un evento en el view de evento (HECHO)
 -Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda (HECHO)
 -Diferenciar entre evento borrado y editado en el mensaje de broadcast (HECHO)
 -No se crea un evento correctamente (HECHO)
