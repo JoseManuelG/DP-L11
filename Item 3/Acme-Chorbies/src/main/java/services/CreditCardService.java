@@ -76,6 +76,9 @@ public class CreditCardService {
 		if (creditCard != null)
 			this.creditCardRepository.delete(creditCard);
 	}
+	public void flush() {
+		this.creditCardRepository.flush();
+	}
 
 	// Other Bussiness Methods --------------------------------------------------------
 

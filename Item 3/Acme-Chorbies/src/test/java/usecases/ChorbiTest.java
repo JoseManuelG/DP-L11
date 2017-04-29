@@ -26,10 +26,12 @@ import security.UserAccount;
 import services.BannerService;
 import services.ChorbiService;
 import services.CoordinatesService;
+import services.CreditCardService;
 import services.LikesService;
 import utilities.AbstractTest;
 import domain.Chorbi;
 import domain.Coordinates;
+import domain.CreditCard;
 import domain.Likes;
 
 @ContextConfiguration(locations = {
@@ -52,6 +54,9 @@ public class ChorbiTest extends AbstractTest {
 
 	@Autowired
 	private CoordinatesService	coordinatesService;
+
+	@Autowired
+	private CreditCardService	creditCardService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -221,6 +226,23 @@ public class ChorbiTest extends AbstractTest {
 		this.template("chorbi3", 2471, 0, null, 0, true, ConstraintViolationException.class);
 	}
 
+	//Caso de uso listar gente que le gustas si tienes credit card
+	//test positivo
+	@Test
+	public void listPeopleWhoLikeMeTest1() {
+		this.templatelistPeopleWhoLikeMe("chorbi1", null);
+	}
+	//sin loguearse
+	@Test
+	public void listPeopleWhoLikeMeTest2() {
+		this.templatelistPeopleWhoLikeMe(null, IllegalArgumentException.class);
+	}
+	//logueado como manager
+	@Test
+	public void listPeopleWhoLikeMeTest3() {
+		this.templatelistPeopleWhoLikeMe("manager1", IllegalArgumentException.class);
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected void templateBanChorbi(final String username, final int chorbiId, final Class<?> expected) {
@@ -311,6 +333,30 @@ public class ChorbiTest extends AbstractTest {
 			} else
 				this.likesService.delete(this.likesService.findOne(likesId));
 
+			this.chorbiService.flush();
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	protected void templatelistPeopleWhoLikeMe(final String username, final Class<?> expected) {
+		Class<?> caught;
+		Chorbi chorbi;
+		CreditCard creditCard;
+		caught = null;
+		try {
+			this.authenticate(username);
+
+			chorbi = this.chorbiService.findChorbiByPrincipal();
+			Assert.notNull(chorbi);
+			creditCard = this.creditCardService.getCreditCardByPrincipal();
+			if (creditCard != null)
+				this.likesService.findReceivedLikesOfChorbi(chorbi.getId());
+			else {
+				//aqui se le reenviaria a crearse la credit card
+			}
 			this.chorbiService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {

@@ -1,12 +1,6 @@
 ﻿---------------Por hacer/comprobar-----------------------
-
-
--Cambiar sitios de evento minimo 1 en vez de minimo 0
--Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
 
-
--Hacer tests funcionales de los casos de uso que no tienen (como el ver la lista de la gente que te gusta) (Sacando cuales faltan, Javi)
 -Rehacer los tests de aceptación indicando exactamente los datos a introducir y los resultados esperados, tener en cuenta que son secuenciales, por lo que si en el test 1 se añade un chorbi hay que tenerlo en cuenta si en el test 2 se hace el search. (faltaba el tests de comprobar la cache del search, y faltaran algunos mas)
 
 -Crear script y war.
@@ -15,11 +9,13 @@
 -Desordenar event list cuando se pide ordenado. (Javi) Use case 13 Test 2
 -Chorbi: pais no obligatorio. 	(Javi) Use case 4 Test 2
 -Etiquetas de error number credit card. (Javi) Use case 21 Test 5
--En search chorbi aparece alguien indevido. (Roldan) Use case 7 Test 1
+-En search chorbi aparece alguien indebido. (Roldan) Use case 7 Test 1
 -Crear script y war. (al final, al menos war)
 
 
 --------- HECHO ------------
+-Cambiar sitios de evento minimo 1 en vez de minimo 0(HECHO)
+-Cambiar astah para los decimales de los chorbiFee y managerFee(HECHO)
 -Lista de managers y otra de chorbies con sus fees, para el administrador (HECHO)
 -Poner lista de asistentes a un evento en el view de evento (HECHO)
 -Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda (HECHO)
@@ -34,4 +30,5 @@
 	-(Comprobar tambien check manager de edit al guardar por si acaso) (Gavira)  ## Si este check es comprobar si el manager que está conectado ahora mismo es el mismo del evento que está editando, ya estaba hecho
 -Quitar desplegable de eventos en mensajes de broadcast. (Gavira) {HECHO}
 -Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
+-Hacer tests funcionales de los casos de uso que no tienen (Dani){HECHO}
 

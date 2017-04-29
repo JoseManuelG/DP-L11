@@ -68,8 +68,9 @@
 
 	<acme:maskedColumn sorteable="true" code="chorbi.genre" text="${row.genre}" highlight="${style}" />
 	
-	<acme:column sorteable="true" code="chorbi.chargedFee" path="chargedFee"/>
-
+	<security:authorize access="hasRole('ADMINISTRATOR')">	
+		<acme:column sorteable="true" code="chorbi.chargedFee" path="chargedFee"/>
+	</security:authorize>
 
 
 </display:table>

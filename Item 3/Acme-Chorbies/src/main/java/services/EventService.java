@@ -146,7 +146,9 @@ public class EventService {
 		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-		chorbiId = chorbi != null ? chorbi.getId() : 0;
+
+		Assert.notNull(chorbi);
+		chorbiId = chorbi.getId();
 
 		return this.eventRepository.findAllFromChorbiAndFreePlaces(chorbiId);
 	}
@@ -156,7 +158,9 @@ public class EventService {
 		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-		chorbiId = chorbi != null ? chorbi.getId() : 0;
+
+		Assert.notNull(chorbi);
+		chorbiId = chorbi.getId();
 
 		return this.eventRepository.findAllFromChorbiSortedAndFreePlaces(chorbiId);
 	}
