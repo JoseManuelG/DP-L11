@@ -30,13 +30,13 @@
 
 	<jstl:choose>
 		<jstl:when test="${!empty eventsCloseToFinish and row[0].organisedMoment<now}">
-			<jstl:set var="style" value="color: grey"/>
+			<jstl:set var="style" value="background-color: grey; color: white"/>
 		</jstl:when>
 		<jstl:when test="${!empty eventsCloseToFinish and eventsCloseToFinish.contains(row[0])}">
-			<jstl:set var="style" value="color: green; font-size:150%"/>
+			<jstl:set var="style" value="background-color: green; color: white; font-size:150%"/>
 		</jstl:when>
 		<jstl:otherwise>
-			<jstl:set var="style" value=""/>
+			<jstl:set var="style" value="background-color: white"/>
 		</jstl:otherwise>
 	</jstl:choose>
 	
@@ -72,7 +72,9 @@
 	</security:authorize>
 	</jstl:if>
 </display:table>
-
+<jstl:if test="${requestURI eq 'event/list/all.do' or requestURI eq 'event/list/all.do?sorted=true' }">
+<spring:message code="event.list.legend"/>
+</jstl:if>
 
 <security:authorize access="hasRole('MANAGER')">
 	<a href="event/manager/create.do">
