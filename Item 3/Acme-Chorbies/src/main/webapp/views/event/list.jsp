@@ -51,7 +51,7 @@
 	
 	<acme:maskedColumn  sorteable="false" code="event.free.seats" text="${row[1]}" highlight="${style}"/>
 	
-	<display:column>
+	<display:column style="${style}">
 		<a href="event/view.do?eventId=${row[0].id}">
 			<spring:message code="event.view"/>
 		</a>
