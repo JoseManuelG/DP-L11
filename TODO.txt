@@ -13,7 +13,7 @@
 -Desordenar event list cuando se pide ordenado. (Javi) Use case 13 Test 2
 -Chorbi: pais no obligatorio. 	(Javi) Use case 4 Test 2
 -Etiquetas de error number credit card. (Javi) Use case 21 Test 5
--En search chorbi aparece alguien indevido. (Roldan) Use case 7 Test 1
+-En search chorbi aparece alguien indebido. (Roldan) Use case 7 Test 1
 -Crear script y war. (al final, al menos war)
 
 
