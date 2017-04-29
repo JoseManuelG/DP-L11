@@ -14,8 +14,8 @@
 
 
 --------- HECHO ------------
--Cambiar sitios de evento minimo 1 en vez de minimo 0(HECHO)
--Cambiar astah para los decimales de los chorbiFee y managerFee(HECHO)
+-Cambiar sitios de evento minimo 1 en vez de minimo 0 (HECHO)
+-Cambiar astah para los decimales de los chorbiFee y managerFee (HECHO)
 -Lista de managers y otra de chorbies con sus fees, para el administrador (HECHO)
 -Poner lista de asistentes a un evento en el view de evento (HECHO)
 -Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda (HECHO)
@@ -31,4 +31,3 @@
 -Quitar desplegable de eventos en mensajes de broadcast. (Gavira) {HECHO}
 -Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
 -Hacer tests funcionales de los casos de uso que no tienen (Dani){HECHO}
-
