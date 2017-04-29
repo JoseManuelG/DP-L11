@@ -5,8 +5,8 @@
 -Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
 
--Diferenciar entre evento borrado y editado en el mensaje de broadcast
--No se crea un evento correctamente
+-Diferenciar entre evento borrado y editado en el mensaje de broadcast (WIP javi)
+-No se crea un evento correctamente (WIP javi)
 -Poner lista de asistentes a un evento en el view de evento
 -Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda
 -Hacer tests funcionales de los casos de uso que no tienen (como el ver la lista de la gente que te gusta)
