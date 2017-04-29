@@ -5,10 +5,8 @@
 -Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
 
--Diferenciar entre evento borrado y editado en el mensaje de broadcast (WIP javi)
--No se crea un evento correctamente (WIP javi)
--Poner lista de asistentes a un evento en el view de evento
--Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda
+-Poner lista de asistentes a un evento en el view de evento (WIP Gavira)
+-Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda (WIP Javi)
 -Hacer tests funcionales de los casos de uso que no tienen (como el ver la lista de la gente que te gusta)
 -Rehacer los tests de aceptación indicando exactamente los datos a introducir y los resultados esperados, tener en cuenta que son secuenciales, por lo que si en el test 1 se añade un chorbi hay que tenerlo en cuenta si en el test 2 se hace el search. (faltaba el tests de comprobar la cache del search, y faltaran algunos mas)
 
@@ -23,6 +21,8 @@
 
 
 --------- HECHO ------------
+-Diferenciar entre evento borrado y editado en el mensaje de broadcast (HECHO)
+-No se crea un evento correctamente (HECHO)
 -Actualizar mensaje de credit card para reflejar lo que no se puede hacer. (Roldan){HECHO}
 -En configuration: controlar decimales de las fee (Javi){HECHO}
 -En configuration: si metes mas de 99 horas no hace nada, ni sale mensaje de error ni se mueve de vista (Javi, Gavira){Error no encontrado}
