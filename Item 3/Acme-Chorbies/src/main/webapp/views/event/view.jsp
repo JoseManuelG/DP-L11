@@ -62,6 +62,8 @@
 
 
 </display:table>
+
+<br/>
 	
 <security:authorize access="hasRole('CHORBI')">
 	<jstl:if test="${!expired}">

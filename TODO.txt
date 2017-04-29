@@ -1,6 +1,6 @@
 ﻿---------------Por hacer/comprobar-----------------------
 
--Lista de managers y otra de chorbies con sus fees, para el administrador (WIP Gavira)
+
 -Cambiar sitios de evento minimo 1 en vez de minimo 0
 -Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
@@ -20,6 +20,7 @@
 
 
 --------- HECHO ------------
+-Lista de managers y otra de chorbies con sus fees, para el administrador (HECHO)
 -Poner lista de asistentes a un evento en el view de evento (HECHO)
 -Destacar en la lista de eventos con colores de background para que se vea mejor, y añadir debajo una leyenda (HECHO)
 -Diferenciar entre evento borrado y editado en el mensaje de broadcast (HECHO)

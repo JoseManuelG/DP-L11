@@ -67,6 +67,8 @@
 	<acme:maskedColumn sorteable="true" code="chorbi.birthDate" text="${row.birthDate }" highlight="${style}" />
 
 	<acme:maskedColumn sorteable="true" code="chorbi.genre" text="${row.genre}" highlight="${style}" />
+	
+	<acme:column sorteable="true" code="chorbi.chargedFee" path="chargedFee"/>
 
 
 

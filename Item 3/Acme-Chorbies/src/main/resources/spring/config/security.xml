@@ -80,6 +80,7 @@
 		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/chorbi/administrator/updateChorbiesChargedFees.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/chorbi/administrator/successFee.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/manager/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- Chorbi -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->

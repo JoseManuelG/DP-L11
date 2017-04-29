@@ -33,7 +33,8 @@
 		<value>/views/dashboard/messages</value>
 		<value>/views/event/messages</value>
 		<value>/views/likes/messages</value>
-		<value>/views/searchTemplate/messages</value>		
+		<value>/views/searchTemplate/messages</value>	
+		<value>/views/manager/messages</value>	
 		
 	</util:list>
 

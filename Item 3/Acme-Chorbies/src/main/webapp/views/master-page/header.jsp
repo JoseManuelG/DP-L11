@@ -81,6 +81,7 @@
 					<li><a href="configuration/administrator/view.do"><spring:message code="master.page.administrator.configuration" /></a></li>
 					<li><a href="banner/administrator/list.do"><spring:message code="master.page.administrator.banner" /></a></li>
 					<li><a href="chorbi/administrator/list.do"><spring:message code="master.page.administrator.chorbies" /></a></li>
+					<li><a href="manager/administrator/list.do"><spring:message code="master.page.administrator.managers" /></a></li>
 					<li><a href="chorbi/administrator/updateChorbiesChargedFees.do"><spring:message code="master.page.administrator.chorbies.updateChorbiesChargedFees" /></a></li>
 					
 					</security:authorize>
