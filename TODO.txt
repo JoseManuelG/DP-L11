@@ -1,6 +1,6 @@
 ﻿---------------Por hacer/comprobar-----------------------
 
--Lista de managers y otra de chorbies con sus fees, para el administrador
+-Lista de managers y otra de chorbies con sus fees, para el administrador (WIP Gavira)
 -Cambiar sitios de evento minimo 1 en vez de minimo 0
 -Cambiar astah para los decimales de los chorbiFee y managerFee
 -Informe de costes (Acha)
