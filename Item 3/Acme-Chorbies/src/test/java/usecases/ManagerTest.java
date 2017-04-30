@@ -126,7 +126,7 @@ public class ManagerTest extends AbstractTest {
 
 		// Test positivo
 
-		this.createEventTemplate("title", "27/03/2018 19:46", "description", "http://picture.com/pic1.jpg", 10, 2399, null);
+		this.createEventTemplate("title", "27/03/2018 19:46", "description", "http://picture.com/pic1.jpg", 10, "manager1", null);
 	}
 
 	@Test
@@ -134,7 +134,7 @@ public class ManagerTest extends AbstractTest {
 
 		// Creación sin título
 
-		this.createEventTemplate("", "27/03/2018 19:46", "description", "http://picture.com/pic1.jpg", 10, 2399, ConstraintViolationException.class);
+		this.createEventTemplate("", "27/03/2018 19:46", "description", "http://picture.com/pic1.jpg", 10, "manager1", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class ManagerTest extends AbstractTest {
 
 		// Creación en el pasado
 
-		this.createEventTemplate("title", "27/03/2015 19:46", "description", "http://picture.com/pic1.jpg", 10, 2399, IllegalArgumentException.class);
+		this.createEventTemplate("title", "27/03/2015 19:46", "description", "http://picture.com/pic1.jpg", 10, "manager1", IllegalArgumentException.class);
 	}
 
 	@Test
@@ -150,7 +150,7 @@ public class ManagerTest extends AbstractTest {
 
 		// Imagen no url
 
-		this.createEventTemplate("title", "27/03/2018 19:46", "description", "noturl", 10, 2399, ConstraintViolationException.class);
+		this.createEventTemplate("title", "27/03/2018 19:46", "description", "noturl", 10, "manager1", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -158,7 +158,7 @@ public class ManagerTest extends AbstractTest {
 
 		// Descripción vacía
 
-		this.createEventTemplate("title", "27/03/2018 19:46", "", "http://picture.com/pic1.jpg", 10, 2399, ConstraintViolationException.class);
+		this.createEventTemplate("title", "27/03/2018 19:46", "", "http://picture.com/pic1.jpg", 10, "manager1", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -166,7 +166,7 @@ public class ManagerTest extends AbstractTest {
 
 		// Número de plazas inválido
 
-		this.createEventTemplate("title", "27/03/2018 19:46", "description", "http://picture.com/pic1.jpg", 0, 2399, IllegalArgumentException.class);
+		this.createEventTemplate("title", "27/03/2018 19:46", "description", "http://picture.com/pic1.jpg", 0, "manager1", IllegalArgumentException.class);
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -204,13 +204,13 @@ public class ManagerTest extends AbstractTest {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void createEventTemplate(final String title, final String organisedMomentString, final String description, final String picture, final int seatsOffered, final int managerId, final Class<?> expected) {
+	private void createEventTemplate(final String title, final String organisedMomentString, final String description, final String picture, final int seatsOffered, final String manageBeanName, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 
 		try {
-			final Manager manager = this.managerService.findOne(managerId);
+			final Manager manager = this.managerService.findOne(this.extract(manageBeanName));
 			final String username = manager.getUserAccount().getUsername();
 			this.authenticate(username);
 			final Event event = this.eventService.create();

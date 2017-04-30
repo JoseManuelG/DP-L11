@@ -84,22 +84,22 @@ public class EventTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void broadcastEventMessageTest1() {
-		this.templatebroadcastEventMessage("manager1", "testsubject", "testText", 2461, null);
+		this.templatebroadcastEventMessage("manager1", "testsubject", "testText", "event1", null);
 	}
 	//sin loguearse
 	@Test
 	public void broadcastEventMessageTest2() {
-		this.templatebroadcastEventMessage(null, "testsubject", "testText", 2461, IllegalArgumentException.class);
+		this.templatebroadcastEventMessage(null, "testsubject", "testText", "event1", IllegalArgumentException.class);
 	}
 	//logueado como chorbi
 	@Test
 	public void broadcastEventMessageTest3() {
-		this.templatebroadcastEventMessage("chorbi1", "testsubject", "testText", 2461, IllegalArgumentException.class);
+		this.templatebroadcastEventMessage("chorbi1", "testsubject", "testText", "event1", IllegalArgumentException.class);
 	}
 	//intentando hacer un mensaje de otro manager
 	@Test
 	public void broadcastEventMessageTest4() {
-		this.templatebroadcastEventMessage("manager2", "testsubject", "testText", 2461, IllegalArgumentException.class);
+		this.templatebroadcastEventMessage("manager2", "testsubject", "testText", "event1", IllegalArgumentException.class);
 	}
 	// Ancillary methods ------------------------------------------------------
 
@@ -128,7 +128,7 @@ public class EventTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templatebroadcastEventMessage(final String username, final String subject, final String text, final int eventId, final Class<?> expected) {
+	protected void templatebroadcastEventMessage(final String username, final String subject, final String text, final String eventBeanName, final Class<?> expected) {
 		Class<?> caught;
 		ChirpBroadcastForm form;
 		List<Chirp> chirps;
@@ -142,7 +142,7 @@ public class EventTest extends AbstractTest {
 			chirps = new ArrayList<Chirp>();
 			recipients = new ArrayList<Chorbi>();
 
-			form.setEvent(eventId);
+			form.setEvent(this.extract(eventBeanName));
 			form.setSubject(subject);
 			form.setText(text);
 			chirps = new LinkedList<Chirp>();

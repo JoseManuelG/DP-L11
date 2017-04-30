@@ -150,6 +150,7 @@ public class PopulateDatabase {
 			}
 
 			//Storafe of the file
+			properties.setProperty("noExist", "0");
 			properties.store(output, null);
 			databaseUtil.closeTransaction();
 			System.out.println();

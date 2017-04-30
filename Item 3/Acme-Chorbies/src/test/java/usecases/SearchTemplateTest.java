@@ -135,7 +135,7 @@ public class SearchTemplateTest extends AbstractTest {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected void templateEditSearchTemplate(final String username, final String searchTemplateId, final String desiredRelationship, final Integer age, final String genre, final String keyword, final Class<?> expected) {
+	protected void templateEditSearchTemplate(final String username, final String searchTemplateBeanName, final String desiredRelationship, final Integer age, final String genre, final String keyword, final Class<?> expected) {
 		Class<?> caught;
 		SearchTemplate searchTemplate;
 
@@ -143,7 +143,7 @@ public class SearchTemplateTest extends AbstractTest {
 		try {
 			this.authenticate(username);
 
-			searchTemplate = this.searchTemplateService.findOne(this.extraxt(searchTemplateId));
+			searchTemplate = this.searchTemplateService.findOne(this.extract(searchTemplateBeanName));
 
 			searchTemplate.setDesiredRelationship(desiredRelationship);
 			searchTemplate.setAge(age);

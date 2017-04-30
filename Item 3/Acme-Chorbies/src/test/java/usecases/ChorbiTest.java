@@ -65,44 +65,44 @@ public class ChorbiTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void banChorbiTest1() {
-		this.templateBanChorbi("admin", 2471, null);
+		this.templateBanChorbi("admin", "chorbi1", null);
 	}
 	//sin loguearse
 	@Test
 	public void banChorbiTest2() {
-		this.templateBanChorbi(null, 2471, IllegalArgumentException.class);
+		this.templateBanChorbi(null, "chorbi1", IllegalArgumentException.class);
 	}
 	//no logeado como admin
 	@Test
 	public void banChorbiTest3() {
-		this.templateBanChorbi("chorbi1", 2471, IllegalArgumentException.class);
+		this.templateBanChorbi("chorbi1", "chorbi1", IllegalArgumentException.class);
 	}
 	//chorbi no existente
 	@Test
 	public void banChorbiTest4() {
-		this.templateBanChorbi("admin", 288, NullPointerException.class);
+		this.templateBanChorbi("admin", "noExist", NullPointerException.class);
 	}
 
 	//Caso de uso de desbanear un chorbi:
 	//test positivo
 	@Test
 	public void unbanChorbiTest1() {
-		this.templateUnbanChorbi("admin", 2476, null);
+		this.templateUnbanChorbi("admin", "chorbi6", null);
 	}
 	//sin loguearse
 	@Test
 	public void unbanChorbiTest2() {
-		this.templateUnbanChorbi(null, 2476, IllegalArgumentException.class);
+		this.templateUnbanChorbi(null, "chorbi6", IllegalArgumentException.class);
 	}
 	//no logeado como admin
 	@Test
 	public void unbanChorbiTest3() {
-		this.templateUnbanChorbi("chorbi1", 2476, IllegalArgumentException.class);
+		this.templateUnbanChorbi("chorbi1", "chorbi6", IllegalArgumentException.class);
 	}
 	//chorbi no existente
 	@Test
 	public void unbanChorbiTest4() {
-		this.templateUnbanChorbi("admin", 288, NullPointerException.class);
+		this.templateUnbanChorbi("admin", "noExist", NullPointerException.class);
 	}
 
 	// See a welcome page with a banner that advertises Acme projects, including Acme Pad-Thai
@@ -208,7 +208,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Crear un like
 
-		this.template("chorbi3", 2471, 0, "test", 3, true, null);
+		this.template("chorbi3", "chorbi1", "noExist", "test", 3, true, null);
 	}
 
 	@Test
@@ -216,14 +216,14 @@ public class ChorbiTest extends AbstractTest {
 
 		// Borrar un like
 
-		this.template("chorbi1", 0, 2479, "test", 0, false, null);
+		this.template("chorbi1", "noExist", "likes1Chorbi1", "test", 0, false, null);
 	}
 	@Test
 	public void LikeNegativeTest1() {
 
 		// Crear un like con comentario null
 
-		this.template("chorbi3", 2471, 0, null, 0, true, ConstraintViolationException.class);
+		this.template("chorbi3", "chorbi1", "noExist", null, 0, true, ConstraintViolationException.class);
 	}
 
 	//Caso de uso listar gente que le gustas si tienes credit card
@@ -245,13 +245,13 @@ public class ChorbiTest extends AbstractTest {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected void templateBanChorbi(final String username, final int chorbiId, final Class<?> expected) {
+	protected void templateBanChorbi(final String username, final String chorbiBeanName, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		try {
 			this.authenticate(username);
 
-			this.chorbiService.banChorbi(chorbiId);
+			this.chorbiService.banChorbi(this.extract(chorbiBeanName));
 
 			this.chorbiService.flush();
 			this.unauthenticate();
@@ -261,13 +261,13 @@ public class ChorbiTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templateUnbanChorbi(final String username, final int chorbiId, final Class<?> expected) {
+	protected void templateUnbanChorbi(final String username, final String chorbiBeanName, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		try {
 			this.authenticate(username);
 
-			this.chorbiService.unbanChorbi(chorbiId);
+			this.chorbiService.unbanChorbi(this.extract(chorbiBeanName));
 
 			this.chorbiService.flush();
 			this.unauthenticate();
@@ -320,18 +320,18 @@ public class ChorbiTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void template(final String liker, final Integer likedId, final Integer likesId, final String comment, final Integer stars, final boolean whatToDo, final Class<?> expected) {
+	protected void template(final String liker, final String likedBeanName, final String likesBeanName, final String comment, final Integer stars, final boolean whatToDo, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		try {
 			this.authenticate(liker);
 			if (whatToDo) {
-				final Likes likes = this.likesService.create(this.chorbiService.findOne(likedId));
+				final Likes likes = this.likesService.create(this.chorbiService.findOne(this.extract(likedBeanName)));
 				likes.setComment(comment);
 				likes.setStars(stars);
 				this.likesService.save(likes);
 			} else
-				this.likesService.delete(this.likesService.findOne(likesId));
+				this.likesService.delete(this.likesService.findOne(this.extract(likesBeanName)));
 
 			this.chorbiService.flush();
 			this.unauthenticate();

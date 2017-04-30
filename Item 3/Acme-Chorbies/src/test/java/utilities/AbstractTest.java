@@ -95,7 +95,7 @@ public abstract class AbstractTest {
 			throw new RuntimeException(expected.getName() + " was expected, but " + caught.getName() + " was thrown");
 	}
 
-	public int extraxt(final String beanName) {
+	public int extract(final String beanName) {
 		int result;
 		result = Integer.valueOf(AbstractTest.prop.getProperty(beanName));
 		return result;
