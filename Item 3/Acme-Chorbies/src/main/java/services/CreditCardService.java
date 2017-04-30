@@ -122,7 +122,12 @@ public class CreditCardService {
 		else
 			expireTime = new LocalDate(creditCard.getExpirationYear() + 1, 1, 1);
 		now = new LocalDate();
-		period = new Period(now, expireTime, PeriodType.yearMonthDay());
+		//Cambio realizado porque el period devolvia una estructura de [años,meses,dias], pero solo se miraba el día, por lo que si salia un año y 1 dia, 
+		//saltaba que estaba mal. Se ha solucionado pidiendo que te devuelva un estructura de [dias], por lo que no deberia haber problema de esta clase.
+		//Cambio esta linea:
+		//period = new Period(now, expireTime, PeriodType.yearMonthDay());
+		//Por esta:
+		period = new Period(now, expireTime, PeriodType.days());
 
 		result = period.getDays() > 1;
 

@@ -10,6 +10,11 @@
 
 package utilities;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +27,37 @@ import security.LoginService;
 
 public abstract class AbstractTest {
 
+	private static Properties	prop;
 	// Supporting services --------------------------------
 
 	@Autowired
-	private LoginService	loginService;
+	private LoginService		loginService;
 
 
 	// Set up and tear down -------------------------------
 
 	@Before
 	public void setUp() {
+		AbstractTest.prop = new Properties();
+		InputStream input = null;
+
+		try {
+			input = new FileInputStream("src/main/resources/populate.properties");
+
+			//load a properties file
+			AbstractTest.prop.load(input);
+
+		} catch (final IOException e) {
+
+			e.printStackTrace();
+		} finally {
+			if (input != null)
+				try {
+					input.close();
+				} catch (final Exception e2) {
+					e2.printStackTrace();
+				}
+		}
 	}
 
 	@After
@@ -69,4 +95,9 @@ public abstract class AbstractTest {
 			throw new RuntimeException(expected.getName() + " was expected, but " + caught.getName() + " was thrown");
 	}
 
+	public int extraxt(final String beanName) {
+		int result;
+		result = Integer.valueOf(AbstractTest.prop.getProperty(beanName));
+		return result;
+	}
 }
