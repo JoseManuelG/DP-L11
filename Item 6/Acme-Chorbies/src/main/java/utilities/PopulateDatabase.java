@@ -10,10 +10,14 @@
 
 package utilities;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import javax.persistence.Entity;
 
@@ -121,24 +125,46 @@ public class PopulateDatabase {
 	protected static void persist(final DatabaseUtil databaseUtil, final List<Entry<String, Object>> sortedEntities) {
 		String name;
 		DomainEntity entity;
+		//Properties objecto definition
+		final Properties properties = new Properties();
+		OutputStream output = null;
 
-		System.out.println();
-		databaseUtil.openTransaction();
-		for (final Entry<String, Object> entry : sortedEntities) {
-			name = entry.getKey();
-			entity = (DomainEntity) entry.getValue();
+		try {
+			//output definition
+			output = new FileOutputStream("src\\main\\resources\\populate.properties");
+			System.out.println();
+			databaseUtil.openTransaction();
+			for (final Entry<String, Object> entry : sortedEntities) {
+				name = entry.getKey();
+				entity = (DomainEntity) entry.getValue();
 
-			System.out.printf("> %s", name);
-			databaseUtil.persist(entity);
-			System.out.printf(": %s%n", entity.toString());
-			// TODO: print the entity using SchemaPrinter.  This should get a map in which 
-			// every persisted entity is mapped onto the corresponding bean name in the 
-			// PopulateDatabase.xml file; otherwise traceability will be a nightmare.
+				System.out.printf("> %s", name);
+				databaseUtil.persist(entity);
+				System.out.printf(": %s%n", entity.toString());
+				// TODO: print the entity using SchemaPrinter.  This should get a map in which 
+				// every persisted entity is mapped onto the corresponding bean name in the 
+				// PopulateDatabase.xml file; otherwise traceability will be a nightmare.
+
+				//Register of the bean id against the identifier in te properties
+				properties.setProperty(name, String.valueOf(entity.getId()));
+			}
+
+			//Storafe of the file
+			properties.setProperty("noExist", "0");
+			properties.store(output, null);
+			databaseUtil.closeTransaction();
+			System.out.println();
+		} catch (final IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (output != null)
+				try {
+					output.close();
+				} catch (final IOException e2) {
+					e2.printStackTrace();
+				}
 		}
-		databaseUtil.closeTransaction();
-		System.out.println();
 	}
-
 	protected static void cleanEntities(final LinkedList<Entry<String, Object>> result) {
 		for (final Entry<String, Object> entry : result) {
 			DomainEntity entity;

@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,12 @@ public class ManagerService {
 
 	public Manager findOne(final int managerId) {
 		return this.managerRepository.findOne(managerId);
+	}
+
+	public Collection<Manager> findAll() {
+		Collection<Manager> result;
+		result = this.managerRepository.findAll();
+		return result;
 	}
 
 	public Manager save(final Manager manager) {
@@ -131,4 +139,5 @@ public class ManagerService {
 	public void flush() {
 		this.managerRepository.flush();
 	}
+
 }

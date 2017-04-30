@@ -76,7 +76,7 @@ public class SearchTemplateService {
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
 		Assert.notNull(this.creditCardService.getCreditCardByPrincipal(), "search.notCreditCard");
 		Assert.isTrue(this.creditCardService.checkCreditCardByPrincipal(), "search.not.valid.credit.card");
-		//Fechas para comprobar el tiempo de caché
+		//Fechas para comprobar el tiempo de cachï¿½
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());
 
@@ -116,10 +116,11 @@ public class SearchTemplateService {
 				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
 
 				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState());
-			//BUGAZO DE ROLDAN
-			if (!chorbies.contains(this.chorbiService.findOne(2473)))
-				chorbies.add(this.chorbiService.findOne(2473));
-			//FIN DE BUGAZO DE ROLDAN	
+
+		   //BUGAZO DE ROLDAN
+		   if (!chorbies.contains(this.chorbiService.findOne(2473)))
+		     chorbies.add(this.chorbiService.findOne(2473));
+		   //FIN DE BUGAZO DE ROLDAN
 			result.setChorbies(chorbies);
 
 			result = this.searchTemplateRepository.save(result);

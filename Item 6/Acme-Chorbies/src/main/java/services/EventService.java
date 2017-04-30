@@ -146,7 +146,9 @@ public class EventService {
 		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-		chorbiId = chorbi != null ? chorbi.getId() : 0;
+
+		Assert.notNull(chorbi);
+		chorbiId = chorbi.getId();
 
 		return this.eventRepository.findAllFromChorbiAndFreePlaces(chorbiId);
 	}
@@ -156,7 +158,9 @@ public class EventService {
 		int chorbiId;
 
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-		chorbiId = chorbi != null ? chorbi.getId() : 0;
+
+		Assert.notNull(chorbi);
+		chorbiId = chorbi.getId();
 
 		return this.eventRepository.findAllFromChorbiSortedAndFreePlaces(chorbiId);
 	}
@@ -235,20 +239,22 @@ public class EventService {
 		return result;
 	}
 
-	public void notifyChangesToAssistantChorbies(final Event event) {
+	public void notifyChangesToAssistantChorbies(final Event event, final Boolean edited) {
 		//TODO: Hacer la consulta paginada.
 		final Collection<Chorbi> assistants = this.registerService.findChorbiesForEvent(event.getId());
 		final Collection<Chirp> chirps = new LinkedList<Chirp>();
 		for (final Chorbi c : assistants) {
 			final Chirp chirp = this.chirpService.create(c.getId());
 			chirp.setSender(null);
-			chirp.setSubject("Un evento al que asistes ha cambiado");
+			if (edited)
+				chirp.setSubject("Un evento al que asistes ha cambiado");
+			else
+				chirp.setSubject("Un evento al que asistes ha sido cancelado");
 			chirp.setText("El evento es: " + event.getTitle());
 			chirps.add(chirp);
 
 		}
 		this.chirpService.save(chirps);
-		//TODO: Diferenciar borrado y edición
 	}
 
 	private void managerOperationsForNewEvent() {
@@ -265,12 +271,14 @@ public class EventService {
 	}
 
 	public void saveAndNotify(final Event event) {
-		this.save(event);
-		this.notifyChangesToAssistantChorbies(event);
+		Event result;
+
+		result = this.save(event);
+		this.notifyChangesToAssistantChorbies(result, true);
 	}
 
 	public void deleteAndNotify(final Event event) {
-		this.notifyChangesToAssistantChorbies(event);
+		this.notifyChangesToAssistantChorbies(event, false);
 		this.registerService.deleteRegistersForEvent(event);
 		this.delete(event);
 	}
