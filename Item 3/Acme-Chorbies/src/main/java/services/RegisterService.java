@@ -4,6 +4,8 @@ package services;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -89,6 +91,10 @@ public class RegisterService {
 
 	public Collection<Chorbi> findChorbiesForEvent(final int eventId) {
 		return this.registerRepository.findChorbiesForEvent(eventId);
+	}
+
+	public Page<Chorbi> findChorbiesForEvent(final int eventId, final Pageable pageable) {
+		return this.registerRepository.findChorbiesForEventPaginated(eventId, pageable);
 	}
 
 	public void deleteRegistersForEvent(final Event event) {

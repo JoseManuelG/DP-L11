@@ -3,10 +3,11 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -240,21 +241,36 @@ public class EventService {
 	}
 
 	public void notifyChangesToAssistantChorbies(final Event event, final Boolean edited) {
-		//TODO: Hacer la consulta paginada.
-		final Collection<Chorbi> assistants = this.registerService.findChorbiesForEvent(event.getId());
-		final Collection<Chirp> chirps = new LinkedList<Chirp>();
-		for (final Chorbi c : assistants) {
-			final Chirp chirp = this.chirpService.create(c.getId());
-			chirp.setSender(null);
-			if (edited)
-				chirp.setSubject("Un evento al que asistes ha cambiado");
-			else
-				chirp.setSubject("Un evento al que asistes ha sido cancelado");
-			chirp.setText("El evento es: " + event.getTitle());
-			chirps.add(chirp);
+		Page<Chorbi> page;
+		PageRequest pageRequest;
+		int numberOfPages;
+		Customer principal;
 
+		principal = this.customerService.findCustomerByPrincipal();
+		Assert.isTrue(event.getManager().equals(principal), "chirp.broadcast.principal.error");
+
+		pageRequest = new PageRequest(0, 100);
+		page = this.registerService.findChorbiesForEvent(event.getId(), pageRequest);
+
+		numberOfPages = page.getTotalPages();
+
+		for (int i = 0; i < numberOfPages; i++) {
+			pageRequest = new PageRequest(i, 100);
+			page = this.registerService.findChorbiesForEvent(event.getId(), pageRequest);
+			for (final Chorbi c : page.getContent()) {
+				Chirp chirp;
+
+				chirp = this.chirpService.create(c.getId());
+				chirp.setSender(null);
+				if (edited)
+					chirp.setSubject("Un evento al que asistes ha cambiado");
+				else
+					chirp.setSubject("Un evento al que asistes ha sido cancelado");
+				chirp.setText("El evento es: " + event.getTitle());
+				this.chirpService.save(chirp);
+
+			}
 		}
-		this.chirpService.save(chirps);
 	}
 
 	private void managerOperationsForNewEvent() {

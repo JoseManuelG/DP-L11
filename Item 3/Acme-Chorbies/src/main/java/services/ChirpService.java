@@ -86,9 +86,15 @@ public class ChirpService {
 
 		return result;
 	}
+
 	public void save(final Collection<Chirp> chirps) {
 		this.chirpRepository.save(chirps);
 	}
+
+	public void save(final Chirp chirp) {
+		this.chirpRepository.save(chirp);
+	}
+
 	public void save(final Collection<Chirp> chirps, final Collection<Attachment> attachments, final Integer eventId) {
 
 		Event event;
@@ -200,7 +206,10 @@ public class ChirpService {
 		List<Chorbi> recipients;
 
 		chirps = new LinkedList<Chirp>();
-		//TODO: hacer consulta paginada.
+		//TODO: hacer consulta paginada. NOTA: Si se hace aqui consulta paginada, no tiene sentido
+		// el planteamiento de este metodo, ya que crea un chirp por cada chorbi y al final tendras
+		// en memoria tantos chirps como chorbis registrados en el evento. Habría reconstruir solo 
+		// uno y en el save guardarlos todos.
 		recipients = new LinkedList<Chorbi>(this.registerService.findChorbiesForEvent(chirpBroadcastForm.getEvent()));
 
 		for (final Chorbi chorbi : recipients) {

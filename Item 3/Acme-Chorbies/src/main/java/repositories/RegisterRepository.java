@@ -3,6 +3,8 @@ package repositories;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +27,9 @@ public interface RegisterRepository extends JpaRepository<Register, Integer> {
 
 	@Query("select r.chorbi from Register r where r.event.id = ?1")
 	public Collection<Chorbi> findChorbiesForEvent(int eventId);
+
+	@Query("select r.chorbi from Register r where r.event.id = ?1")
+	public Page<Chorbi> findChorbiesForEventPaginated(int eventId, Pageable pageRequest);
 
 	@Modifying
 	@Query("delete from Register r where r.event.id = ?1")
