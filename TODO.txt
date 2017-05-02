@@ -6,9 +6,9 @@
 -Crear script y war.
 
 -------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
--Desordenar event list cuando se pide ordenado. (Javi) Use case 13 Test 2
--Chorbi: pais no obligatorio. 	(Javi) Use case 4 Test 2
--Etiquetas de error number credit card. (Javi) Use case 21 Test 5
+-Desordenar event list cuando se pide ordenado. [Cambio introducido: Se ordena por fecha en vez de por sitios libres] (Javi) Use case 13 Test 2
+-Chorbi: pais no obligatorio. [Cambio introducido: Quitado @NotBlank del ChorbiForm]	(Javi) Use case 4 Test 2
+-Etiquetas de error number credit card. [Cambio introducido: añadido string de error vacio en misc message.properties ingles y español.](Javi) Use case 21 Test 5
 -En search chorbi aparece alguien indebido. (Roldan) Use case 7 Test 1
 -Crear script y war. (al final, al menos war)
 

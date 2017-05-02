@@ -1,0 +1,20 @@
+OUTCOMES:
+
+17) Logueado con chorbi 1, aparece un único mensaje.
+18) Solo aparecen 2 eventos, los dos inminentes. NOTA: El caso de uso que estamos testeando es el de los inminentes precisamente, quizá se ha equivocado el redactor de este test al esperar 6 eventos de los cuales solo dos fuesen inminentes.
+19) Aparecen 6 eventos, de los cuales 2 son inminentes. NOTA: La leyenda es un poco confusa, parece decir justo lo contrario, 6 eventos de los cuales 4 fuesen inminentes. Por la fecha vemos que no es asi.
+20) Logueado como manager 2, aparecen dos eventos.
+21) Exceso de espaciado entre campos en el formulario de creación. Evento creado correctamente. (No hay caso de test negativo, pero puedo crear evento en el pasado y con 0 sitios libres).
+22) Exceso de espaciado entre campos en el formulario de edición. El evento se edita correctamente (No hay caso de test negativo, pero puedo poner fecha en el pasado o menos sitios disponibles de los que ya están registrados en el sistema.)
+23) Evento eliminado correctamente.
+24) El chorbi parece registrarse correctamente. No puedo ver lista de asistentes al evento. Al registrarse lleva a lista de mis eventos, pero al tener el mismo titulo parece que desaparezcan eventos de la lista.
+25) El chorbi parece borrase del evento correctamente. No puedo ver lista de asistentes al evento.
+26) Hemos hecho este caso de uso en el test anterior, quedan ahora los eventos en los que el chorbi no ha sido borrado.
+27) Después de modificar las tasas se nos redirige a la pagina de inicio. Volvemos a entrar en sistema para ver que efectivamente han sido cambiadas.
+28) La acumulación de pago se actualiza correctamente, pero no se ve en la dashboard, si no en la lista de chorbis a la que te manda. Las dos listas que hay parecen identicas (la de admin y la que no es de admin).
+29) El mensaje se envía y llega a los chorbis 1, 2 y 6.
+30) Logueado con chorbi 2, aparece un único chorbi.
+31) No se especifica que chorbi no tiene credit card para probar este caso de uso. Después de encontrar que el 4 no disponía de ninguna, hacemos un primer intento registrando la tarjeta con número de tarjeta 0. El sistema da un error y cada vez que se intenta acceder a la tarjeta vuelve a dar el mismo error (String index out of range: -11). Restableciendo la base de datos, creamos una tarjeta con un número correcto y se crea correctamente.
+32) La tarjeta se borra correctamente.
+
+OTROS: No esta el caso de uso de ordenar eventos por sitios libres.
