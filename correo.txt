@@ -1,3 +1,19 @@
 Estimado Rafael:
 
 Hemos discutido acerca de la proposición que nos hizo en la última clase de revisión, cambiar 4 de los A+ que tenemos pendientes por introducir un módulo de business analytics en nuestra aplicación. La respuesta es que no. No lo vemos factible en tiempo, ni una carga de trabajo equivalente. Queremos que el trabajo entregado sea de calidad y para llegar a ese objetivo con la calidad habitual, necesitaríamos más tiempo. 
+
+
+
+
+-->Versión de Roldán:
+
+Estimado Rafael:
+
+Hemos discutido acerca de la proposición que nos hizo en la última clase de revisión, cambiar 4 de los A+ que tenemos pendientes por introducir un módulo de business analytics en nuestra aplicación. La respuesta es que no.
+Tras una pequeña investigación hemos apreciado, que el mundo del business analytics es mas profundo de lo que se prodia apreciar al principio, dado que hoy en día hay empresas que se dedican a esto, como IBM e Information Builders, ademas de existir masters y cursos especificos en este campo.
+Aún llegando a poder realizar un panel de control para acercarnos a esto,no creemos que nos pueda reportar tanto beneficio a la plantilla como podria ocurrir con los A+ ya planteados, Ya que tenemos nuestra actual dashboard lo que nos permite obtener información estadística, sería mas la necesidad de saber aprovechar esos datos que la de obtener mejores datos.
+
+Gracias por su tiempo-
+
+
+
