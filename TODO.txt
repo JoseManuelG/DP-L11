@@ -1,7 +1,5 @@
-------------- Errores encontrados por el otro equipo ........
-- No se puede hacer like a un chorbi. No pasa del formulario y no se muestra error ninguno. (10.1)
-- La lista de chorbis no se muestra en español. Parece estar redireccionando a la lista de likes. (5.1) [Puede que sea el tiles]
-- Al registrar un chorbi (y probablemente un manager) la contraseña se cambia a lowercase. (4.1)
+﻿------------- Errores encontrados por el otro equipo ........
+
 - Revisar registro de manager en preproduccion (No esta en la lista, pero es posible que de conflicto)
 - Al intentar entrar un usuario baneado se muestra mensaje de no registrado. (8.1)
 
@@ -23,6 +21,9 @@
 
 
 --------- HECHO ------------
+- Al registrar un chorbi (y probablemente un manager) la contraseña se cambia a lowercase. (4.1) (NO DA EL ERROR)
+- No se puede hacer like a un chorbi. No pasa del formulario y no se muestra error ninguno. (10.1) (HECHO)
+- La lista de chorbis no se muestra en español. Parece estar redireccionando a la lista de likes. (5.1) [Puede que sea el tiles] (HECHO)
 -Cambiar sitios de evento minimo 1 en vez de minimo 0 (HECHO)
 -Cambiar astah para los decimales de los chorbiFee y managerFee (HECHO)
 -Lista de managers y otra de chorbies con sus fees, para el administrador (HECHO)

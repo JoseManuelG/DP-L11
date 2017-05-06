@@ -109,11 +109,11 @@ public class LikesService {
 		// Setear lo que viene del formulario:
 		result.setComment(likes.getComment());
 		result.setLiked(likes.getLiked());
-		result.setLiker(chorbi);
+		result.setStars(likes.getStars());
 
 		// Setear lo que no viene del formulario:
-		result.setMoment(likes.getMoment());
-		result.setStars(likes.getStars());
+		result.setLiker(chorbi);
+		result.setMoment(new Date(System.currentTimeMillis() - 100));
 		result.setId(likes.getId());
 		result.setVersion(likes.getVersion());
 		this.validator.validate(result, binding);
