@@ -3,10 +3,16 @@ package social;
 
 import java.util.List;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.social.twitter.api.FriendOperations;
@@ -19,6 +25,7 @@ import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
 @Configuration
+@EnableCaching
 public class TwitterUtils {
 
 	private static Twitter	twitter;
@@ -52,14 +59,16 @@ public class TwitterUtils {
 		}
 	}
 	
-	public List<Tweet> recentActivity() {
+	@Cacheable(value="latesttweets",key="#hashtag")
+	public List<Tweet> recentActivity(String hashtag) {
 		SearchOperations searchOps = TwitterUtils.twitter.searchOperations();
-		final List<Tweet> results = searchOps.search("#acmechorbies").getTweets();
+		final List<Tweet> results = searchOps.search(hashtag).getTweets();
 		return results;
 	}
-	
-	public List<TwitterProfile> getFollowers(){
+	@Cacheable(value="followers",key="#dummy")
+	public List<TwitterProfile> getFollowers(String dummy){
 		List<TwitterProfile> followersList;
+		dummy = "asdf";
 		final FriendOperations friendsOps = TwitterUtils.twitter.friendOperations();
 		
 		followersList = friendsOps.getFollowers();

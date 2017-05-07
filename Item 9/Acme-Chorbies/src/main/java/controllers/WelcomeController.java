@@ -47,7 +47,7 @@ public class WelcomeController extends AbstractController {
 	public ModelAndView index() {
 		final TwitterUtils twtutils = new TwitterUtils();
 		List<Tweet> tweets;
-		List<TwitterProfile> followers;
+		final List<TwitterProfile> followers;
 		ModelAndView result;
 		final SimpleDateFormat formatter;
 		String moment;
@@ -57,15 +57,15 @@ public class WelcomeController extends AbstractController {
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
 		banner = this.bannerService.randomBanner();
-		tweets = twtutils.recentActivity();
-		followers = twtutils.getFollowers();
+		tweets = twtutils.recentActivity("#acmechorbies");
+		//followers = twtutils.getFollowers("dummyString");
 		requestURI = "";
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("moment", moment);
 		result.addObject("banner", banner);
 		result.addObject("tweets", tweets);
-		result.addObject("followers", followers);
+		//result.addObject("followers", followers);
 		result.addObject("requestURI", requestURI);
 
 		return result;

@@ -40,7 +40,7 @@
 	
 </display:table>
 
-<display:table pagesize="5" class="displaytag" keepStatus="false"
+<%-- <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="followers" requestURI="${requestURI}" id="row" excludedParams="*">
 	
 	<!-- Action links -->
@@ -58,5 +58,5 @@
 	<acme:column sorteable="false" code="twitterprofile.name" path="name"/>
 	<acme:column sorteable="false" code="twitterprofile.description" path="description"/>
 	<acme:column sorteable="false" code="twitterprofile.location" path="location"/>
-</display:table>
+</display:table> --%>
 

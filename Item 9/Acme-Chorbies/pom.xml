@@ -341,6 +341,11 @@
     		<artifactId>spring-social-twitter</artifactId>
     		<version>1.1.0.RELEASE</version>
 		</dependency>
+		<dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.2.2.21</version>
+        </dependency>
 		
 	</dependencies>
 
