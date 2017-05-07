@@ -58,14 +58,14 @@ public class WelcomeController extends AbstractController {
 		moment = formatter.format(new Date());
 		banner = this.bannerService.randomBanner();
 		tweets = twtutils.recentActivity("#acmechorbies");
-		//followers = twtutils.getFollowers("dummyString");
+		//		followers = twtutils.getFollowers("acmechorbies");
 		requestURI = "";
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("moment", moment);
 		result.addObject("banner", banner);
 		result.addObject("tweets", tweets);
-		//result.addObject("followers", followers);
+		//		result.addObject("followers", followers);
 		result.addObject("requestURI", requestURI);
 
 		return result;

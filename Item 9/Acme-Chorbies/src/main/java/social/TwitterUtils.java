@@ -3,16 +3,12 @@ package social;
 
 import java.util.List;
 
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.social.twitter.api.FriendOperations;
@@ -59,19 +55,19 @@ public class TwitterUtils {
 		}
 	}
 	
+	@Cacheable(value="resultfllusers",key="#screenName")
+	public List<TwitterProfile> getFollowers(String screenName){
+		FriendOperations friendsOps = TwitterUtils.twitter.friendOperations();
+		final List<TwitterProfile> results = friendsOps.getFollowers(screenName);
+		return results;
+	}
+	
 	@Cacheable(value="latesttweets",key="#hashtag")
 	public List<Tweet> recentActivity(String hashtag) {
 		SearchOperations searchOps = TwitterUtils.twitter.searchOperations();
 		final List<Tweet> results = searchOps.search(hashtag).getTweets();
 		return results;
 	}
-	@Cacheable(value="followers",key="#dummy")
-	public List<TwitterProfile> getFollowers(String dummy){
-		List<TwitterProfile> followersList;
-		dummy = "asdf";
-		final FriendOperations friendsOps = TwitterUtils.twitter.friendOperations();
-		
-		followersList = friendsOps.getFollowers();
-		return followersList;
-	}
+	
+
 }

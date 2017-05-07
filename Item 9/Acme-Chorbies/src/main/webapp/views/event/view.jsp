@@ -79,3 +79,19 @@
 		</jstl:if>
 	</jstl:if>
 </security:authorize>
+
+<display:table pagesize="5" class="displaytag" keepStatus="false"
+	name="tweets" requestURI="${requestURI}" id="row" excludedParams="*">
+	
+	<!-- Action links -->
+	
+	
+	<!-- Attributes -->
+	<jstl:set var = "link" value = "https://twitter.com/${row.fromUser}/status/${row.id}"/>
+	<display:column>
+		<a href="<jstl:out value="${link}"></jstl:out>"><jstl:out value="URL"></jstl:out></a>
+	</display:column>
+	<acme:column sorteable="false" code="tweet.moment" path="createdAt"/>
+	<acme:column sorteable="false" code="tweet.text" path="text"/>
+	
+</display:table>

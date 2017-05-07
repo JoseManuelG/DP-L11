@@ -12,8 +12,10 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ChorbiService;
 import services.EventService;
 import services.RegisterService;
+import social.TwitterUtils;
 import domain.Chorbi;
 import domain.Event;
 
@@ -37,7 +40,7 @@ public class EventController extends AbstractController {
 
 	@Autowired
 	private ChorbiService	chorbiService;
-	
+
 	@Autowired
 	private RegisterService	registerService;
 
@@ -97,13 +100,15 @@ public class EventController extends AbstractController {
 		return result;
 	}
 
-		@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam final int eventId) {
+		final TwitterUtils twtutils = new TwitterUtils();
 		ModelAndView result;
 		Event event;
 		Chorbi chorbi;
 		Boolean siteFree, expired, registered;
 		Collection<Chorbi> chorbies;
+		List<Tweet> tweets;
 
 		event = this.eventService.findOne(eventId);
 		expired = this.eventService.checkExpired(event);
@@ -117,6 +122,7 @@ public class EventController extends AbstractController {
 		} catch (final IllegalArgumentException e) {
 		}
 		chorbies = this.registerService.findChorbiesForEvent(eventId);
+		tweets = twtutils.recentActivity("#".concat(event.getTitle().replaceAll("\\s+", "")));
 
 		result = new ModelAndView("event/view");
 		result.addObject("event", event);
@@ -125,6 +131,7 @@ public class EventController extends AbstractController {
 		result.addObject("registered", registered);
 		result.addObject("requestURI", "event/view.do?eventId=" + eventId);
 		result.addObject("chorbies", chorbies);
+		result.addObject("tweets", tweets);
 
 		return result;
 	}
