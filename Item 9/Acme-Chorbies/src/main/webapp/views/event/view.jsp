@@ -62,10 +62,8 @@
 
 
 </display:table>
-
-<br/>
-	
 <security:authorize access="hasRole('CHORBI')">
+	<br/>
 	<jstl:if test="${!expired}">
 		<jstl:if test="${!registered and siteFree}">
 			<a href="event/chorbi/register.do?eventId=${event.id}">
@@ -80,17 +78,15 @@
 	</jstl:if>
 </security:authorize>
 
+<b><spring:message code="twitter.latesttweets" /></b>
 <br/>
-<p><spring:message code="twitter.latesttweets" />
-
-<display:table pagesize="5" class="displaytag" keepStatus="false"
-	name="tweets" requestURI="${requestURI}" id="row" excludedParams="*">
+<display:table pagesize="5" class="displaytag" keepStatus="false" name="tweets" requestURI="${requestURI}" id="tweetrow" excludedParams="*">
 	
 	<!-- Action links -->
 	
 	
 	<!-- Attributes -->
-	<jstl:set var = "link" value = "https://twitter.com/${row.fromUser}/status/${row.id}"/>
+	<jstl:set var = "link" value = "https://twitter.com/${tweetrow.fromUser}/status/${tweetrow.id}"/>
 	<display:column>
 		<a href="<jstl:out value="${link}"></jstl:out>"><jstl:out value="URL"></jstl:out></a>
 	</display:column>

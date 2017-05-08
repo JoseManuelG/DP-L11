@@ -24,7 +24,8 @@
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p>
 <p><a href="${banner.link }"><img src="${banner.image}" /></a></p> 
 <br/>
-<p><spring:message code="twitter.latesttweets" />
+<b><spring:message code="twitter.latesttweets" /></b>
+<br/>
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="tweets" requestURI="${requestURI}" id="row" excludedParams="*">
 	

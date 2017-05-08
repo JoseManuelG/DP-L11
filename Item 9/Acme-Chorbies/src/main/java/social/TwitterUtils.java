@@ -3,21 +3,17 @@ package social;
 
 import java.util.List;
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.social.twitter.api.FriendOperations;
 import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TweetData;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
 @Configuration
@@ -54,6 +50,7 @@ public class TwitterUtils {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public void tweetEventAlmostFull(final String data){
 		final TimelineOperations timelineOps = TwitterUtils.twitter.timelineOperations();
 		final String[] parts = data.split("#");
@@ -73,7 +70,7 @@ public class TwitterUtils {
 	}
 	public List<Tweet> recentActivity(String hashtag) {
 		SearchOperations searchOps = TwitterUtils.twitter.searchOperations();
-		final List<Tweet> results = searchOps.search(hashtag).getTweets();
+		final List<Tweet> results = searchOps.search(hashtag,40).getTweets();
 		return results;
 	}
 	
