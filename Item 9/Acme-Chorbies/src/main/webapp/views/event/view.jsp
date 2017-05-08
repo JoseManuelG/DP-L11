@@ -80,6 +80,9 @@
 	</jstl:if>
 </security:authorize>
 
+<br/>
+<p><spring:message code="twitter.latesttweets" />
+
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="tweets" requestURI="${requestURI}" id="row" excludedParams="*">
 	
