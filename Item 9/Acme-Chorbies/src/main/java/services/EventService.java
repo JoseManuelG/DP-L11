@@ -211,6 +211,16 @@ public class EventService {
 		return event.getSeatsOffered() > numberOfChorbies;
 	}
 
+	public Integer freeSeats(final Event event) {
+		Integer numberOfChorbies;
+
+		numberOfChorbies = this.registerService.getNumberOfChorbiesForEvent(event.getId());
+		if (numberOfChorbies == null)
+			numberOfChorbies = 0;
+
+		return event.getSeatsOffered() - numberOfChorbies;
+	}
+
 	public Boolean checkPrincipalIsRegistered(final Event event) {
 		Chorbi chorbi;
 		Register register;

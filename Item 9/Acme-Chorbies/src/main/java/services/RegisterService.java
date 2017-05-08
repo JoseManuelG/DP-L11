@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RegisterRepository;
+import social.TwitterUtils;
 import domain.Chorbi;
 import domain.Event;
 import domain.Register;
@@ -51,6 +52,11 @@ public class RegisterService {
 		Assert.isTrue(!this.eventService.checkExpired(event), "register.error.expired");
 		Assert.isTrue(!this.eventService.checkPrincipalIsRegistered(event), "register.error.double.register");
 		Assert.isTrue(this.eventService.checkSiteFree(event), "register.error.free.site");
+		if (this.eventService.freeSeats(event) <= 3 && this.eventService.freeSeats(event) > 1) {
+			final TwitterUtils twtUtils = new TwitterUtils();
+			final Integer freeseats = this.eventService.freeSeats(event) - 1;
+			twtUtils.tweetEventAlmostFull(new String(event.getTitle().concat("#").concat(freeseats.toString()).concat("#").concat(event.getPicture())));
+		}
 
 		result = this.registerRepository.save(register);
 		return result;

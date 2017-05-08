@@ -53,6 +53,24 @@ public class TwitterUtils {
 		} catch (final Exception e) {
 		}
 	}
+	
+	public void tweetEventAlmostFull(final String data){
+		final TimelineOperations timelineOps = TwitterUtils.twitter.timelineOperations();
+		final String[] parts = data.split("#");
+		final TweetData twtdata = new TweetData("Evento casi lleno: " + parts[0] + ". Plazas libres: " + parts[1] + " #acmechorbies #"+parts[0].replaceAll("\\s+",""));
+		Resource resource = null;
+		try {
+			resource = new UrlResource(parts[2]);
+			if (!resource.exists()){
+				final Tweet tweet = timelineOps.updateStatus(twtdata);
+			}else{
+				final Tweet tweet = timelineOps.updateStatus(twtdata.withMedia(resource));
+			}
+		} catch (final Exception e) {
+		}
+
+		
+	}
 	public List<Tweet> recentActivity(String hashtag) {
 		SearchOperations searchOps = TwitterUtils.twitter.searchOperations();
 		final List<Tweet> results = searchOps.search(hashtag).getTweets();
