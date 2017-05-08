@@ -21,7 +21,6 @@ import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
 @Configuration
-@EnableCaching
 public class TwitterUtils {
 
 	private static Twitter	twitter;
@@ -54,15 +53,6 @@ public class TwitterUtils {
 		} catch (final Exception e) {
 		}
 	}
-	
-	@Cacheable(value="resultfllusers",key="#screenName")
-	public List<TwitterProfile> getFollowers(String screenName){
-		FriendOperations friendsOps = TwitterUtils.twitter.friendOperations();
-		final List<TwitterProfile> results = friendsOps.getFollowers(screenName);
-		return results;
-	}
-	
-	@Cacheable(value="latesttweets",key="#hashtag")
 	public List<Tweet> recentActivity(String hashtag) {
 		SearchOperations searchOps = TwitterUtils.twitter.searchOperations();
 		final List<Tweet> results = searchOps.search(hashtag).getTweets();

@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.Tweet;
-import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,7 +46,6 @@ public class WelcomeController extends AbstractController {
 	public ModelAndView index() {
 		final TwitterUtils twtutils = new TwitterUtils();
 		List<Tweet> tweets;
-		final List<TwitterProfile> followers;
 		ModelAndView result;
 		final SimpleDateFormat formatter;
 		String moment;
@@ -58,14 +56,12 @@ public class WelcomeController extends AbstractController {
 		moment = formatter.format(new Date());
 		banner = this.bannerService.randomBanner();
 		tweets = twtutils.recentActivity("#acmechorbies");
-		//		followers = twtutils.getFollowers("acmechorbies");
 		requestURI = "";
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("moment", moment);
 		result.addObject("banner", banner);
 		result.addObject("tweets", tweets);
-		//		result.addObject("followers", followers);
 		result.addObject("requestURI", requestURI);
 
 		return result;
