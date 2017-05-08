@@ -48,7 +48,7 @@
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" />
 		 
  		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" />
- 		<security:intercept-url pattern="/manager/register.do" access="isAnonymous()" />
+ 		<security:intercept-url pattern="/managers/register.do" access="isAnonymous()" />
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
@@ -80,7 +80,7 @@
 		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/chorbi/administrator/updateChorbiesChargedFees.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/chorbi/administrator/successFee.do" access="hasRole('ADMINISTRATOR')" />
-		<security:intercept-url pattern="/manager/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/managers/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- Chorbi -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->
@@ -119,7 +119,7 @@
 		
 		<!-- Manager -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('MANAGER')" /> -->
-		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 	
+		<security:intercept-url pattern="/managers/edit.do" access="hasRole('MANAGER')" /> 	
 		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')"  /> 
 		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')"  /> 
 		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')"  /> 

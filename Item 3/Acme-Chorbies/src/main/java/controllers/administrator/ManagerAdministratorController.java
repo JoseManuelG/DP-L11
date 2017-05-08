@@ -14,7 +14,7 @@ import controllers.AbstractController;
 import domain.Manager;
 
 @Controller
-@RequestMapping("/manager/administrator")
+@RequestMapping("/managers/administrator")
 public class ManagerAdministratorController extends AbstractController {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class ManagerAdministratorController extends AbstractController {
 
 		result = new ModelAndView("manager/administrator/list");
 		result.addObject("managers", managers);
-		result.addObject("requestURI", "manager/administrator/list.do");
+		result.addObject("requestURI", "managers/administrator/list.do");
 
 		return result;
 	}

@@ -43,7 +43,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="chorbi/register.do"><spring:message code="master.page.register.chorbi" /></a></li>
-					<li><a href="manager/register.do"><spring:message code="master.page.register.manager" /></a></li>
+					<li><a href="managers/register.do"><spring:message code="master.page.register.manager" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -81,7 +81,7 @@
 					<li><a href="configuration/administrator/view.do"><spring:message code="master.page.administrator.configuration" /></a></li>
 					<li><a href="banner/administrator/list.do"><spring:message code="master.page.administrator.banner" /></a></li>
 					<li><a href="chorbi/administrator/list.do"><spring:message code="master.page.administrator.chorbies" /></a></li>
-					<li><a href="manager/administrator/list.do"><spring:message code="master.page.administrator.managers" /></a></li>
+					<li><a href="managers/administrator/list.do"><spring:message code="master.page.administrator.managers" /></a></li>
 					<li><a href="chorbi/administrator/updateChorbiesChargedFees.do"><spring:message code="master.page.administrator.chorbies.updateChorbiesChargedFees" /></a></li>
 					
 					</security:authorize>

@@ -15,7 +15,7 @@ import domain.Manager;
 import forms.ManagerForm;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/managers")
 public class ManagerController extends AbstractController {
 
 	//Services------------------------------------------------------------
@@ -89,7 +89,7 @@ public class ManagerController extends AbstractController {
 		else
 			try {
 				this.managerService.save(managerResult);
-				result = new ModelAndView("redirect:/manager/manager/myProfile.do");
+				result = new ModelAndView("redirect:/managers/manager/myProfile.do");
 			} catch (final IllegalArgumentException oops) {
 				result = this.createEditModelAndView(managerForm, oops.getMessage());
 			}
