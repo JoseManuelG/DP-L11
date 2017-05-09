@@ -82,64 +82,64 @@ public class BannerTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void editBannerTest1() {
-		this.templateEditBanner("admin", 1090, "http://link.com", "http://image.com", null);
+		this.templateEditBanner("admin", "Banner1", "http://link.com", "http://image.com", null);
 	}
 	//sin loguearse
 	@Test
 	public void editBannerTest2() {
-		this.templateEditBanner(null, 1090, "http://link.com", "http://image.com", IllegalArgumentException.class);
+		this.templateEditBanner(null, "Banner1", "http://link.com", "http://image.com", IllegalArgumentException.class);
 	}
 	//link no url
 	@Test
 	public void editBannerTest3() {
-		this.templateEditBanner("admin", 1090, "no soy una url", "http://image.com", ConstraintViolationException.class);
+		this.templateEditBanner("admin", "Banner1", "no soy una url", "http://image.com", ConstraintViolationException.class);
 	}
 	//imagen no url
 	@Test
 	public void editBannerTest4() {
-		this.templateEditBanner("admin", 1090, "http://link.com", "no soy una url", ConstraintViolationException.class);
+		this.templateEditBanner("admin", "Banner1", "http://link.com", "no soy una url", ConstraintViolationException.class);
 	}
 	//link vacío
 	@Test
 	public void editBannerTest5() {
-		this.templateEditBanner("admin", 1090, "", "http://image.com", ConstraintViolationException.class);
+		this.templateEditBanner("admin", "Banner1", "", "http://image.com", ConstraintViolationException.class);
 	}
 	//imagen vacía
 	@Test
 	public void editBannerTest6() {
-		this.templateEditBanner("admin", 1090, "http://link.com", "", ConstraintViolationException.class);
+		this.templateEditBanner("admin", "Banner1", "http://link.com", "", ConstraintViolationException.class);
 	}
 	//link nulo
 	@Test
 	public void editBannerTest7() {
-		this.templateEditBanner("admin", 1090, null, "http://image.com", ConstraintViolationException.class);
+		this.templateEditBanner("admin", "Banner1", null, "http://image.com", ConstraintViolationException.class);
 	}
 	//imagen nula
 	@Test
 	public void editBannerTest8() {
-		this.templateEditBanner("admin", 1090, "http://link.com", null, ConstraintViolationException.class);
+		this.templateEditBanner("admin", "Banner1", "http://link.com", null, ConstraintViolationException.class);
 	}
 
 	//Caso de uso de borrar un banner:
 	//test positivo
 	@Test
 	public void DeleteBannerTest1() {
-		this.templateDeleteBanner("admin", 1090, null);
+		this.templateDeleteBanner("admin", "Banner1", null);
 	}
 	//sin loguearse
 	@Test
 	public void DeleteBannerTest2() {
-		this.templateDeleteBanner(null, 1090, IllegalArgumentException.class);
+		this.templateDeleteBanner(null, "Banner1", IllegalArgumentException.class);
 	}
 	//logeado como no administrador
 	@Test
 	public void DeleteBannerTest3() {
-		this.templateDeleteBanner("chorbi1", 1090, NullPointerException.class);
+		this.templateDeleteBanner("chorbi1", "Banner1", NullPointerException.class);
 	}
 	//banner no existe
 	@Test
 	public void DeleteBannerTest4() {
-		this.templateDeleteBanner("admin", 288, IllegalArgumentException.class);
+		this.templateDeleteBanner("admin", "noExist", IllegalArgumentException.class);
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -166,7 +166,7 @@ public class BannerTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templateEditBanner(final String username, final int bannerId, final String link, final String image, final Class<?> expected) {
+	protected void templateEditBanner(final String username, final String bannerBeanName, final String link, final String image, final Class<?> expected) {
 		Class<?> caught;
 		Banner banner;
 
@@ -174,7 +174,7 @@ public class BannerTest extends AbstractTest {
 		try {
 			this.authenticate(username);
 
-			banner = this.bannerService.findOne(bannerId);
+			banner = this.bannerService.findOne(this.extract(bannerBeanName));
 
 			banner.setImage(image);
 			banner.setLink(link);
@@ -188,7 +188,7 @@ public class BannerTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templateDeleteBanner(final String username, final int bannerId, final Class<?> expected) {
+	protected void templateDeleteBanner(final String username, final String bannerBeanName, final Class<?> expected) {
 		Class<?> caught;
 		Banner banner;
 
@@ -196,7 +196,7 @@ public class BannerTest extends AbstractTest {
 		try {
 			this.authenticate(username);
 
-			banner = this.bannerService.findOne(bannerId);
+			banner = this.bannerService.findOne(this.extract(bannerBeanName));
 
 			this.bannerService.delete(banner);
 			this.bannerService.flush();

@@ -45,27 +45,27 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void WriteChirpTest1() {
-		this.templateWriteChirp("chorbi1", 1096, "test subject", "test text", null);
+		this.templateWriteChirp("chorbi1", "chorbi2", "test subject", "test text", null);
 	}
 	//sin loguearse
 	@Test
 	public void WriteChirpTest2() {
-		this.templateWriteChirp(null, 1096, "test subject", "test text", IllegalArgumentException.class);
+		this.templateWriteChirp(null, "chorbi2", "test subject", "test text", IllegalArgumentException.class);
 	}
 	//recipient no válido
 	@Test
 	public void WriteChirpTest3() {
-		this.templateWriteChirp("chorbi1", 1, "test subject", "test text", IllegalArgumentException.class);
+		this.templateWriteChirp("chorbi1", "noExist", "test subject", "test text", IllegalArgumentException.class);
 	}
 	//subject blank
 	@Test
 	public void WriteChirpTest4() {
-		this.templateWriteChirp("chorbi1", 1096, "", "test text", ConstraintViolationException.class);
+		this.templateWriteChirp("chorbi1", "chorbi2", "", "test text", ConstraintViolationException.class);
 	}
 	//text blank
 	@Test
 	public void WriteChirpTest5() {
-		this.templateWriteChirp("chorbi1", 1096, "test subject", "", ConstraintViolationException.class);
+		this.templateWriteChirp("chorbi1", "chorbi2", "test subject", "", ConstraintViolationException.class);
 	}
 
 	//	@Test
@@ -92,32 +92,32 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void ReplyChirpTest1() {
-		this.templateReplyChirp("chorbi1", 1039, "test subject", "test text", null);
+		this.templateReplyChirp("chorbi1", "chirp5Chorbi1Received", "test subject", "test text", null);
 	}
 	//mensaje sin sender(cuenta borrada del sender)
 	@Test
 	public void ReplyChirpTest2() {
-		this.templateReplyChirp("chorbi1", 1056, "test subject", "test text", IllegalArgumentException.class);
+		this.templateReplyChirp("chorbi1", "chirpNoSender", "test subject", "test text", IllegalArgumentException.class);
 	}
 	//mensaje que no es suyo
 	@Test
 	public void ReplyChirpTest3() {
-		this.templateReplyChirp("chorbi1", 1055, "test subject", "test text", IllegalArgumentException.class);
+		this.templateReplyChirp("chorbi1", "chirp1Chorbi2", "test subject", "test text", IllegalArgumentException.class);
 	}
 	//sin loguearse
 	@Test
 	public void ReplyChirpTest4() {
-		this.templateReplyChirp(null, 1039, "test subject", "test text", IllegalArgumentException.class);
+		this.templateReplyChirp(null, "chirp5Chorbi1Received", "test subject", "test text", IllegalArgumentException.class);
 	}
 	//titulo blank
 	@Test
 	public void ReplyChirpTest5() {
-		this.templateReplyChirp("chorbi1", 1039, "", "test text", ConstraintViolationException.class);
+		this.templateReplyChirp("chorbi1", "chirp5Chorbi1Received", "", "test text", ConstraintViolationException.class);
 	}
 	//texto blank
 	@Test
 	public void ReplyChirpTest6() {
-		this.templateReplyChirp("chorbi1", 1039, "test subject", "", ConstraintViolationException.class);
+		this.templateReplyChirp("chorbi1", "chirp5Chorbi1Received", "test subject", "", ConstraintViolationException.class);
 	}
 
 	//	@Test
@@ -146,22 +146,22 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void ForwardChirpTest1() {
-		this.templateForwardChirp("chorbi1", 1039, 1097, null);
+		this.templateForwardChirp("chorbi1", "chirp5Chorbi1Received", "chorbi1", null);
 	}
 	//sin loguearse
 	@Test
 	public void ForwardChirpTest2() {
-		this.templateForwardChirp(null, 1039, 1097, IllegalArgumentException.class);
+		this.templateForwardChirp(null, "chirp5Chorbi1Received", "chorbi1", IllegalArgumentException.class);
 	}
 	//mensaje que no es suyo
 	@Test
 	public void ForwardChirpTest3() {
-		this.templateForwardChirp("chorbi5", 1039, 1097, IllegalArgumentException.class);
+		this.templateForwardChirp("chorbi5", "chirp1Chorbi2", "chorbi1", IllegalArgumentException.class);
 	}
 	//recipient no válido
 	@Test
 	public void ForwardChirpTest4() {
-		this.templateForwardChirp("chorbi1", 1039, 1, IllegalArgumentException.class);
+		this.templateForwardChirp("chorbi1", "chirp5Chorbi1Received", "chirp5Chorbi1Received", IllegalArgumentException.class);
 	}
 
 	//	@Test
@@ -186,17 +186,17 @@ public class ChirpTest extends AbstractTest {
 	//test positivo
 	@Test
 	public void DeleteChirpTest1() {
-		this.templateDeleteChirp("chorbi1", 1039, null);
+		this.templateDeleteChirp("chorbi1", "chirp5Chorbi1Received", null);
 	}
 	//sin loguearse
 	@Test
 	public void DeleteChirpTest2() {
-		this.templateDeleteChirp(null, 1039, IllegalArgumentException.class);
+		this.templateDeleteChirp(null, "chirp5Chorbi1Received", IllegalArgumentException.class);
 	}
 	//mensaje que no es suyo
 	@Test
 	public void DeleteChirpTest3() {
-		this.templateDeleteChirp("chorbi5", 1039, IllegalArgumentException.class);
+		this.templateDeleteChirp("chorbi5", "chirp1Chorbi2", IllegalArgumentException.class);
 	}
 
 	//	@Test
@@ -217,7 +217,7 @@ public class ChirpTest extends AbstractTest {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected void templateWriteChirp(final String username, final int recipientId, final String subject, final String text, final Class<?> expected) {
+	protected void templateWriteChirp(final String username, final String recipientBeanName, final String subject, final String text, final Class<?> expected) {
 		Class<?> caught;
 		Chirp chirp;
 		Collection<Attachment> attachments;
@@ -228,7 +228,7 @@ public class ChirpTest extends AbstractTest {
 			this.chirpService.findSentChirpOfPrincipal();
 
 			attachments = new ArrayList<Attachment>();
-			chirp = this.chirpService.create(recipientId);
+			chirp = this.chirpService.create(this.extract(recipientBeanName));
 
 			chirp.setSubject(subject);
 			chirp.setText(text);
@@ -242,7 +242,7 @@ public class ChirpTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templateReplyChirp(final String username, final int chirpId, final String subject, final String text, final Class<?> expected) {
+	protected void templateReplyChirp(final String username, final String chirpBeanName, final String subject, final String text, final Class<?> expected) {
 		Class<?> caught;
 		Chirp chirp;
 		Collection<Attachment> attachments;
@@ -254,7 +254,7 @@ public class ChirpTest extends AbstractTest {
 			this.chirpService.findReceivedChirpOfPrincipal();
 
 			attachments = new ArrayList<Attachment>();
-			chirpForm = this.chirpService.replyChirp(chirpId);
+			chirpForm = this.chirpService.replyChirp(this.extract(chirpBeanName));
 			chirp = this.chirpService.create(chirpForm.getRecipient().getId());
 
 			chirp.setSubject(subject);
@@ -269,7 +269,7 @@ public class ChirpTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templateForwardChirp(final String username, final int chirpId, final int recipientId, final Class<?> expected) {
+	protected void templateForwardChirp(final String username, final String chirpBeanName, final String recipientBeanName, final Class<?> expected) {
 		Class<?> caught;
 		Chirp chirp;
 		Collection<Attachment> attachments;
@@ -279,9 +279,9 @@ public class ChirpTest extends AbstractTest {
 			this.authenticate(username);
 			this.chirpService.findReceivedChirpOfPrincipal();
 
-			chirpForm = this.chirpService.forwardChirp(chirpId);
+			chirpForm = this.chirpService.forwardChirp(this.extract(chirpBeanName));
 			attachments = chirpForm.getAttachments();
-			chirp = this.chirpService.create(recipientId);
+			chirp = this.chirpService.create(this.extract(recipientBeanName));
 
 			chirp.setSubject(chirpForm.getSubject());
 			chirp.setText(chirpForm.getText());
@@ -295,14 +295,14 @@ public class ChirpTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	protected void templateDeleteChirp(final String username, final int chirpId, final Class<?> expected) {
+	protected void templateDeleteChirp(final String username, final String chirpBeanName, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
 			this.authenticate(username);
 			this.chirpService.findReceivedChirpOfPrincipal();
-			this.chirpService.delete(chirpId);
+			this.chirpService.delete(this.extract(chirpBeanName));
 
 			this.chirpService.flush();
 			this.unauthenticate();

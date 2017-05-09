@@ -40,102 +40,102 @@ public class SearchTemplateTest extends AbstractTest {
 	//Test positivo todo opcional
 	@Test
 	public void editSearchTemplateTest1() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "", 0, "", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "", 0, "", "", null);
 	}
 	//Test positivo con desiredRelationship=activities
 	@Test
 	public void editSearchTemplateTest2() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "activities", 0, "", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "activities", 0, "", "", null);
 	}
 	//Test positivo con desiredRelationship=friendship
 	@Test
 	public void editSearchTemplateTest3() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "friendship", 0, "", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "friendship", 0, "", "", null);
 	}
 	//Test positivo con desiredRelationship=love
 	@Test
 	public void editSearchTemplateTest4() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", 0, "", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", 0, "", "", null);
 	}
 	//Test positivo con edad
 	@Test
 	public void editSearchTemplateTest5() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "", 25, "", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "", 25, "", "", null);
 	}
 	//Test positivo con edad y desiredRelathionship
 	@Test
 	public void editSearchTemplateTest6() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", 25, "", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", 25, "", "", null);
 	}
 	//Test positivo con genre=man
 	@Test
 	public void editSearchTemplateTest7() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "", 0, "man", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "", 0, "man", "", null);
 	}
 
 	//Test positivo con genre=woman
 	@Test
 	public void editSearchTemplateTest8() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "", 0, "woman", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "", 0, "woman", "", null);
 	}
 	//Test positivo con genre y edad
 	@Test
 	public void editSearchTemplateTest9() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "", 25, "woman", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "", 25, "woman", "", null);
 	}
 	//Test positivo con genre desiredRelathionship
 	@Test
 	public void editSearchTemplateTest10() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", 0, "woman", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", 0, "woman", "", null);
 	}
 	//Test positivo con genre desiredRelathionship y edad
 	@Test
 	public void editSearchTemplateTest11() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", 25, "woman", "", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", 25, "woman", "", null);
 	}
 	//Test positivo con keyword
 	@Test
 	public void editSearchTemplateTest12() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", 25, "woman", "a", null);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", 25, "woman", "a", null);
 	}
 	//Test Negativo->sin loguearse
 	@Test
 	public void editSearchTemplateTest13() {
-		this.templateEditSearchTemplate(null, 1110, "love", 25, "woman", "a", IllegalArgumentException.class);
+		this.templateEditSearchTemplate(null, "searchTemplateChorbi1", "love", 25, "woman", "a", IllegalArgumentException.class);
 
 	}
 	//Test Negativo->Logueado como admin
 	@Test
 	public void editSearchTemplateTest14() {
-		this.templateEditSearchTemplate("admin", 1110, "love", 25, "woman", "a", IllegalArgumentException.class);
+		this.templateEditSearchTemplate("admin", "searchTemplateChorbi1", "love", 25, "woman", "a", IllegalArgumentException.class);
 
 	}
 	//Test Negativo->Editar el SearchTemplate de otro
 	@Test
 	public void editSearchTemplateTest15() {
-		this.templateEditSearchTemplate("chorbi2", 1110, "love", 25, "woman", "a", IllegalArgumentException.class);
+		this.templateEditSearchTemplate("chorbi2", "searchTemplateChorbi1", "love", 25, "woman", "a", IllegalArgumentException.class);
 
 	}
 	//Test Negativo->desiredRelathionship fuera del pattern
 	@Test
 	public void editSearchTemplateTest16() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "EstoDebeFallar", 25, "woman", "a", ConstraintViolationException.class);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "EstoDebeFallar", 25, "woman", "a", ConstraintViolationException.class);
 
 	}
 	//Test Negativo->edad negativa
 	@Test
 	public void editSearchTemplateTest17() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", -25, "woman", "a", ConstraintViolationException.class);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", -25, "woman", "a", ConstraintViolationException.class);
 	}
 	//Test Negativo->genre fuera del pattern
 	@Test
 	public void editSearchTemplateTest18() {
-		this.templateEditSearchTemplate("chorbi1", 1110, "love", 25, "EstoDebeFallar", "a", ConstraintViolationException.class);
+		this.templateEditSearchTemplate("chorbi1", "searchTemplateChorbi1", "love", 25, "EstoDebeFallar", "a", ConstraintViolationException.class);
 	}
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected void templateEditSearchTemplate(final String username, final int searchTemplateId, final String desiredRelationship, final Integer age, final String genre, final String keyword, final Class<?> expected) {
+	protected void templateEditSearchTemplate(final String username, final String searchTemplateBeanName, final String desiredRelationship, final Integer age, final String genre, final String keyword, final Class<?> expected) {
 		Class<?> caught;
 		SearchTemplate searchTemplate;
 
@@ -143,7 +143,7 @@ public class SearchTemplateTest extends AbstractTest {
 		try {
 			this.authenticate(username);
 
-			searchTemplate = this.searchTemplateService.findOne(searchTemplateId);
+			searchTemplate = this.searchTemplateService.findOne(this.extract(searchTemplateBeanName));
 
 			searchTemplate.setDesiredRelationship(desiredRelationship);
 			searchTemplate.setAge(age);
