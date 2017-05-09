@@ -1,26 +1,16 @@
-﻿------------- Errores encontrados por el otro equipo ........
-
-- Revisar registro de manager en preproduccion (No esta en la lista, pero es posible que de conflicto)
-- Al intentar entrar un usuario baneado se muestra mensaje de no registrado. (8.1)
-
-
-
 ﻿---------------Por hacer/comprobar-----------------------
 -Informe de costes (Acha)
+-Sacar informe test rendimiento
+-Errores encontrados: Al intentar entrar un usuario baneado se muestra mensaje de no registrado. (8.1)
 
--Rehacer los tests de aceptación indicando exactamente los datos a introducir y los resultados esperados, tener en cuenta que son secuenciales, por lo que si en el test 1 se añade un chorbi hay que tenerlo en cuenta si en el test 2 se hace el search. (faltaba el tests de comprobar la cache del search, y faltaran algunos mas)
-
--Crear script y war.
-
--------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
--Desordenar event list cuando se pide ordenado. [Cambio introducido: Se ordena por fecha en vez de por sitios libres] (Javi) Use case 13 Test 2
--Chorbi: pais no obligatorio. [Cambio introducido: Quitado @NotBlank del ChorbiForm]	(Javi) Use case 4 Test 2
--Etiquetas de error number credit card. [Cambio introducido: añadido string de error vacio en misc message.properties ingles y español.](Javi) Use case 21 Test 5
--En search chorbi aparece alguien indebido. (Roldan) Use case 7 Test 1
--Crear script y war. (al final, al menos war)
+-Crear war.
+-Actualizar proyecto de A+ spring social.
+-Sacar pdfs de los documentos.
 
 
 --------- HECHO ------------
+-Rehacer los tests de aceptación indicando exactamente los datos a introducir y los resultados esperados, tener en cuenta que son secuenciales, por lo que si en el test 1 se añade un chorbi hay que tenerlo en cuenta si en el test 2 se hace el search. (faltaba el tests de comprobar la cache del search, y faltaran algunos mas)
+- Revisar registro de manager en preproduccion (No esta en la lista, pero es posible que de conflicto) (HECHO)
 - Al registrar un chorbi (y probablemente un manager) la contraseña se cambia a lowercase. (4.1) (NO DA EL ERROR)
 - No se puede hacer like a un chorbi. No pasa del formulario y no se muestra error ninguno. (10.1) (HECHO)
 - La lista de chorbis no se muestra en español. Parece estar redireccionando a la lista de likes. (5.1) [Puede que sea el tiles] (HECHO)
@@ -41,3 +31,11 @@
 -Quitar desplegable de eventos en mensajes de broadcast. (Gavira) {HECHO}
 -Al editar el evento no puedes poner menos asientos de los que estan ocupados. (Gavira) {HECHO}
 -Hacer tests funcionales de los casos de uso que no tienen (Dani){HECHO}
+
+
+-------------------Bugs intencionales a hacer en el proyecto aparte cuando todo lo anterior este arreglado. --------------------------
+-Desordenar event list cuando se pide ordenado. [Cambio introducido: Se ordena por fecha en vez de por sitios libres] (Javi) Use case 13 Test 2
+-Chorbi: pais no obligatorio. [Cambio introducido: Quitado @NotBlank del ChorbiForm]	(Javi) Use case 4 Test 2
+-Etiquetas de error number credit card. [Cambio introducido: añadido string de error vacio en misc message.properties ingles y español.](Javi) Use case 21 Test 5
+-En search chorbi aparece alguien indebido. (Roldan) Use case 7 Test 1
+-Crear script y war. (al final, al menos war)
